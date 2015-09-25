@@ -1,19 +1,7 @@
-# This file does histogram adjustment normalization as described by Nyul et al. (2000)
-# Original version by Taki Shinohara -- September 10, 2012
-# Current version by Jean-Philippe Fortin -- July 29 2015
-i <- as.numeric(Sys.getenv("SGE_TASK_ID"))
-
-#load("../objects/registered_brain_filenames.rda")
-load("design_complete.rda")
-files <- as.character(design$file)
-files <- paste0("../extdata/processed/", files, "_N4_Reg_Brain.nii.gz")
-input   <- as.character(files[i])
-output  <- gsub(".nii.gz", "_HM", input)
-library(oro.nifti)
-
 # Histogram matching function:
-hm <- function(input, output){
-	t1   <- readNIfTI(input)
+hm <- function(input, output, what=c("T1", "FLAIR")){
+	what <- match.arg(what)
+	img  <- readNIfTI(input)
 	seed <- 123413
 	set.seed(seed)
 	i.min   <- 0.01 # Trimming Quantiles
@@ -46,19 +34,20 @@ hm <- function(input, output){
 		return(transformed.data)
 	}
 
-	load("../objects/histogram_match_train_healthy.rda")
-	t1.m 	<- apply(t1.landmarks, 2, mean)
-	t1.fg   <- 1*(t1>mean(t1))
-	t1 <- do.hist.norm(t1, i.min, i.max, i.s.min, i.s.max, h, t1.m, t1.fg)
-	writeNIfTI(t1, output)
-}
-
-
-if (file.exists(input)){
-	if (!file.exists(paste0(output, ".nii.gz"))){
-		norm <- hm(input, output)
+	load("../../objects/histogram_match_train_healthy.rda")
+	if (what=="T1"){
+		img.m 	<- apply(t1.landmarks, 2, mean)
+	} else {
+		img.m 	<- apply(flair.landmarks, 2, mean)
 	}
+	
+	img.fg   <- 1*(img>mean(img))
+	img <- do.hist.norm(img, i.min, i.max, i.s.min, i.s.max, h, img.m, img.fg)
+	writeNIfTI(img, output)
 }
+
+
+
 
 
 
