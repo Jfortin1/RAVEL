@@ -22,7 +22,7 @@ BiocStyle::latex()
 % Introduction
 \section{Introduction}
 
-Allo
+We use the package \cite{whitestripe:package} for ... 
 
 \section*{Session info}
 
