@@ -1,6 +1,5 @@
 \name{RAVEL-package}
 \alias{RAVEL-package}
-\alias{RAVEL}
 \docType{package}
 \title{
 RAVEL
