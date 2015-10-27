@@ -10,7 +10,8 @@ control.mask <- "../../RAVELdata/csf_control_mask.nii.gz"
 output.files <- NULL
 k=1
 verbose=TRUE
-WhiteStripe=FALSE
+WhiteStripe=TRUE
+WhiteStripe_Type <- "T1"
 
 
 RAVEL(input.file=input.files, brain.mask = brain.mask, control.mask = control.mask)
@@ -53,7 +54,7 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 		# Performing White Stripe normalization: 
 		V <- do.call(cbind,lapply(input.files, function(x){
 			brain   <- readNIfTI(x, reorient=FALSE)
-			indices <- whitestripe(brain, type=WhiteStripe_Type)
+			indices <- whitestripe(brain, type=WhiteStripe_Type, verbose=FALSE)
 			brain    <- whitestripe_norm(brain, indices$whitestripe.ind)
 			if (!is.null(brain.mask)){
 				brain <- as.vector(brain[brain.indices])
