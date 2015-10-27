@@ -4,7 +4,7 @@
 RAVEL correction
 }
 \description{
- RAVEl stuff 
+ RAVEl stuff is blablablablabla. 
 }
 \usage{
 RAVEL(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE)
