@@ -1,2 +1,4 @@
 .git
 README.md
+./R/example.R
+./R/hm.R
