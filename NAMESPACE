@@ -4,4 +4,6 @@ import(fslr)
 import(WhiteStripe)
 import(knitr)
 
+export(RAVEL)
+
 
