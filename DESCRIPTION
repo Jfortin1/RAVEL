@@ -3,7 +3,8 @@ Title: Removal of Artificial Voxel Effect by Linear Regression
 Version: 0.99.0
 Author: Jean-Philippe Fortin
 Maintainer: Jean-Philippe Fortin <fortin946@gmail.com>
-Depends: methods, WhiteStripe, fslr, oro.nifti, knitr
+Suggests: BiocStyle, knitr
+Depends: methods, WhiteStripe, fslr, oro.nifti
 Description: Removal of artificial voxel effect by linear regression. 
 Url: https://github.com/Jfortin1/RAVEL
 VignetteBuilder: knitr
