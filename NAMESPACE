@@ -2,7 +2,6 @@ import(methods)
 import(oro.nifti)
 import(fslr)
 import(WhiteStripe)
-import(knitr)
 
 export(RAVEL)
 
