@@ -1,23 +1,31 @@
-library(oro.nifti)
-library(fslr)
-library(WhiteStripe)
 
-
-
-input.files  <- list.files("../../RAVELdata/processed/", pattern=".nii.gz", full.names=TRUE)
-brain.mask   <- "../../RAVELdata/brain_mask.nii.gz"
-control.mask <- "../../RAVELdata/csf_control_mask.nii.gz"
-output.files <- NULL
-k=1
-verbose=TRUE
-WhiteStripe=TRUE
-WhiteStripe_Type <- "T1"
-
-
-RAVEL(input.file=input.files, brain.mask = brain.mask, control.mask = control.mask)
 # WhiteStripe option not yet implemented
 # Assuming images are registered and normalized beforehand
 RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE){
+	# RAVEL correction procedure:
+	.ravel.correction <- function(V, Z){
+		means <- rowMeans(V)
+		beta   <- solve(t(Z) %*% Z) %*% t(Z) %*% t(V)
+		fitted <- t(Z %*% beta)
+		res   <- V - fitted
+		res   <- res + means
+		res
+	}
+
+
+	.write.brain <- function(brain.norm, output.file, template){
+		if (!is.null(brain.mask)){
+			template[brain.indices] <- brain.norm
+		} else {
+			template <- fslr::niftiarr(template, brain.norm)
+		}
+		template <- oro.nifti::cal_img(template)
+		output.file <- gsub(".nii.gz|.nii", "", output.file)
+		writeNIfTI(template, output.file)
+	}
+
+
+
 	if (!is.null(brain.mask)){
 		brain.mask <- readNIfTI(brain.mask, reorient=FALSE)
 		brain.indices <- brain.mask==1
@@ -28,11 +36,12 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 	}
 
 
-	if (verbose){
-		cat("[RAVEL] Creating the voxel intensities matrix V \n")
-	}
+	
 	# Matrix of voxel intensities:
 	if (!WhiteStripe){
+		if (verbose){
+			cat("[RAVEL] Creating the voxel intensities matrix V \n")
+		}
 		V <- do.call(cbind,lapply(input.files, function(x){
 			brain <- readNIfTI(x, reorient=FALSE)
 			if (!is.null(brain.mask)){
@@ -50,7 +59,9 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 		if (verbose){
 			cat("[RAVEL] Performing White Stripe intensity normalization \n")
 		}
-
+		if (verbose){
+			cat("[RAVEL] Creating the voxel intensities matrix V \n")
+		}
 		# Performing White Stripe normalization: 
 		V <- do.call(cbind,lapply(input.files, function(x){
 			brain   <- readNIfTI(x, reorient=FALSE)
@@ -106,27 +117,6 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 }
 
 
-# RAVEL correction procedure:
-.ravel.correction <- function(V, Z){
-	means <- rowMeans(V)
-	beta   <- solve(t(Z) %*% Z) %*% t(Z) %*% t(V)
-	fitted <- t(Z %*% beta)
-	res   <- V - fitted
-	res   <- res + means
-	res
-}
-
-
-.write.brain <- function(brain.norm, output.file, template){
-	if (!is.null(brain.mask)){
-		template[brain.indices] <- brain.norm
-	} else {
-		template <- fslr::niftiarr(template, brain.norm)
-	}
-	template <- oro.nifti::cal_img(template)
-	output.file <- gsub(".nii.gz|.nii", "", output.file)
-	writeNIfTI(template, output.file)
-}
 
 
 
