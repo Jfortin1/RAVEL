@@ -7,7 +7,9 @@ RAVEL correction
  RAVEl stuff is blablablablabla. 
 }
 \usage{
-RAVEL(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE)
+RAVEL(input.files, output.files=NULL, brain.mask=NULL, 
+  control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  
+  k=1, verbose=TRUE)
 }
 \arguments{
   \item{input.files}{
