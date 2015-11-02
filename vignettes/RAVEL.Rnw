@@ -1,0 +1,41 @@
+% \VignetteIndexEntry{RAVEL: Removal of Artificial Voxel Effect by Linear Regression}
+% \VignettePackage{RAVEL}
+% \VignetteDepends{BiocStyle}
+% \VignetteEngine{knitr::knitr}
+
+\documentclass[12pt]{article}
+\usepackage[numbers]{natbib}
+\usepackage{amsthm}
+%\newcommand{\minfi}{\Biocpkg{minfi}}
+
+<<style, eval=TRUE, echo=FALSE, results="asis">>=
+BiocStyle::latex()
+@
+
+\title{RAVEL: Removal of Artificial Voxel Effect by Linear Regression}
+\author{Jean-Philippe Fortin}
+\begin{document}
+
+\maketitle{}
+\setcounter{secnumdepth}{1} 
+
+% Introduction
+\section{Introduction}
+
+We use the package \cite{whitestripe:package} for ... 
+
+\section*{Session info}
+
+Here is the output of \Rfunction{sessionInfo} on the system on which
+this document was compiled:
+<<sessionInfo, results="asis", echo=FALSE, eval=TRUE>>=
+toLatex(sessionInfo())
+@
+
+
+\bibliography{RAVEL}
+
+
+
+\end{document}
+
