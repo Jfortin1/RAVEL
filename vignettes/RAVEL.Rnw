@@ -13,7 +13,7 @@ BiocStyle::latex()
 @
 
 \title{RAVEL: Removal of Artificial Voxel Effect by Linear Regression}
-\author{Jean-Philippe Fortin}
+\author{Jean-Philippe Fortin, Russell Taki Shinohara}
 \begin{document}
 
 \maketitle{}
