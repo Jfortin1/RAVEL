@@ -2,6 +2,7 @@ import(methods)
 import(oro.nifti)
 import(fslr)
 import(WhiteStripe)
+import(pbapply)
 
 export(RAVEL)
 
