@@ -63,7 +63,7 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 			cat("[RAVEL] Creating the voxel intensities matrix V \n")
 		}
 		# Performing White Stripe normalization: 
-		V <- do.call(cbind,lapply(input.files, function(x){
+		V <- do.call(cbind,pblapply(input.files, function(x){
 			brain   <- readNIfTI(x, reorient=FALSE)
 			indices <- whitestripe(brain, type=WhiteStripe_Type, verbose=FALSE)
 			brain    <- whitestripe_norm(brain, indices$whitestripe.ind)
