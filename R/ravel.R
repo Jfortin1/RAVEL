@@ -3,6 +3,10 @@
 # Assuming images are registered and normalized beforehand
 RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE){
 	# RAVEL correction procedure:
+
+	if (!verbose){
+		pboptions(type="none")
+	}
 	.ravel.correction <- function(V, Z){
 		means <- rowMeans(V)
 		beta   <- solve(t(Z) %*% Z) %*% t(Z) %*% t(V)
@@ -63,6 +67,7 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 			cat("[RAVEL] Creating the voxel intensities matrix V \n")
 		}
 		# Performing White Stripe normalization: 
+	
 		V <- do.call(cbind,pblapply(input.files, function(x){
 			brain   <- readNIfTI(x, reorient=FALSE)
 			indices <- whitestripe(brain, type=WhiteStripe_Type, verbose=FALSE)
@@ -72,6 +77,8 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 			}
 			brain
 		}))
+		
+		
 	}
 	
   	
