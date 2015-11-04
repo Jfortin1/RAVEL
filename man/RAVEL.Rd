@@ -9,7 +9,7 @@ RAVEL correction
 \usage{
 RAVEL(input.files, output.files=NULL, brain.mask=NULL, 
   control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  
-  k=1, verbose=TRUE)
+  k=1, verbose=TRUE, writeToDisk=FALSE)
 }
 \arguments{
   \item{input.files}{
