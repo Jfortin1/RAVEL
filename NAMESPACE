@@ -5,5 +5,5 @@ import(WhiteStripe)
 import(pbapply)
 
 export(RAVEL)
-
+export(mask_intersect)
 
