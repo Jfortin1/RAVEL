@@ -23,6 +23,31 @@ BiocStyle::latex()
 \section{Introduction}
 
 We use the package \cite{whitestripe:package} for ... 
+Work from \cite{ravel}
+
+
+\section{Creation of a control region}
+<<>>=
+library(RAVEL)
+library(RAVELData)
+datadir <- system.file("data",package="RAVELData")
+files <- list.files(datadir, pattern="csf_mask.nii.gz", full.names=TRUE)
+masks <- pblapply(files, readNIfTI)
+control.mask<- mask_intersect(masks)
+@
+
+
+% Reading the data
+\section{Reading the data}
+
+<<>>=
+files <- list.files(datadir, pattern="processed.nii.gz", full.names=TRUE)
+template    <- file.path(datadir, "JHU_MNI_SS_T1.nii.gz")
+brain.mask <- file.path(datadir, "JHU_MNI_SS_T1_Brain_Mask.nii.gz")
+RAVEL(input.files = files, brain.mask = brain.mask, control.mask = control.mask,WhiteStripe=FALSE)
+@
+
+
 
 \section*{Session info}
 
@@ -31,6 +56,7 @@ this document was compiled:
 <<sessionInfo, results="asis", echo=FALSE, eval=TRUE>>=
 toLatex(sessionInfo())
 @
+
 
 
 \bibliography{RAVEL}
