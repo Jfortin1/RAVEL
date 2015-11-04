@@ -1,7 +1,7 @@
 
 # WhiteStripe option not yet implemented
 # Assuming images are registered and normalized beforehand
-RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE){
+RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE, writeToDisk=FALSE){
 	# RAVEL correction procedure:
 
 	if (!verbose){
@@ -87,7 +87,13 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 		cat("[RAVEL] Creating the control voxel matrix Vc \n")
 	}
 	# Submatrix of control voxels:
-	control.indices <- readNIfTI(control.mask, reorient=FALSE)==1
+
+	if (class(control.mask)=="nifti"){
+		control.indices <- control.mask==1
+	} else {
+		control.indices <- readNIfTI(control.mask, reorient=FALSE)==1
+	}
+
 	if (!is.null(brain.mask)){
 		control.indices <- control.indices[brain.mask==1]
 	}
@@ -116,11 +122,14 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 		template[brain.indices]  <- 1
 	}
 
-	for (i in 1:ncol(V.norm)){
-		.write.brain(brain.norm = V.norm[,i], output.file = output.files[i], template=template)
-		#if (verbose){print(i)}
-	}
+ 	if (writeToDisk){
+ 		for (i in 1:ncol(V.norm)){
+			.write.brain(brain.norm = V.norm[,i], output.file = output.files[i], template=template)
+			#if (verbose){print(i)}
+		}
 
+ 	}
+	
 }
 
 
