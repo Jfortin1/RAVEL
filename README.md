@@ -6,5 +6,5 @@
 
 ```{r}
 library(devtools)
-install_github(jfortin1/RAVEl)
+install_github(jfortin1/RAVEL)
 ```
