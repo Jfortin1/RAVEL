@@ -1,8 +1,12 @@
 
 # WhiteStripe option not yet implemented
 # Assuming images are registered and normalized beforehand
-RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE){
+RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE, writeToDisk=FALSE){
 	# RAVEL correction procedure:
+
+	if (!verbose){
+		pboptions(type="none")
+	}
 	.ravel.correction <- function(V, Z){
 		means <- rowMeans(V)
 		beta   <- solve(t(Z) %*% Z) %*% t(Z) %*% t(V)
@@ -63,7 +67,8 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 			cat("[RAVEL] Creating the voxel intensities matrix V \n")
 		}
 		# Performing White Stripe normalization: 
-		V <- do.call(cbind,lapply(input.files, function(x){
+	
+		V <- do.call(cbind,pblapply(input.files, function(x){
 			brain   <- readNIfTI(x, reorient=FALSE)
 			indices <- whitestripe(brain, type=WhiteStripe_Type, verbose=FALSE)
 			brain    <- whitestripe_norm(brain, indices$whitestripe.ind)
@@ -72,6 +77,8 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 			}
 			brain
 		}))
+		
+		
 	}
 	
   	
@@ -80,7 +87,13 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 		cat("[RAVEL] Creating the control voxel matrix Vc \n")
 	}
 	# Submatrix of control voxels:
-	control.indices <- readNIfTI(control.mask, reorient=FALSE)==1
+
+	if (class(control.mask)=="nifti"){
+		control.indices <- control.mask==1
+	} else {
+		control.indices <- readNIfTI(control.mask, reorient=FALSE)==1
+	}
+
 	if (!is.null(brain.mask)){
 		control.indices <- control.indices[brain.mask==1]
 	}
@@ -109,11 +122,14 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 		template[brain.indices]  <- 1
 	}
 
-	for (i in 1:ncol(V.norm)){
-		.write.brain(brain.norm = V.norm[,i], output.file = output.files[i], template=template)
-		#if (verbose){print(i)}
-	}
+ 	if (writeToDisk){
+ 		for (i in 1:ncol(V.norm)){
+			.write.brain(brain.norm = V.norm[,i], output.file = output.files[i], template=template)
+			#if (verbose){print(i)}
+		}
 
+ 	}
+	
 }
 
 
