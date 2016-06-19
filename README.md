@@ -13,3 +13,9 @@ install_github("jfortin1/RAVEL")
 
 
 #### preprocessRAVEL
+
+
+
+#### Other functions
+
+preprocessWS, preprocessHM
