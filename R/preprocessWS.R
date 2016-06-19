@@ -15,20 +15,8 @@ normalizeWS <- function(input.files, output.files=NULL, brain.mask=NULL, WhiteSt
 	if (is.null(output.files)){
 		output.files <- gsub(".nii.gz|.nii","_WS.nii.gz", input.files)
 	}
-
-	.write_brain <- function(brain.norm, output.file, template){
-		if (!is.null(brain.mask)){
-			template[brain.indices] <- brain.norm
-		} else {
-			template <- fslr::niftiarr(template, brain.norm)
-		}
-		template <- oro.nifti::cal_img(template)
-		output.file <- gsub(".nii.gz|.nii", "", output.file)
-		writeNIfTI(template, output.file)
-	}
-
 	
-	if (WhiteSripe) cat("[RAVEL] WhiteStripe intensity normalization is applied to each scan. \n")
+	if (WhiteSripe) cat("[preprocessWS] WhiteStripe intensity normalization is applied to each scan. \n")
 	# Matrix of voxel intensities:
 	V <- pblapply(input.files, function(x){
 		brain <- readNIfTI(x, reorient=FALSE)
@@ -44,9 +32,8 @@ normalizeWS <- function(input.files, output.files=NULL, brain.mask=NULL, WhiteSt
 	V <- do.call(cbind, V)
 
 
-
 	if (verbose & writeToDisk){
-		cat("[RAVEL] Writing out the corrected images \n")
+		cat("[preprocessWS] Writing out the corrected images \n")
 		template <- readNIfTI(input.files[1], reorient=FALSE)
 		template[!brain.indices] <- 0
 		template[brain.indices]  <- 1
