@@ -14,12 +14,12 @@ install_github("jfortin1/RAVEL")
 
 #### preprocessRAVEL
 
-The function <code>preprocessRAVEL<code> applies the RAVEL correction described in XX
+The function <code>preprocessRAVEL</code> applies the RAVEL correction described in XX
 
 
 #### preprocessWW
 
-The function <code>preprocessWS<code> applies the White Stripe intensity normalization described in XX
+The function <code>preprocessWS</code> applies the White Stripe intensity normalization described in XX
 
 
 
