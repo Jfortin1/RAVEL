@@ -21,6 +21,10 @@ The function `preprocessRAVEL` applies the RAVEL correction described in XX
 
 The function `preprocessWS` applies the White Stripe intensity normalization described in XX
 
+#### RAVEL for longitudinal data
+
+#### RAVEL for multimodal data
+
 
 
 
