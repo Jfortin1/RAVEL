@@ -7,9 +7,9 @@ RAVEL correction
  RAVEl stuff is blablablablabla. 
 }
 \usage{
-RAVEL(input.files, output.files=NULL, brain.mask=NULL, 
+preprocessRAVEL(input.files, output.files=NULL, brain.mask=NULL, 
   control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type="T1",  
-  k=1, verbose=TRUE, writeToDisk=FALSE, returnObject=FALSE)
+  k=1, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE)
 }
 \arguments{
   \item{input.files}{
@@ -45,7 +45,7 @@ RAVEL(input.files, output.files=NULL, brain.mask=NULL,
 }
 
 \value{
-if \code{returnObject} is \code{FALSE}, no value returned, but RAVEL-corrected images are saved. Ff \code{returnObject} is \code{TRUE}, RAVEL-corrected images are saved and a matrix of normalized intensities is returned. 
+if \code{returnMatrix} is \code{FALSE}, no value returned, but RAVEL-corrected images are saved. If \code{returnMatrix} is \code{TRUE}, RAVEL-corrected images are saved and a matrix of normalized intensities is returned. 
 }
 \author{
 Jean-Philippe Fortin
