@@ -19,7 +19,7 @@ The function `preprocessRAVEL` applies the RAVEL correction described in XX
 
 #### preprocessWW
 
-The function <code>preprocessWS</code> applies the White Stripe intensity normalization described in XX
+The function `preprocessWS` applies the White Stripe intensity normalization described in XX
 
 
 
