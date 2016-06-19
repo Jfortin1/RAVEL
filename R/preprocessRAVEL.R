@@ -1,5 +1,5 @@
 # Assuming images are registered and normalized beforehand
-normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type=c("T1", "T2", "FLAIR"),  k=1, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE){
+preprocessRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type=c("T1", "T2", "FLAIR"),  k=1, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE){
 	
 	# RAVEL correction procedure:
 	WhiteStripe_Type <- match.arg(WhiteStripe_Type)
@@ -24,17 +24,6 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, cont
 		res   <- V - fitted
 		res   <- res + means
 		res
-	}
-
-	.write_brain <- function(brain.norm, output.file, template){
-		if (!is.null(brain.mask)){
-			template[brain.indices] <- brain.norm
-		} else {
-			template <- fslr::niftiarr(template, brain.norm)
-		}
-		template <- oro.nifti::cal_img(template)
-		output.file <- gsub(".nii.gz|.nii", "", output.file)
-		writeNIfTI(template, output.file)
 	}
 
 	cat("[preprocessRAVEL] Creating the voxel intensities matrix V. \n")
