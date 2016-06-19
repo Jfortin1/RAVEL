@@ -1,7 +1,5 @@
-
-# WhiteStripe option not yet implemented
 # Assuming images are registered and normalized beforehand
-RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE, writeToDisk=FALSE){
+normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1",  k=1, verbose=TRUE, writeToDisk=FALSE, returnObject=FALSE){
 	
 	# RAVEL correction procedure:
 	if (WhiteStripe & WhiteStripe_Type!="T1") stop("Only image modality T1 is supported at the moment for WhiteStripe")
@@ -88,6 +86,7 @@ RAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=
 			.write_brain(brain.norm = V.norm[,i], output.file = output.files[i], template=template)
 		})
 	} 
-
-	
+	if (returnObject){
+		return(V)
+	}
 }
