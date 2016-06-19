@@ -1,4 +1,3 @@
-
 # Create intersection mask:
 mask_intersect <- function(list){
 	n <- length(list)
@@ -9,7 +8,3 @@ mask_intersect <- function(list){
 	}
 	inter
 }
-
-
-
-
