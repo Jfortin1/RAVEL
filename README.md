@@ -14,7 +14,7 @@ install_github("jfortin1/RAVEL")
 
 #### preprocessRAVEL
 
-The function <code>preprocessRAVEL</code> applies the RAVEL correction described in XX
+The function `preprocessRAVEL` applies the RAVEL correction described in XX
 
 
 #### preprocessWW
