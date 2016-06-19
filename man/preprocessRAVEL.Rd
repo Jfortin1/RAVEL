@@ -28,7 +28,7 @@ preprocessRAVEL(input.files, output.files=NULL, brain.mask=NULL,
     Should White Stripe intensity normalization be performed prior to RAVEL?. 
   }
   \item{WhiteStripe_Type}{
-    What modality is used for WhiteStripe? For the moment, only "T1" is supported. 
+    What modality is used for WhiteStripe? Should be one of T1, T2 or FLAIR.
   }
   \item{k}{
     Number of unwanted factors to be included in the RAVEL model. 

@@ -1,8 +1,10 @@
 # Assuming images are registered and normalized beforehand
-preprocessWS <- function(input.files, output.files=NULL, brain.mask=NULL, WhiteStripe_Type="T1", verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE){
+preprocessWS <- function(input.files, output.files=NULL, brain.mask=NULL, WhiteStripe_Type=c("T1", "T2", "FLAIR"), verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE){
 	
+	WhiteStripe_Type <- match.arg(WhiteStripe_Type)
+	if (WhiteStripe_Type=="FLAIR") WhiteStripe_Type <- "T2"
 	# RAVEL correction procedure:
-	if (WhiteStripe & WhiteStripe_Type!="T1") stop("Only image modality T1 is supported at the moment for WhiteStripe")
+	#if (WhiteStripe & WhiteStripe_Type!="T1") stop("Only image modality T1 is supported at the moment for WhiteStripe")
 	if (!verbose) pboptions(type="none") 
 
 	if (!is.null(brain.mask)){

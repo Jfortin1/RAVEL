@@ -21,7 +21,7 @@ preprocessWS(input.files, output.files=NULL, brain.mask=NULL,
     Filename for the brain binary mask specifying the template space brain. Must be a NIfTI file. 
   }
   \item{WhiteStripe_Type}{
-    What modality is used for WhiteStripe? For the moment, only "T1" is supported. 
+    What modality is used for WhiteStripe? Should be one of T1, T2 or FLAIR.
   }
   \item{verbose}{
     Should messages be printed?

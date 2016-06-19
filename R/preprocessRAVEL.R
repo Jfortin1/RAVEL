@@ -1,8 +1,9 @@
 # Assuming images are registered and normalized beforehand
-normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type="T1",  k=1, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE){
+normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type=c("T1", "T2", "FLAIR"),  k=1, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE){
 	
 	# RAVEL correction procedure:
-	if (WhiteStripe & WhiteStripe_Type!="T1") stop("Only image modality T1 is supported at the moment for WhiteStripe")
+	WhiteStripe_Type <- match.arg(WhiteStripe_Type)
+	if (WhiteStripe_Type=="FLAIR") WhiteStripe_Type <- "T2"
 	if (!verbose) pboptions(type="none") 
 
 	if (!is.null(brain.mask)){
