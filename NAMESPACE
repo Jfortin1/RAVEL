@@ -4,7 +4,7 @@ import(fslr)
 import(WhiteStripe)
 import(pbapply)
 
+export(preprocessRAW)
 export(preprocessRAVEL)
 export(preprocessWS)
 export(mask_intersect)
-
