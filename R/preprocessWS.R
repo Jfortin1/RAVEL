@@ -1,5 +1,5 @@
 # Assuming images are registered and normalized beforehand
-normalizeWS <- function(input.files, output.files=NULL, brain.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1", verbose=TRUE, writeToDisk=FALSE, returnObject=FALSE){
+normalizeWS <- function(input.files, output.files=NULL, brain.mask=NULL, WhiteStripe=FALSE, WhiteStripe_Type="T1", verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE){
 	
 	# RAVEL correction procedure:
 	if (WhiteStripe & WhiteStripe_Type!="T1") stop("Only image modality T1 is supported at the moment for WhiteStripe")
