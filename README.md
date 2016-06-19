@@ -18,7 +18,7 @@ install_github("jfortin1/RAVEL")
 The function `preprocessRAVEL` applies the RAVEL correction described in XX
 
 
-#### preprocessWW
+#### preprocessWS
 
 The function `preprocessWS` applies the White Stripe intensity normalization described in XX
 
