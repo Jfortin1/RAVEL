@@ -1,6 +1,5 @@
-before_install:
- - brew update
- - brew install cmake
+install:
+    - sudo apt-get install cmake
 
 sudo: required
 language: r
