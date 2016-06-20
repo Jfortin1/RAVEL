@@ -6,6 +6,7 @@ os: osx
 
 r_github_packages:
   - Jfortin1/ANTsR
+  - Jfortin1/RAVELData
 
 bioc_packages:
   - BiocStyle
