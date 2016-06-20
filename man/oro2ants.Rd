@@ -6,7 +6,7 @@ NIfTI data can be converted between \code{nifti}
 (from the oro.nifti package) and \code{antsImage} objects.
 }
 \usage{
-oro2ants(img, reference=NULL}
+oro2ants(img, reference=NULL)
 }
 \arguments{
 \item{img}{Object of class \code{nifti}}
