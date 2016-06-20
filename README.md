@@ -25,7 +25,7 @@ The function `preprocessWS` applies the White Stripe intensity normalization des
 
 
 
-### Preprocessing images
+### 2. Preprocessing images
 
 #### Registration to template
 
