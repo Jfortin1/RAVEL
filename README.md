@@ -168,6 +168,7 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 
 | Method      | Package function  | Paper Link
 | -------------  | -------------  | -------------  |
+| No normalization    | `normalizeRaw` |  |
 | RAVEL    | `normalizeRAVEL` | [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
 | WhiteStripe    | `normalizeWS`|[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
 
