@@ -158,9 +158,12 @@ The function `preprocessRAVEL` applies the RAVEL correction described in XX. The
 
 ##### Creation of a control region for the RAVEL algorithm
 
+### 3. Statistical analysis 
 
-### 3. Advance stuff and extensions
-  
+### 4. Advanced visualization
+
+### 5. Miscellaneous
+
 ##### Coregistration (for more than one modality)
 
 ##### RAVEL for longitudinal data
