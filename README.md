@@ -27,12 +27,24 @@ The function `preprocessWS` applies the White Stripe intensity normalization des
 
 ### 2. Preprocessing images
 
+### Introduction
+
+Loading the necessary packages:
+
+Note that the `fslr` package requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). Here is an example how to perform segmentation on the JHU-MNI-ss template, after skull removal, that is included in the `RAVELData` package. First, let's make sure we have `fslr` correctly installed:
+
+```{r}
+library(fslr)
+library(ANTsR)
+library(RAVELData)
+have.fsl() # Should be TRUE if fsl is correctly installed
+```
+
 #### Registration to template
 
 Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package. To install `ANTsR`, please visit the [package GitHub page](https://github.com/stnava/ANTsR). Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
 ```{r}
-library(ANTsR)
 template_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz")
 template    <- antsImageRead(template_path, 3)
 scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
@@ -83,20 +95,12 @@ ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
  
 #### Tissue Segmentation
 
-There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. Note that the `fslr` package requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). Here is an example how to perform segmentation on the JHU-MNI-ss template, after skull removal, that is included in the `RAVELData` package. First, let's make sure we have `fslr` correctly installed:
+There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. 
+
+Let's produce the tissue segmentation for the `scan_reg_n4_brain` scan above:
 
 ```{r}
-library(fslr)
-library(RAVELData)
-have.fsl() # Should be TRUE if fsl is correctly installed
-```
-
-We first load the skull-stripped image to be segmented:
-
-```{r}
-img_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain.nii.gz")
-img <- readNIfTI(img_path)
-ortho2(img, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE, ylim=c(0,400))
+ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE, ylim=c(0,400))
 ```
 The last line of code produces via the `ortho2` function from the `fslr` package the following visualization of the template:
 
@@ -108,20 +112,36 @@ The last line of code produces via the `ortho2` function from the `fslr` package
 We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
 ```{r}
-seg <- fast(img, verbose=FALSE, opts="-t 1 -n 3") 
-ortho2(seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
+scan_reg_n4_brain_seg <- fast(scan_reg_n4_brain, verbose=FALSE, opts="-t 1 -n 3") 
+ortho2(scan_reg_n4_brain_seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 <p align="center">
 <img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" width="750"/>
 </p>
 
 
-The object `seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
+The object `scan_reg_n4_brain_seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
   
-  
+#### Creation of a tissue mask
 
-  
+Suppose we want to create a mask for CSF.
+
+```{r}
+scan_reg_n4_brain_csf_mask <- scan_reg_n4_brain_seg
+scan_reg_n4_brain_csf_mask[scan_reg_n4_brain_csf_mask!=1] <- 0
+ortho2(scan_reg_n4_brain_csf_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
+```
+We use the fact that the file `scan_reg_n4_brain_seg` is equal to 1 for CSF, 2 for GM and 3 for WM. FOr instance, a WM mask could be created as follows:
+
+```{r}
+scan_reg_n4_brain_wm_mask <- scan_reg_n4_brain_seg
+scan_reg_n4_brain_wm_mask[scan_reg_n4_brain_wm_mask!=3] <- 0
+ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
+```
+
+
+#### Creation of a control region for the RAVEL algorithm
   
 #### Coregistration (for more than one modality)
 
