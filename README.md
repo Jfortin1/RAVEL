@@ -17,7 +17,7 @@
 
 ### 0. Introduction
 
-RAVEL stands for Removal of Artificial Voxel Effect by Linear regression, the main preprocessing function of the package. In Section 1, we explain how to use the RAVEL algorithm as well as other intensity normalization techniques. In Section 2, we present a pre-normalization preprocessing pipeline from raw images to processed images ready for intensity normalization. In Section XX, we present different tools for the post-normalizations statistical analysis. In Section XX, we present additional functions that help the visualization of images and statistical results. 
+RAVEL stands for Removal of Artificial Voxel Effect by Linear regression, the main preprocessing function of the package. In Section 1, we present a pre-normalization preprocessing pipeline from raw images to processed images ready for intensity normalization. In Section 2, we explain how to use the RAVEL algorithm as well as other intensity normalization techniques. In Section 3, we present different tools for the post-normalizations statistical analysis. In Section 4, we present additional functions that help the visualization of images and statistical results. 
 
 ##### Installation
 
@@ -26,18 +26,12 @@ library(devtools)
 install_github("jfortin1/RAVEL")
 ```
 
-### 1. Intensity normalization with WhiteStripe and RAVEL
-
-
-
-The function `preprocessRAVEL` applies the RAVEL correction described in XX. The function `preprocessWS` applies the White Stripe intensity normalization described in XX
-
-##### Creation of a control region for the RAVEL algorithm
 
 
 
 
-### 2. Preprocessing images
+
+### 1. Preprocessing images
 
 We present a pre-normalization preprocessing pipeline implemented in the R software, from raw images to images ready for intensity normalization and statistical analysis. Once the images are preprocessed, users can apply their favorite intensity normalization and the scan-effect correction tool RAVEL as presented in Section 1 above. We present a preprocessing pipeline that uses the R packages `ANTsR` and `fslr`. While we have chosen to use a specific template space (JHU-MNI-ss), a specific registration (non-linear diffeomorphic registration) and a specific tissue segmentation (FSL FAST), users can choose other algorithms prior to intensity normalization and in order for RAVEL to work. The only requirement is that the images are registered to the same template space. 
 
@@ -158,7 +152,11 @@ scan_reg_n4_brain_wm_mask <- scan_reg_n4_brain_seg
 scan_reg_n4_brain_wm_mask[scan_reg_n4_brain_wm_mask!=3] <- 0
 ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
+### 2. Intensity normalization and RAVEL
 
+The function `preprocessRAVEL` applies the RAVEL correction described in XX. The function `preprocessWS` applies the White Stripe intensity normalization described in XX
+
+##### Creation of a control region for the RAVEL algorithm
 
 
 ### 3. Advance stuff and extensions
