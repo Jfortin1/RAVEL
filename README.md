@@ -3,7 +3,6 @@
 --------
 
 Creator: Jean-Philippe Fortin
-
 Authors: Jean-Philippe Fortin, Russell T. Shinohara, John Muschelli
 
 [![Build Status](https://travis-ci.org/Jfortin1/RAVEL.svg?branch=master)](https://travis-ci.org/Jfortin1/RAVEL)
