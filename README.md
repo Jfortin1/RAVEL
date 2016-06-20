@@ -2,9 +2,9 @@
 ### An imaging suite for the statistical analysis of structural MRIs. 
 --------
 
-**Creator**: Jean-Philippe Fortin
+**Creator**: Jean-Philippe Fortin, jeanphi@mail.med.upenn.edu
 
-**Authors**: Jean-Philippe Fortin, Russell T. Shinohara, John Muschelli
+**Authors**: Jean-Philippe Fortin, John Muschelli, Russell T. Shinohara
 
 [![Build Status](https://travis-ci.org/Jfortin1/RAVEL.svg?branch=master)](https://travis-ci.org/Jfortin1/RAVEL)
 
