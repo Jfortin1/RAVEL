@@ -34,14 +34,19 @@ have.fsl() # Should be TRUE if fsl is correctly installed
 Then we perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
 ```{r}
-img_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz")
+img_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain.nii.gz")
 img <- readNIfTI(img_path)
-seg <- fast(img)
+seg <- fast(img, verbose=FALSE) 
  
 ```
-The image `seg` contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
+The object `seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
+- Add image of the template
+- Add image of the segmentation
 
+#### Registration to template
+
+#### Coregistration (for more than one modality)
 
 #### RAVEL for longitudinal data
 
