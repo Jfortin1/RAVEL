@@ -84,12 +84,20 @@ outprefix <- gsub(".nii.gz","",brain_path) # Prefix for the output files
 output <- antsRegistration(fixed = template, moving = brain, typeofTransform = "SyN",  outprefix = outprefix)
 brain_reg   <- antsImageClone(output$warpedmovout) # Registered brain
 ```
+The object `brain_reg` contains the scan registed to the template. Note that the object is in the `ANTsR` format. Since I prefer to work with the `oro.nifti` package, which is compatible with `flsr`, I convert the object to a `nifti` object using the function `ants2oro` as follows:
 
-For visualization:
+```{r}
+brain_reg <- ants2oro(brain_reg)
+```
+I can save the registered brain in the NIfTi format using the `writeNIfTI` command:
+
+```{r}
+writeNIfTI(brain_reg, "scan1_reg")
+```
+Since `brain_reg` is converted to a `nifti` object, we can use the function `ortho2` from the `fslr` package to visualize the scan: 
 
 ```{}
-ortho2(ants2oro(brain), crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
-ortho2(ants2oro(brain_reg), crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
+ortho2(brain_reg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
 
