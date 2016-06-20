@@ -5,22 +5,19 @@
 
 RAVEL stands for Removal of Artificial Voxel Effect by Linear regression, the main preprocessing function of the package. 
 
-#### Installation
+#### 0. Installation
 
 ```{r}
 library(devtools)
 install_github("jfortin1/RAVEL")
 ```
 
+#### 1. Intensity normalization with WhiteStripe and RAVEL
+
 
 #### preprocessRAVEL
 
-The function `preprocessRAVEL` applies the RAVEL correction described in XX
-
-
-#### preprocessWS
-
-The function `preprocessWS` applies the White Stripe intensity normalization described in XX
+The function `preprocessRAVEL` applies the RAVEL correction described in XX. The function `preprocessWS` applies the White Stripe intensity normalization described in XX
 
 
 
