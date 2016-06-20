@@ -31,7 +31,8 @@ library(fslr)
 library(RAVELData)
 have.fsl() # Should be TRUE if fsl is correctly installed
 ```
-Then we perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
+
+We first load the skull-stripped image to be segmented:
 
 ```{r}
 img_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain.nii.gz")
@@ -42,6 +43,7 @@ The last line of code produces via the `ortho2` function from the `fslr` package
 
 ![Alt text](https://github.com/Jfortin1/RAVEL/blob/master/images/template.png)
 
+We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
 ```{r}
 seg <- fast(img, verbose=FALSE) 
