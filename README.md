@@ -44,9 +44,9 @@ and let's specify the path for the different files that we will need:
 ```{r}
 # JHU-MNI-ss template:
 template_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz") 
-#JHU-MNI-ss template brain mask:
+# JHU-MNI-ss template brain mask:
 template_brain_mask_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain_Mask.nii.gz") 
- # Example of T1-w MPRAGE image
+# Example of T1-w MPRAGE image
 scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 ```
 
