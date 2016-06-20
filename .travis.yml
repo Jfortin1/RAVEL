@@ -6,3 +6,5 @@ warnings_are_errors: false
 r_github_packages:
   - Jfortin1/ANTsR
 
+bioc_packages:
+  - BiocStyle
