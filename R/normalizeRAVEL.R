@@ -32,7 +32,7 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, cont
 
 
 	# Matrix of voxel intensities:
-	V <- pblapply(input.files, function(x){
+	V <- pblapply(input.files, function(x, WhiteStripe=WhiteStripe){
 		brain <- readNIfTI(x, reorient=FALSE)
 		if (WhiteStripe){
 			indices <- whitestripe(brain, type=WhiteStripe_Type, verbose=FALSE)
