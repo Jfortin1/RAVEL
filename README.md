@@ -13,6 +13,13 @@
 | _Platform:_    | _Linux_       |
 | R CMD check    | <a href="https://travis-ci.org/Jfortin1/RAVEL"><img src="https://travis-ci.org/Jfortin1/RAVEL.svg?branch=master" alt="Build status"></a> |
 
+##### References
+
+The RAVEL correction tool is presented in the following paper:
+
+Jean-Philippe Fortin, Elizabeth M Sweeney, John Muschelli, Ciprian M Crainiceanu, Russell T Shinohara, Alzheimer's Disease Neuroimaging Initiative, et al. *Removing inter-subject technical variability in mag- netic resonance imaging studies*. NeuroImage, 132:198–212, 2016.
+
+
 
 
 ### 0. Introduction
