@@ -17,7 +17,7 @@
 
 ### 0. Introduction
 
-RAVEL stands for Removal of Artificial Voxel Effect by Linear regression, the main preprocessing function of the package. 
+RAVEL stands for Removal of Artificial Voxel Effect by Linear regression, the main preprocessing function of the package. In Section 1, we explain how to use the RAVEL algorithm as well as other intensity normalization techniques. In Section 2, we present a pre-normalization preprocessing pipeline from raw images to processed images ready for intensity normalization. In Section XX, we present different tools for the post-normalizations statistical analysis. In Section XX, we present additional functions that help the visualization of images and statistical results. 
 
 ##### Installation
 
