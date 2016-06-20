@@ -6,9 +6,7 @@
 
 **Authors**: Jean-Philippe Fortin, John Muschelli, Russell T. Shinohara
 
-
-
-## Software status
+##### Software status
 
 | Resource:      | Travis CI     |
 | -------------  |  ------------- |
