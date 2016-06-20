@@ -1,6 +1,4 @@
 .git
 README.md
-R/mriSet.R
-vignettes/
-todo.txt
-vignettes/make.sh
+./R/progress/
+^vignettes/.+$
