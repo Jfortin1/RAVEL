@@ -1,5 +1,5 @@
 \name{mask_intersect}
-\alias{utils}
+\alias{mask_intersect}
 \title{
 Intersection of a list of brain masks
 }

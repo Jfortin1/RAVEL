@@ -7,7 +7,7 @@ Create matrix of voxel intensities without normalization.
 Create matrix of voxel intensities without normalization.
 }
 \usage{
-normalizeRaw(input.files, output.files=NULL, brain.mask=NULL, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE)
+normalizeRaw(input.files, output.files=NULL, brain.mask=NULL, verbose=TRUE, writeToDisk=FALSE, returnMatrix=TRUE)
 }
 \arguments{
   \item{input.files}{

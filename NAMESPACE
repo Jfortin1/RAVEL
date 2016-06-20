@@ -1,8 +1,10 @@
 import(methods)
 import(oro.nifti)
 import(fslr)
+import(ANTsR)
 import(WhiteStripe)
 import(pbapply)
+
 
 export(normalizeRaw)
 export(normalizeRAVEL)
