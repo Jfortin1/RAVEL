@@ -34,7 +34,7 @@ have.fsl() # Should be TRUE if fsl is correctly installed
 Then we perform a 3-class tissue segmentation with the FAST segmentation algorithm:
 
 ```{r}
-img.file <- 
+img.file <-  system.file(package="RAVELData", "data")
 img <- readNIfTI()
 ```
 
