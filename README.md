@@ -31,13 +31,15 @@ library(fslr)
 library(RAVELData)
 have.fsl() # Should be TRUE if fsl is correctly installed
 ```
-Then we perform a 3-class tissue segmentation with the FAST segmentation algorithm:
+Then we perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
 ```{r}
-img.file <-  system.file(package="RAVELData", "data")
-img <- readNIfTI()
+img_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz")
+img <- readNIfTI(img_path)
+seg <- fast(img)
+ 
 ```
-
+The image `seg` contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM respectively. 
 
 
 
