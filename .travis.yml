@@ -3,6 +3,6 @@ language: r
 bioc_required: false
 warnings_are_errors: false
 
-before_install:
-  - wget https://github.com/stnava/ANTsR/releases/download/latest/ANTsR_0.3.2.tgz
-  - sudo R CMD INSTALL ANTsR_0.3.2.tgz
+repos: 
+  CRAN: https://cloud.r-project.org
+  Antsr: https://github.com/stnava/ANTsR/releases/download/
