@@ -49,7 +49,7 @@ The last line of code produces via the `ortho2` function from the `fslr` package
 We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
 ```{r}
-seg <- fast(img, verbose=FALSE) 
+seg <- fast(img, verbose=FALSE, opts="-t 1 -n 3") 
 ortho2(seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 <p align="center">
@@ -72,6 +72,26 @@ img_n4 <- n4BiasFieldCorrection(img)
 ```
 
 #### Registration to template
+
+Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package. Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
+
+```{r}
+template_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz")
+template    <- antsImageRead(template_path, 3)
+brain_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
+brain <- antsImageRead(brain_path,3)
+outprefix <- gsub(".nii.gz","",brain_path) # Prefix for the output files
+output <- antsRegistration(fixed = template, moving = brain, typeofTransform = "SyN",  outprefix = outprefix)
+brain_reg   <- antsImageClone(output$warpedmovout) # Registered brain
+```
+
+For visualization:
+
+```{}
+ortho2(ants2oro(brain), crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
+ortho2(ants2oro(brain_reg), crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
+```
+
 
   
 #### Coregistration (for more than one modality)
