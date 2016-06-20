@@ -27,6 +27,8 @@ The function `preprocessWS` applies the White Stripe intensity normalization des
 
 ### 2. Preprocessing images
 
+We present a pre-normalization preprocessing pipeline implemented in the R software, from raw images to images ready for intensity normalization and statistical analysis. Once the images are preprocessed, users can apply their favorite intensity normalizations and RAVEL as presented in Section 1 above. We present a preprocessing pipeline that used the packages `ANTsR` and `fslr`. While we have chosen to use a specific template space (JHU-MNI-ss), a specific registration (non-linear diffeomorphic registration) and a specific tissue segmentation (FSL FAST), users can choose other algorithms prior to intensity normalization and in order for RAVEL to work. 
+
 ##### Prelude
 
 To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). To install `ANTsR`, please visit the [package GitHub page](https://github.com/stnava/ANTsR). The JHU-MNI-ss atlas is included in the package `RAVELData`, together with 4 MPRage T1-w scans. The package is available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). Once the packages are properly installed, we need to load them into R:
