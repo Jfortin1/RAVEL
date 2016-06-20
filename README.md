@@ -54,8 +54,6 @@ ortho2(seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 
 The object `seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
-- Add image of the template
-- Add image of the segmentation
 
 #### Registration to template
 
