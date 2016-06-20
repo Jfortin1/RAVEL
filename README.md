@@ -50,7 +50,9 @@ seg <- fast(img, verbose=FALSE)
 ortho2(seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
-![Alt text](https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png style="width: 200px;")
+<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" alt="Drawing" style="width: 200px;"/>
+
+
 
 The object `seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
