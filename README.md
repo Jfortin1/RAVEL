@@ -17,7 +17,7 @@
 
 ### 0. Introduction
 
-RAVEL stands for Removal of Artificial Voxel Effect by Linear regression, the main preprocessing function of the package. In Section 1, we present a pre-normalization preprocessing pipeline from raw images to processed images ready for intensity normalization. In Section 2, we explain how to use the RAVEL algorithm as well as other intensity normalization techniques. In Section 3, we present different tools for the post-normalizations statistical analysis. In Section 4, we present additional functions that help the visualization of images and statistical results. 
+RAVEL is an R package that combines the preprocessing and statistical analysis of structural MRI datasets in one framework. Users start with raw images in the NIfTI format, and end up with a variety of statistical results associated with the voxels and regions of the brain. RAVEL stands for Removal of Artificial Voxel Effect by Linear regression, the main preprocessing function of the package that allows an effective removal of unwanted variation for population-wide statistical inference. The vignette is divided into several sections. In Section 1, we present a pre-normalization preprocessing pipeline from raw images to processed images ready for intensity normalization. In Section 2, we explain how to use the RAVEL algorithm as well as other intensity normalization techniques. In Section 3, we present different tools for the post-normalizations statistical analysis. In Section 4, we present additional functions that help the visualization of images and statistical results. 
 
 ##### Installation
 
