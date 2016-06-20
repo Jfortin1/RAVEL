@@ -24,18 +24,22 @@ The function `preprocessWS` applies the White Stripe intensity normalization des
 
 #### Tissue Segmentation
 
-There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. Note that the `fslr` package requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/).
+There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. Note that the `fslr` package requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). Here is an example how to perform segmentation on the JHU-MNI-ss template included in the `RAVELData` package. First, let's make sure we have `fslr` correctly installed:
 
 ```{r}
 library(fslr)
 library(RAVELData)
 have.fsl() # Should be TRUE if fsl is correctly installed
+```
+Then we perform a 3-class tissue segmentation with the FAST segmentation algorithm:
+
+```{r}
 img.file <- 
 img <- readNIfTI()
 ```
 
-- fast
-- athropos
+
+
 
 #### RAVEL for longitudinal data
 
