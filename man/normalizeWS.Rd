@@ -8,7 +8,7 @@ WhiteStripe intensity normalization.
 }
 \usage{
 normalizeWS(input.files, output.files=NULL, brain.mask=NULL, 
-  WhiteStripe_Type="T1", verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE)
+  WhiteStripe_Type=c("T1","T2","FLAIR"), verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE)
 }
 \arguments{
   \item{input.files}{

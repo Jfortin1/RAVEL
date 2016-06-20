@@ -1,5 +1,5 @@
 # Assuming images are registered and normalized beforehand
-normalizeRAW <- function(input.files, output.files=NULL, brain.mask=NULL,  verbose=TRUE, writeToDisk=FALSE, returnMatrix=TRUE){
+normalizeRaw <- function(input.files, output.files=NULL, brain.mask=NULL,  verbose=TRUE, writeToDisk=FALSE, returnMatrix=TRUE){
 	
 	# RAVEL correction procedure:
 	if (!verbose) pboptions(type="none") 

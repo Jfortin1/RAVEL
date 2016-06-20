@@ -8,7 +8,7 @@ RAVEL correction
 }
 \usage{
 normalizeRAVEL(input.files, output.files=NULL, brain.mask=NULL, 
-  control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type="T1",  
+  control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type=c("T1","T2", "FLAIR"),  
   k=1, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE)
 }
 \arguments{
