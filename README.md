@@ -181,6 +181,12 @@ The function `normalizeRAVEL` applies the RAVEL correction described in XX. The 
 
 ### 3. Statistical analysis 
 
+##### Creation of T-maps
+
+##### Mean-variance relationship
+
+##### Empirical Bayes
+
 ### 4. Advanced visualization
 
 ### 5. Miscellaneous
