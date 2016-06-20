@@ -119,7 +119,7 @@ The last line of code produces via the `ortho2` function from the `fslr` package
 
 
 <p align="center">
-<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/template.png" width="750"/>
+<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/template.png" width="600"/>
 </p>
 
 We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
@@ -129,7 +129,7 @@ scan_reg_n4_brain_seg <- fast(scan_reg_n4_brain, verbose=FALSE, opts="-t 1 -n 3"
 ortho2(scan_reg_n4_brain_seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 <p align="center">
-<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" width="750"/>
+<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" width="600"/>
 </p>
 
 
