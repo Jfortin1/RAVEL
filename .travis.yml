@@ -1,4 +1,4 @@
-install:
+pre_install:
     - sudo apt-get install cmake
 
 sudo: required
