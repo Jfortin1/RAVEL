@@ -187,9 +187,11 @@ The function `normalizeRAVEL` applies the RAVEL correction described in XX. The 
 
 ##### Empirical Bayes
 
-### 4. Advanced visualization
+### 4. Analysis of RAVENS maps
 
-### 5. Miscellaneous
+### 5. Advanced visualization
+
+### 6. Miscellaneous
 
 ##### Coregistration (for more than one modality)
 
