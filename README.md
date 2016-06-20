@@ -24,7 +24,7 @@ The function `preprocessWS` applies the White Stripe intensity normalization des
 
 #### Tissue Segmentation
 
-There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. Note that the `fslr` package requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). Here is an example how to perform segmentation on the JHU-MNI-ss template included in the `RAVELData` package. First, let's make sure we have `fslr` correctly installed:
+There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. Note that the `fslr` package requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). Here is an example how to perform segmentation on the JHU-MNI-ss template, after skull removal, that is included in the `RAVELData` package. First, let's make sure we have `fslr` correctly installed:
 
 ```{r}
 library(fslr)
@@ -36,6 +36,13 @@ Then we perform a 3-class tissue segmentation on the T1-w image with the FAST se
 ```{r}
 img_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain.nii.gz")
 img <- readNIfTI(img_path)
+ortho2(img, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE, ylim=c(0,400))
+```
+The last line of code produces the following visualization of the template:
+![Alt text](/path/to/img.jpg)
+
+
+```{r}
 seg <- fast(img, verbose=FALSE) 
  
 ```
