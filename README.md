@@ -170,12 +170,12 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 | -------------  | -------------  | -------------  | ----------- |
 | No normalization    | `normalizeRaw` | T1, T2, FLAIR, PD | |
 | RAVEL    | `normalizeRAVEL` |T1, T2, FLAIR| [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
-| WhiteStripe    | `normalizeWS`|T1, T2, FLAIR |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
+| White Stripe    | `normalizeWS`|T1, T2, FLAIR |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
 | Histogram Matching    | `normalizeHM`|T1, T2 | | 
 
 
 
-The function `preprocessRAVEL` applies the RAVEL correction described in XX. The function `preprocessWS` applies the White Stripe intensity normalization described in XX
+The function `normalizeRAVEL` applies the RAVEL correction described in XX. The function `normalizeWS` applies the White Stripe intensity normalization described in XX. 
 
 ##### Creation of a control region for the RAVEL algorithm
 
