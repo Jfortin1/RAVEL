@@ -1,0 +1,8 @@
+1. getVoxelTMap
+2. shrinkage ?
+3. RAVEL when the coefficients are only estimated from healthy controls.
+4. Some visualization
+5. Bolero
+6. Daphnis
+7. SVM()
+
