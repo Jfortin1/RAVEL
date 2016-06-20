@@ -43,7 +43,7 @@ The last line of code produces via the `ortho2` function from the `fslr` package
 
 
 
-<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/template.png" width="500"/>
+<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/template.png" width="750"/>
 
 We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
@@ -52,7 +52,7 @@ seg <- fast(img, verbose=FALSE)
 ortho2(seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
-<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" alt="Drawing" style="width: 50px;"/>
+<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" width="750"/>
 
 
 
