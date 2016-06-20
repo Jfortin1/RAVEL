@@ -10,7 +10,7 @@
 
 | Resource:      | Travis CI     |
 | -------------  |  ------------- |
-| _Platform:_    | _OSX_       |
+| Platform:      | OSX       |
 | R CMD check    | <a href="https://travis-ci.org/Jfortin1/RAVEL"><img src="https://travis-ci.org/Jfortin1/RAVEL.svg?branch=master" alt="Build status"></a> |
 
 ##### References
