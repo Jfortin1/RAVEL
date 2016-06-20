@@ -3,6 +3,6 @@ language: r
 bioc_required: false
 warnings_are_errors: false
 
-repos: 
-  CRAN: https://cloud.r-project.org
-  Antsr: https://github.com/stnava/ANTsR/releases/download/
+r_github_packages:
+  - Jfortin1/ANTsR
+
