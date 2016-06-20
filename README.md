@@ -27,11 +27,9 @@ The function `preprocessWS` applies the White Stripe intensity normalization des
 
 ### 2. Preprocessing images
 
-##### Introduction
+##### Prelude
 
-Loading the necessary packages:
-
-Note that the `fslr` package requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). Here is an example how to perform segmentation on the JHU-MNI-ss template, after skull removal, that is included in the `RAVELData` package. First, let's make sure we have `fslr` correctly installed:
+To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). To install `ANTsR`, please visit the [package GitHub page](https://github.com/stnava/ANTsR). The JHU-MNI-ss atlas is included in the package `RAVELData`, together with 4 MPRage T1-w scans. The package is available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). Once the packages are properly installed, we need to load them into R:
 
 ```{r}
 library(fslr)
@@ -52,7 +50,7 @@ scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 
 ##### Registration to template
 
-Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package. To install `ANTsR`, please visit the [package GitHub page](https://github.com/stnava/ANTsR). Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
+Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package.  Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
 ```{r}
 template    <- antsImageRead(template_path, 3)
