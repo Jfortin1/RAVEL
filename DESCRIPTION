@@ -7,5 +7,4 @@ Suggests: BiocStyle, knitr
 Depends: methods, WhiteStripe, fslr, ANTsR, oro.nifti, pbapply
 Description: Removal of artificial voxel effect by linear regression. 
 Url: https://github.com/Jfortin1/RAVEL
-VignetteBuilder: knitr
 License: GPL-2
