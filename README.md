@@ -51,9 +51,9 @@ We perform a 3-class tissue segmentation on the T1-w image with the FAST segment
 seg <- fast(img, verbose=FALSE) 
 ortho2(seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
-
+<p align="center">
 <img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" width="750"/>
-
+</p>
 
 
 The object `seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
