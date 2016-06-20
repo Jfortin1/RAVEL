@@ -15,7 +15,10 @@ install_github("jfortin1/RAVEL")
 ### 1. Intensity normalization with WhiteStripe and RAVEL
 
 
+
 The function `preprocessRAVEL` applies the RAVEL correction described in XX. The function `preprocessWS` applies the White Stripe intensity normalization described in XX
+
+##### Creation of a control region for the RAVEL algorithm
 
 
 
@@ -143,13 +146,14 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 ```
 
 
-##### Creation of a control region for the RAVEL algorithm
+
+### 3. Advance stuff and extensions
   
-#### Coregistration (for more than one modality)
+##### Coregistration (for more than one modality)
 
-#### RAVEL for longitudinal data
+##### RAVEL for longitudinal data
 
-#### RAVEL for multimodal data
+##### RAVEL for multimodal data
 
 
 
