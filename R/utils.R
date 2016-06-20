@@ -9,15 +9,10 @@ mask_intersect <- function(list){
 	inter
 }
 
-.write_brain <- function(brain.norm, output.file, template){
-		if (!is.null(brain.mask)){
-			template[brain.indices] <- brain.norm
-		} else {
-			template <- fslr::niftiarr(template, brain.norm)
-		}
-		template <- oro.nifti::cal_img(template)
+.write_brain <- function(brain.norm, output.file, brain.mask){
+		brain.mask[brain.mask==1] <- brain.norm
 		output.file <- gsub(".nii.gz|.nii", "", output.file)
-		writeNIfTI(template, output.file)
+		writeNIfTI(brain.mask, output.file)
 }
 
 # Function from the extrantsr package (thx to John Muschelli): 

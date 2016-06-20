@@ -69,11 +69,8 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, cont
 
 	if (verbose & writeToDisk){
 		cat("[preprocessRAVEL] Writing out the corrected images \n")
-		template <- readNIfTI(input.files[1], reorient=FALSE)
-		template[!brain.indices] <- 0
-		template[brain.indices]  <- 1
 		pblapply(1:ncol(V.norm), function(i){
-			.write_brain(brain.norm = V.norm[,i], output.file = output.files[i], template=template)
+			.write_brain(brain.norm = V.norm[,i], output.file = output.files[i], brain.mask=brain.mask)
 		})
 	} 
 	if (returnMatrix){

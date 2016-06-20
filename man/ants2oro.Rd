@@ -12,7 +12,7 @@ ants2oro(img, reorient = FALSE)
 }
 \arguments{
 \item{img}{Object of class \code{antsImage}}
-\item{reorient}{Reorientation passed to \code{\link{readnii}}}
+\item{reorient}{Reorientation passed to \code{\link{readNIfTI}}}
 }
 
 \value{
