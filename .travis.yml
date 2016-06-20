@@ -4,4 +4,6 @@ bioc_required: false
 warnings_are_errors: false
 
 r_github_packages:
+ - stnava/cmaker
+ - stnava/ITKR
  - stnava/ANTsR

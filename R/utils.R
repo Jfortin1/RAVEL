@@ -77,7 +77,7 @@ oro2ants <- function(img, reference = NULL){
 
 
 # To clean registration files:
-clean_reg_files <- function(outprefix){
+.clean_reg_files <- function(outprefix){
     file.remove(paste0(outprefix, "1InverseWarp.nii.gz"))
     file.remove(paste0(outprefix, "1Warp.nii.gz"))
     file.remove(paste0(outprefix, "0GenericAffine.mat"))
