@@ -40,14 +40,19 @@ library(RAVELData)
 have.fsl() # Should be TRUE if fsl is correctly installed
 ```
 
+and let's specify the path for the different files that we will need:
+```{r}
+template_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz") # JHU-MNI-ss template
+template_brain_mask_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain_Mask.nii.gz") #JHU-MNI-ss template brain mask
+scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz") # Example of T1-w MPRAGE image
+```
+
 ##### Registration to template
 
 Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package. To install `ANTsR`, please visit the [package GitHub page](https://github.com/stnava/ANTsR). Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
 ```{r}
-template_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz")
 template    <- antsImageRead(template_path, 3)
-scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 scan <- antsImageRead(scan_path,3)
 outprefix <- gsub(".nii.gz","",scan_path) # Prefix for the output files
 output <- antsRegistration(fixed = template, moving = scan, typeofTransform = "SyN",  outprefix = outprefix)
@@ -82,7 +87,6 @@ scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further pr
 ##### Skull stripping
 
 ```{r}
-template_brain_mask_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain_Mask.nii.gz")
 template_brain_mask <- readNIfTI(template_brain_mask_path, reorient=FALSE)
 scan_reg_n4_brain <- niftiarr(scan_reg_n4, scan_reg_n4*template_brain_mask)
 ```
