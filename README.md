@@ -50,7 +50,7 @@ seg <- fast(img, verbose=FALSE)
 ortho2(seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
-<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" alt="Drawing" style="width: 200px;"/>
+<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" alt="Drawing" style="width: 50px;"/>
 
 
 
