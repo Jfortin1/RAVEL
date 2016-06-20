@@ -15,21 +15,12 @@
 
 ##### References
 
-| Method      | Citation     | Paper
+| Method      | Citation     | Paper Link
 | -------------  | -------------  | -------------  |
 | RAVEL    |  Jean-Philippe Fortin, Elizabeth M Sweeney, John Muschelli, Ciprian M Crainiceanu, Russell T Shinohara, Alzheimer's Disease Neuroimaging Initiative, et al. [*Removing inter-subject technical variability in magnetic resonance imaging studies*](http://www.sciencedirect.com/science/article/pii/S1053811916001452). NeuroImage, 132:198–212, 2016.      | [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
 | WhiteStripe    | Russell T Shinohara, Elizabeth M Sweeney, Jeff Goldsmith, Navid Shiee, Farrah J Mateen, Peter A Cal- abresi, Samson Jarso, Dzung L Pham, Daniel S Reich, Ciprian M Crainiceanu, Australian Imaging Biomarkers Lifestyle Flagship Study of Ageing, and Alzheimer’s Disease Neuroimaging Initiative. [*Statistical normalization techniques for magnetic resonance  imaging*](http://www.sciencedirect.com/science/article/pii/S221315821400117X). Neuroimage Clin, 6:9–19, 2014.    |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
 
 
-
-
-The RAVEL correction tool is presented in the following paper:
-
-Jean-Philippe Fortin, Elizabeth M Sweeney, John Muschelli, Ciprian M Crainiceanu, Russell T Shinohara, Alzheimer's Disease Neuroimaging Initiative, et al. [*Removing inter-subject technical variability in magnetic resonance imaging studies*](http://www.sciencedirect.com/science/article/pii/S1053811916001452). NeuroImage, 132:198–212, 2016.
-
-The White Stripe intensity normalization is presented in the following paper"
-
-Russell T Shinohara, Elizabeth M Sweeney, Jeff Goldsmith, Navid Shiee, Farrah J Mateen, Peter A Cal- abresi, Samson Jarso, Dzung L Pham, Daniel S Reich, Ciprian M Crainiceanu, Australian Imaging Biomarkers Lifestyle Flagship Study of Ageing, and Alzheimer’s Disease Neuroimaging Initiative. [*Statistical normalization techniques for magnetic resonance imaging*](http://www.sciencedirect.com/science/article/pii/S221315821400117X). Neuroimage Clin, 6:9–19, 2014.
 
 
 
