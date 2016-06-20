@@ -43,6 +43,7 @@ The last line of code produces via the `ortho2` function from the `fslr` package
 
 
 <img src="https://github.com/Jfortin1/RAVEL/blob/master/images/template.png" alt="Drawing" style="width: 50px;"/>
+<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/template.png" width="50"/>
 
 We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
