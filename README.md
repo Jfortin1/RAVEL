@@ -60,8 +60,20 @@ ortho2(seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 The object `seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
 
+#### Intensity Inhomogeneity correction
+
+To install `ANTsR`, please visit the [package GitHub page](https://github.com/stnava/ANTsR).
+
+```{r}
+library(ANTsR)
+img_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz")
+img <- antsImageRead(img_path, 3)
+img_n4 <- n4BiasFieldCorrection(img)
+```
+
 #### Registration to template
 
+  
 #### Coregistration (for more than one modality)
 
 #### RAVEL for longitudinal data
