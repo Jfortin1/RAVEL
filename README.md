@@ -41,7 +41,8 @@ ortho2(img, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE, ylim=c(0,400))
 ```
 The last line of code produces via the `ortho2` function from the `fslr` package the following visualization of the template:
 
-![Alt text](https://github.com/Jfortin1/RAVEL/blob/master/images/template.png)
+
+<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/template.png" alt="Drawing" style="width: 50px;"/>
 
 We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
