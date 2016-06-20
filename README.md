@@ -6,9 +6,17 @@
 
 **Authors**: Jean-Philippe Fortin, John Muschelli, Russell T. Shinohara
 
-[![Build Status](https://travis-ci.org/Jfortin1/RAVEL.svg?branch=master)](https://travis-ci.org/Jfortin1/RAVEL)
 
--------------
+
+## Software status
+
+| Resource:      | Travis CI     |
+| -------------  |  ------------- |
+| _Platform:_    | _Linux_       |
+| R CMD check    | <a href="https://travis-ci.org/Jfortin1/RAVEL"><img src="https://travis-ci.org/Jfortin1/RAVEL.svg?branch=master" alt="Build status"></a> |
+
+
+
 ### 0. Introduction
 
 RAVEL stands for Removal of Artificial Voxel Effect by Linear regression, the main preprocessing function of the package. 
