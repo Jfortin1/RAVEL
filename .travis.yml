@@ -1,6 +1,8 @@
-pre_install:
-    - sudo apt-get install cmake
-
+before_install:
+    -sudo add-apt-repository --yes ppa:kalakris/cmake
+    -sudo apt-get update -qq
+    -sudo apt-get install cmake
+  
 sudo: required
 language: r
 bioc_required: false
