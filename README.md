@@ -27,7 +27,7 @@ The function `preprocessWS` applies the White Stripe intensity normalization des
 
 ### 2. Preprocessing images
 
-### Introduction
+##### Introduction
 
 Loading the necessary packages:
 
@@ -40,7 +40,7 @@ library(RAVELData)
 have.fsl() # Should be TRUE if fsl is correctly installed
 ```
 
-#### Registration to template
+##### Registration to template
 
 Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package. To install `ANTsR`, please visit the [package GitHub page](https://github.com/stnava/ANTsR). Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
@@ -69,7 +69,7 @@ Since `scan_reg` is converted to a `nifti` object, we can use the function `orth
 ortho2(scan_reg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
-#### Intensity inhomogeneity correction
+##### Intensity inhomogeneity correction
 
 We perform intensity inhomogeneity correction on the registered scan using the N4 Correction from the `ANTsR` package:
 
@@ -79,7 +79,7 @@ scan_reg_n4 <- n4BiasFieldCorrection(scan_reg)
 scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further processing
 ```
 
-#### Skull stripping
+##### Skull stripping
 
 ```{r}
 template_brain_mask_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain_Mask.nii.gz")
@@ -93,7 +93,7 @@ Visualization:
 ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
  
-#### Tissue Segmentation
+##### Tissue Segmentation
 
 There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. 
 
@@ -123,7 +123,7 @@ ortho2(scan_reg_n4_brain_seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 The object `scan_reg_n4_brain_seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
   
-#### Creation of a tissue mask
+##### Creation of a tissue mask
 
 Suppose we want to create a mask for CSF.
 
@@ -141,7 +141,7 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 ```
 
 
-#### Creation of a control region for the RAVEL algorithm
+##### Creation of a control region for the RAVEL algorithm
   
 #### Coregistration (for more than one modality)
 
