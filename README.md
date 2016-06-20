@@ -39,7 +39,8 @@ img <- readNIfTI(img_path)
 ortho2(img, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE, ylim=c(0,400))
 ```
 The last line of code produces the following visualization of the template:
-![Alt text](/path/to/img.jpg)
+
+![Alt text](https://github.com/Jfortin1/RAVEL/blob/master/images/template.png)
 
 
 ```{r}
