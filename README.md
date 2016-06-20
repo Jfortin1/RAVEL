@@ -26,7 +26,7 @@ The function `preprocessWS` applies the White Stripe intensity normalization des
 
 - fast
 - athropos
-- 
+
 #### RAVEL for longitudinal data
 
 #### RAVEL for multimodal data
