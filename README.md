@@ -39,7 +39,7 @@ img <- readNIfTI(img_path)
 seg <- fast(img)
  
 ```
-The image `seg` contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM respectively. 
+The image `seg` contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
 
 
