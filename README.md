@@ -164,6 +164,15 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 ```
 ### 2. Intensity normalization and RAVEL
 
+##### Available methods
+
+| Method      | Package function  | Paper Link
+| -------------  | -------------  | -------------  |
+| RAVEL    | `normalizeRAVEL` | [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
+| WhiteStripe    | `normalizeWS`|[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
+
+
+
 The function `preprocessRAVEL` applies the RAVEL correction described in XX. The function `preprocessWS` applies the White Stripe intensity normalization described in XX
 
 ##### Creation of a control region for the RAVEL algorithm
