@@ -47,7 +47,9 @@ We present a pre-normalization preprocessing pipeline implemented in the R softw
 
 ##### Prelude
 
-To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/). To install `ANTsR`, please visit the [package GitHub page](https://github.com/stnava/ANTsR/releases/) and download the latest stable release. While writing this vignette, the release `ANTsR_0.3.2.tgz` was used. The JHU-MNI-ss atlas is included in the package `RAVELData`, together with 4 MPRage T1-w scans. The package is available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). Once the packages are properly installed, we need to load them into R:
+To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/) for installation. For `ANTsR`, we recommend to install the latest stable version available at the ANTsR [GitHub page](https://github.com/stnava/ANTsR/releases/). The version used for this vignette was `ANTsR_0.3.2.tgz`. For the template space, we use the JHU-MNI-ss atlas, which we have included in the package `RAVELData`, together with 4 example MP-RAGE T1-w scans. The package `RAVELData` is available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). 
+
+Once the packages are properly installed, we are ready to start our preprocessing of T1-w images. We first load the packages into R:
 
 ```{r}
 library(fslr)
