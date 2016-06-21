@@ -47,23 +47,24 @@ We present a pre-normalization preprocessing pipeline implemented in the R softw
 
 ##### 1.1. Prelude
 
-To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/) for installation. For `ANTsR`, we recommend to install the latest stable version available at the ANTsR [GitHub page](https://github.com/stnava/ANTsR/releases/). The version used for this vignette was `ANTsR_0.3.2.tgz`. For the template space, we use the JHU-MNI-ss atlas (see Section 1.2), which we have included in the package `RAVELData`, together with 4 example MP-RAGE T1-w scans. The package `RAVELData` is available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). 
-
+To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/) for installation. For `ANTsR`, we recommend to install the latest stable version available at the ANTsR [GitHub page](https://github.com/stnava/ANTsR/releases/). The version used for this vignette was `ANTsR_0.3.2.tgz`. For the template space, we use the JHU-MNI-ss atlas (see Section 1.2) included in the `EveTemplate` package, available on GitHub at [https://github.com/Jfortin1/EveTemplate](https://github.com/Jfortin1/EveTemplate). 
+For data examples, we use 4 T1-w scans from the package `RAVELData` available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). 
 Once the packages are properly installed, we are ready to start our preprocessing of T1-w images. We first load the packages into R:
 
 ```{r}
 library(fslr)
 library(ANTsR)
 library(RAVELData)
+library(EveTemplate)
 have.fsl() # Should be TRUE if fsl is correctly installed
 ```
 
 and let's specify the path for the different files that we will need:
 ```{r}
 # JHU-MNI-ss template:
-template_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1.nii.gz") 
+template_path <- getEveTemplatePath()
 # JHU-MNI-ss template brain mask:
-template_brain_mask_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1_Brain_Mask.nii.gz") 
+template_brain_mask_path <- getEveTemplatePath("brain_mask")
 # Example of T1-w MPRAGE image
 scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 ```
