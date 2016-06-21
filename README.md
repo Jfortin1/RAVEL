@@ -3,7 +3,7 @@
 --------
 # My Table of content
 - [1. Introduction](#id-section1)
-- [2. Preprocessing](#id-section2)
+- [2. Image preprocessing](#id-section2)
 - [3. Intensity normalization and RAVEL correction](#id-section3)
 - [4. Statistical analysis](#id-section4)
 
@@ -48,7 +48,7 @@ install_github("jfortin1/RAVEL")
 
 
 <div id='id-section2'/>
-## 2. Preprocessing images
+## 2. Image preprocessing 
 
 
 
