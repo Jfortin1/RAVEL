@@ -45,7 +45,7 @@ install_github("jfortin1/RAVEL")
 
 We present a pre-normalization preprocessing pipeline implemented in the R software, from raw images to images ready for intensity normalization and statistical analysis. Once the images are preprocessed, users can apply their favorite intensity normalization and the scan-effect correction tool RAVEL as presented in Section 1 above. We present a preprocessing pipeline that uses the R packages `ANTsR` and `fslr`. While we have chosen to use a specific template space (JHU-MNI-ss), a specific registration (non-linear diffeomorphic registration) and a specific tissue segmentation (FSL FAST), users can choose other algorithms prior to intensity normalization and in order for RAVEL to work. The only requirement is that the images are registered to the same template space. 
 
-##### Prelude
+##### 1.1. Prelude
 
 To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/) for installation. For `ANTsR`, we recommend to install the latest stable version available at the ANTsR [GitHub page](https://github.com/stnava/ANTsR/releases/). The version used for this vignette was `ANTsR_0.3.2.tgz`. For the template space, we use the JHU-MNI-ss atlas, which we have included in the package `RAVELData`, together with 4 example MP-RAGE T1-w scans. The package `RAVELData` is available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). 
 
@@ -68,7 +68,9 @@ template_brain_mask_path <- system.file(package="RAVELData", "data/JHU_MNI_SS_T1
 scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 ```
 
-##### Registration to template
+##### 1.2. JHU-MNI-ss template (_EVE_ atlas)
+
+##### 1.3. Registration to template
 
 Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package.  Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
