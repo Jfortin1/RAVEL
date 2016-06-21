@@ -1,14 +1,6 @@
 # RAVEL
 ### Imaging suite for the preprocessing and statistical analysis of MRIs in R.
 --------
-# My Table of content
-- [1. Introduction](#id-section1)
-- [2. Image preprocessing](#id-section2)
-- [3. Intensity normalization and RAVEL correction](#id-section3)
-- [4. Statistical analysis](#id-section4)
-
-
-
 **Creator**: Jean-Philippe Fortin, jeanphi@mail.med.upenn.edu
 
 **Authors**: Jean-Philippe Fortin, John Muschelli, Russell T. Shinohara
@@ -29,6 +21,11 @@
 
 
 
+## Table of content
+- [1. Introduction](#id-section1)
+- [2. Image preprocessing](#id-section2)
+- [3. Intensity normalization and RAVEL correction](#id-section3)
+- [4. Statistical analysis](#id-section4)
 
 
 
