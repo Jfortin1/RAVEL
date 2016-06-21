@@ -62,7 +62,7 @@ have.fsl() # Should be TRUE if fsl is correctly installed
 and let's specify the path for the different files that we will need:
 ```{r}
 # JHU-MNI-ss template:
-template_path <- getEveTemplatePath()
+template_path <- getEveTemplatePath("full")
 # JHU-MNI-ss template brain mask:
 template_brain_mask_path <- getEveTemplatePath("brain_mask")
 # Example of T1-w MPRAGE image
