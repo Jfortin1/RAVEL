@@ -100,7 +100,7 @@ Since `scan_reg` is converted to a `nifti` object, we can use the function `orth
 ortho2(scan_reg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
-##### Intensity inhomogeneity correction
+##### 1.4. Intensity inhomogeneity correction
 
 We perform intensity inhomogeneity correction on the registered scan using the N4 Correction from the `ANTsR` package:
 
@@ -110,7 +110,7 @@ scan_reg_n4 <- n4BiasFieldCorrection(scan_reg)
 scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further processing
 ```
 
-##### Skull stripping
+##### 1.5. Skull stripping
 
 ```{r}
 template_brain_mask <- readNIfTI(template_brain_mask_path, reorient=FALSE)
@@ -123,7 +123,7 @@ Visualization:
 ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
  
-##### Tissue Segmentation
+##### 1.6. Tissue Segmentation
 
 There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. 
 
@@ -153,7 +153,7 @@ ortho2(scan_reg_n4_brain_seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 The object `scan_reg_n4_brain_seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
   
-##### Creation of a tissue mask
+##### 1.7. Creation of a tissue mask
 
 Suppose we want to create a mask for CSF.
 
