@@ -1,5 +1,5 @@
 # RAVEL
-### Imaging suite for the preprocessing and statistical analysis of structural MRIs in R.
+### Imaging suite for the preprocessing and statistical analysis of MRIs in R.
 --------
 
 **Creator**: Jean-Philippe Fortin, jeanphi@mail.med.upenn.edu
