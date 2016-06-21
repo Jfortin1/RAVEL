@@ -2,10 +2,10 @@
 ### Imaging suite for the preprocessing and statistical analysis of MRIs in R.
 --------
 # My Table of content
-- [Introduction](#id-section1)
-- [Preprocessing](#id-section2)
-- [Intensity normalization and RAVEL correction](#id-section3)
-- [Statistical analysis](#id-section4)
+- [1. Introduction](#id-section1)
+- [2. Preprocessing](#id-section2)
+- [3. Intensity normalization and RAVEL correction](#id-section3)
+- [4. Statistical analysis](#id-section4)
 
 
 
@@ -33,7 +33,7 @@
 
 
 <div id='id-section1'/>
-## Introduction
+## 1. Introduction
 
 RAVEL is an R package that combines the preprocessing and statistical analysis of magnetic resonance imaging (MRI) datasets within one framework. Users can start with raw images in the NIfTI format, and end up with a variety of statistical results associated with voxels and regions of interest in the brain. RAVEL stands for _Removal of Artificial Voxel Effect by Linear regression_, the main preprocessing function of the package that allows an effective removal of between-scan unwanted variation. We have shown in [our recent paper](http://www.sciencedirect.com/science/article/pii/S1053811916001452) that RAVEL improves significantly population-wide statistical inference. The vignette is divided into several sections. In Section 1, we present a pre-normalization preprocessing pipeline from raw images to processed images ready for intensity normalization. In Section 2, we explain how to use the RAVEL algorithm as well as other intensity normalization techniques. In Section 3, we present different tools for post-normalization statistical analysis. In Section 4, we present additional functions that help the visualization of images and statistical results. 
 
@@ -48,13 +48,13 @@ install_github("jfortin1/RAVEL")
 
 
 <div id='id-section2'/>
-## Preprocessing images
+## 2. Preprocessing images
 
 
 
 We present a pre-normalization preprocessing pipeline implemented in the R software, from raw images to images ready for intensity normalization and statistical analysis. Once the images are preprocessed, users can apply their favorite intensity normalization and the scan-effect correction tool RAVEL as presented in Section 1 above. We present a preprocessing pipeline that uses the R packages `ANTsR` and `fslr`. While we have chosen to use a specific template space (JHU-MNI-ss), a specific registration (non-linear diffeomorphic registration) and a specific tissue segmentation (FSL FAST), users can choose other algorithms prior to intensity normalization and in order for RAVEL to work. The only requirement is that the images are registered to the same template space. 
 
-##### 1.1. Prelude
+#### 2.1. Prelude
 
 To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/) for installation. For `ANTsR`, we recommend to install the latest stable version available at the ANTsR [GitHub page](https://github.com/stnava/ANTsR/releases/). The version used for this vignette was `ANTsR_0.3.2.tgz`. For the template space, we use the JHU-MNI-ss atlas (see Section 1.2) included in the `EveTemplate` package, available on GitHub at [https://github.com/Jfortin1/EveTemplate](https://github.com/Jfortin1/EveTemplate). 
 For data examples, we use 4 T1-w scans from the package `RAVELData` available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). 
@@ -78,11 +78,11 @@ template_brain_mask_path <- getEveTemplatePath("brain_mask")
 scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 ```
 
-##### 1.2. JHU-MNI-ss template (_EVE_ atlas)
+#### 2.2. JHU-MNI-ss template (_EVE_ atlas)
 
 
 
-##### 1.3. Registration to template
+#### 2.3. Registration to template
 
 Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package.  Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
@@ -109,7 +109,7 @@ Since `scan_reg` is converted to a `nifti` object, we can use the function `orth
 ortho2(scan_reg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
-##### 1.4. Intensity inhomogeneity correction
+#### 2.4. Intensity inhomogeneity correction
 
 We perform intensity inhomogeneity correction on the registered scan using the N4 Correction from the `ANTsR` package:
 
@@ -119,7 +119,7 @@ scan_reg_n4 <- n4BiasFieldCorrection(scan_reg)
 scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further processing
 ```
 
-##### 1.5. Skull stripping
+#### 2.5. Skull stripping
 
 ```{r}
 template_brain_mask <- readNIfTI(template_brain_mask_path, reorient=FALSE)
@@ -132,7 +132,7 @@ Visualization:
 ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
  
-##### 1.6. Tissue Segmentation
+#### 2.6. Tissue Segmentation
 
 There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. 
 
@@ -162,7 +162,7 @@ ortho2(scan_reg_n4_brain_seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 The object `scan_reg_n4_brain_seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
   
-##### 1.7. Creation of a tissue mask
+#### 2.7. Creation of a tissue mask
 
 Suppose we want to create a mask for CSF.
 
@@ -180,7 +180,7 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 ```
 
 <div id='id-section3'/>
-## Intensity normalization and RAVEL
+## 3. Intensity normalization and RAVEL
 
 
 
@@ -201,7 +201,7 @@ The function `normalizeRAVEL` applies the RAVEL correction described in XX. The 
 
 
 <div id='id-section4'/>
-## Statistical analysis
+## 4. Statistical analysis
 
 
 ##### Creation of T-maps
