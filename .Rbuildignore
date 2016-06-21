@@ -4,3 +4,4 @@ README.md
 ^vignettes/.+$
 .travis.yml
 todo.txt
+^images/.+$
