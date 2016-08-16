@@ -27,8 +27,8 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, cont
 	}
 
 	cat("[preprocessRAVEL] Creating the voxel intensities matrix V. \n")
-	if (WhiteSripe) cat("[preprocessRAVEL] WhiteStripe intensity normalization is applied to each scan. \n")
-	if (!WhiteSripe) cat("[preprocessRAVEL] WhiteStripe intensity normalization not applied.  \n")
+	if (WhiteStripe) cat("[preprocessRAVEL] WhiteStripe intensity normalization is applied to each scan. \n")
+	if (!WhiteStripe) cat("[preprocessRAVEL] WhiteStripe intensity normalization not applied.  \n")
 
 
 	# Matrix of voxel intensities:
