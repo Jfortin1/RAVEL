@@ -9,6 +9,15 @@ mask_intersect <- function(list){
 	inter
 }
 
+mask_intersect2 <- function(list, prob=1){
+  n <- length(list)
+  inter <- Reduce("+", list)
+  cutoff <- floor(prob * n)
+  inter[inter < cutoff] <- 0
+  inter[inter >= cutoff] <- 1
+  inter
+}
+
 .write_brain <- function(brain.norm, output.file, brain.mask){
 		brain.mask[brain.mask==1] <- brain.norm
 		output.file <- gsub(".nii.gz|.nii", "", output.file)
