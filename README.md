@@ -213,7 +213,8 @@ RAVEL uses a control region of the brain to infer unwanted variation across subj
 Example:
 
 ```{r}
-mask <- mask_intersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"), output.file="intersection_mask.nii.gz")
+mask <- mask_intersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
+    output.file="intersection_mask.nii.gz")
 ```
 
 
