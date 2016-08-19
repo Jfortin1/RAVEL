@@ -45,7 +45,10 @@ mask_intersect <- function(list, output.file = NULL, prob=1,
 
 
 .write_brain <- function(brain.norm, output.file, brain.mask){
-		brain.mask[brain.mask==1] <- brain.norm
+    if (is.character(brain.mask)){
+        brain.mask <- readNIfTI(brain.mask, reorient=FALSE)
+    }
+    brain.mask[brain.mask==1] <- brain.norm
 		output.file <- gsub(".nii.gz|.nii", "", output.file)
 		writeNIfTI(brain.mask, output.file)
 }
