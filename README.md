@@ -196,7 +196,7 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 | Argument     | Description  | Default
 | -------------  | -------------  | -------------  | 
 | `input.files` | `vector` or `list` of the paths for the input NIfTI image files to be normalized 
-| `output.files` | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "_RAVEL" appended at the end.   
+| `output.files` | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "_RAVEL" appended at the end.   | `NULL`
 | `brain.mask`  | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise 
 | `control.mask` | NIfTI image path for the binary control region mask. Must have value `1` for the control region and `0` otherwise. See the helper function `mask_intersect` for the creation of a `control.mask`.  
 | `WhiteStripe` | Should White Stripe normalization be performed before RAVEL? | `TRUE` 
