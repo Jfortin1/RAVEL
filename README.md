@@ -243,7 +243,7 @@ The function `normalizeRAVEL` takes as input the preprocessed and registered ima
 | `writeToDisk` | Should the normalized images be saved to the disk as NIfTI files? |`FALSE`
 | `verbose` | Should the function be verbose? | `TRUE` 
 
-### 3.1.1 Creation of a control region for RAVEL
+### Creation of a control region for RAVEL
 
 RAVEL uses a control region of the brain to infer unwanted variation across subjects. The control region is made of voxels that are known to be not associated with the phenotype of interest. For instance, it is known that the CSF intensities on T1-w images are not associated with the progression of AD. The control region must be specified in the argument `control.mask` of the function `normalizeRAVEL` as a path to a NIfTI file storing the binary mask. In the case of a CSF control region, one way to create such a binary mask is to create a CSF binary mask for each image, and then take the intersection of all binary masks to create a common CSF binary mask for all images. The helper function `mask_intersect` will take as input a list of binary masks (either `nifti` objects or a list of NIfTI file paths), and will output the intersection of all binary masks. By default, the function will save the intersection mask to the disk as a NIfTI file, as specified by `output.file` 
 
@@ -260,21 +260,11 @@ mask <- mask_intersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.n
 
 ##### Creation of T-maps
 
-##### Mean-variance relationship
-
 ##### Empirical Bayes
 
 ### 4. Analysis of RAVENS maps
 
-### 5. Advanced visualization
 
-### 6. Miscellaneous
-
-##### Coregistration (for more than one modality)
-
-##### RAVEL for longitudinal data
-
-##### RAVEL for multimodal data
 
 
 
