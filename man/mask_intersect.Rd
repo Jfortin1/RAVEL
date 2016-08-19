@@ -7,7 +7,8 @@ Intersection of a list of brain masks
  RAVEl stuff is blablablablabla. 
 }
 \usage{
-mask_intersect(list)
+mask_intersect(list, output.file = NULL, prob=1, reorient = FALSE, returnObject = TRUE,
+	writeToDisk = TRUE, verbose = TRUE)
 }
 \arguments{
   \item{list}{
