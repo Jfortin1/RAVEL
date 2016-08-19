@@ -1,5 +1,7 @@
 # Assuming images are registered and normalized beforehand
-normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type=c("T1", "T2", "FLAIR"),  k=1, verbose=TRUE, returnMatrix=TRUE, writeToDisk=FALSE){
+normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, 
+	control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type=c("T1", "T2", "FLAIR"),  
+	k=1, returnMatrix=TRUE, writeToDisk=FALSE, verbose=TRUE){
 	
 	# RAVEL correction procedure:
 	WhiteStripe_Type <- match.arg(WhiteStripe_Type)
