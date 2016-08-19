@@ -190,8 +190,19 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 | `normalizeWS`    | White Stripe |T1, T2, FLAIR |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
 | `normalizeHM` |Histogram Matching   |T1, T2 | [Link](http://www.ncbi.nlm.nih.gov/pubmed/10571928)| 
 
-#### RAVEL normalization
+### 3.1 RAVEL normalization
 
+
+| Argument     | Type  | Modalities supported at the moment| Paper Link
+| -------------  | -------------  | -------------  | ----------- |
+| `input.files` | `vector` or `list` of the paths for the input NIfTI image files | T1, T2, FLAIR, PD | |
+| `output.files` | optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "_RAVEL" appended at the end.   |T1, T2, FLAIR| [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
+| `normalizeWS`    | White Stripe |T1, T2, FLAIR |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
+| `normalizeHM` |Histogram Matching   |T1, T2 | [Link](http://www.ncbi.nlm.nih.gov/pubmed/10571928)| 
+
+
+
+normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, control.mask=NULL, WhiteStripe=TRUE, WhiteStripe_Type=c("T1", "T2", "FLAIR"),  k=1, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE)
 
 
 ##### Creation of a control region for the RAVEL algorithm
