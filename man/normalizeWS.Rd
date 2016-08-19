@@ -8,7 +8,7 @@ WhiteStripe intensity normalization.
 }
 \usage{
 normalizeWS(input.files, output.files=NULL, brain.mask=NULL, 
-  WhiteStripe_Type=c("T1","T2","FLAIR"), verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE)
+  WhiteStripe_Type=c("T1","T2","FLAIR"), writeToDisk=FALSE, returnMatrix=FALSE, verbose=TRUE)
 }
 \arguments{
   \item{input.files}{
@@ -23,14 +23,14 @@ normalizeWS(input.files, output.files=NULL, brain.mask=NULL,
   \item{WhiteStripe_Type}{
     What modality is used for WhiteStripe? Should be one of T1, T2 or FLAIR.
   }
-  \item{verbose}{
-    Should messages be printed?
-  }
   \item{writeToDisk}{
     Should the normalized scans be saved to the disk? 
   }
   \item{returnMatrix}{
     Should the matrix of normalized intensities be returned?
+  }
+  \item{verbose}{
+    Should messages be printed?
   }
 }
 

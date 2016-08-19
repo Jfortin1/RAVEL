@@ -8,7 +8,7 @@ Create matrix of voxel intensities without normalization.
 }
 \usage{
 normalizeRaw(input.files, output.files=NULL, brain.mask=NULL, 
-  verbose=TRUE, writeToDisk=FALSE, returnMatrix=TRUE)
+  writeToDisk=FALSE, returnMatrix=TRUE, verbose=TRUE)
 }
 \arguments{
   \item{input.files}{
@@ -22,14 +22,14 @@ normalizeRaw(input.files, output.files=NULL, brain.mask=NULL,
     Filename for the brain binary mask specifying the template 
     space brain. Must be a NIfTI file. 
   }
-  \item{verbose}{
-    Should messages be printed?
-  }
   \item{writeToDisk}{
     Should the scans be saved to the disk? 
   }
   \item{returnMatrix}{
     Should the matrix of intensities be returned?
+  }
+  \item{verbose}{
+    Should messages be printed?
   }
 }
 
