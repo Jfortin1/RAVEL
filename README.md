@@ -177,9 +177,11 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 ```
 
 <div id='id-section3'/>
-## 3. Intensity normalization
+## 3. Intensity normalization and RAVEL correction
 
+Since MRI intensities are acquired in arbitrary units, image intensities are not comparable across scans, between subjects and across sites. Intensity normalization (or intensity standardization) is paramount before performing between-subject intensity comparisons. The `RAVEL` package includes the popular histogram matching normalization (`normalizeHM`) as well as the White Stripe normalization (`normalizeWS`); see the table below for the reference papers. Once the images intensities are normalized, the RAVEL correction tool can be applied using the function `normalizeRAVEL` to remove additional unwanted variation using a control region. Because we have found that the combination White Stripe + RAVEL was best at removing unwanted variation, the function `normalizeRAVEL` performs White Stripe normalization by default prior to the RAVEL correction. 
 
+Note: registration is also called _spatial normalization_ which is unrelated to _intensity normalization_. 
 
 ##### Available methods
 
@@ -190,8 +192,43 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 | `normalizeWS`    | White Stripe |T1, T2, FLAIR |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
 | `normalizeHM` |Histogram Matching   |T1, T2 | [Link](http://www.ncbi.nlm.nih.gov/pubmed/10571928)| 
 
-### 3.1 RAVEL normalization
+Briefly, each function takes as input a list of NIfTI file paths specifying the images to be normalized, and return a matrix of normalized intensities where rows are voxels and columns are scans. We note that the input files must be the files associated with  preprocessed images registered to a common template. The different functions are described below. 
 
+### 3.1 No normalization
+
+The function `normalizeRaw` takes as input the preprocessed and registered images, and create a matrix of voxel intensities without intensity normalization. For conventional MRI images, we recommend to apply an intensity normalization to the images (see `normalizeWS` or `normalizeRAVEL`). The main purpose of the function `normalizeRaw` is for exploration data analysis (EDA), methods development and methods comparison. 
+
+| Argument     | Description  | Default
+| -------------  | -------------  | -------------  | 
+| `input.files` | `vector` or `list` of the paths for the input NIfTI image files to be normalized 
+| `output.files` | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "_RAW" appended at the end.   | `NULL`
+| `brain.mask`  | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise 
+| `returnMatrix` | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`
+| `writeToDisk` | Should the normalized images be saved to the disk as NIfTI files? |`FALSE`
+| `verbose` | Should the function be verbose? | `TRUE` 
+
+
+### 3.2 White Stripe normalization
+
+The function `normalizeWS` takes as input the preprocessed and registered images, applies the White Stripe normalization algorith to each image separately via the `WhiteStripe` R package, and creates a matrix of normalized voxel intensities. Note that the White Stripe normalization is also included as a first step in the RAVEL algorithm implemented in the `normalizeRAVEL` function. 
+
+| Argument     | Description  | Default
+| -------------  | -------------  | -------------  | 
+| `input.files` | `vector` or `list` of the paths for the input NIfTI image files to be normalized 
+| `output.files` | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "_WS" appended at the end.   | `NULL`
+| `brain.mask`  | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise 
+| `WhiteStripe_Type` | What is the type of images to be normalized? Must be one of "T1", "T2" and "FLAIR". | `T1`
+| `returnMatrix` | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`
+| `writeToDisk` | Should the normalized images be saved to the disk as NIfTI files? |`FALSE`
+| `verbose` | Should the function be verbose? | `TRUE` 
+
+### 3.3 Histogram matching normalization
+
+Not ready yet. 
+
+### 3.4 RAVEL normalization
+
+The function `normalizeRAVEL` takes as input the preprocessed and registered images, and a control region mask, and applies the RAVEL correction method to create a matrix of normalized voxel intensities. The White Stripe normalization is included by default as a first step in the RAVEL algorithm. The next section explains how to create a control region mask.
 
 | Argument     | Description  | Default
 | -------------  | -------------  | -------------  | 
@@ -202,9 +239,9 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 | `WhiteStripe` | Should White Stripe normalization be performed before RAVEL? | `TRUE` 
 | `WhiteStripe_Type` | If `WhiteStripe` is `TRUE`, what is the type of images to be normalized? Must be one of "T1", "T2" and "FLAIR". | `T1`
 | `k` | Integer specifying the number of principal components to be included in the RAVEL correction. | `1`
-| `verbose` | Should the function be verbose? | `TRUE` 
 | `returnMatrix` | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`
 | `writeToDisk` | Should the normalized images be saved to the disk as NIfTI files? |`FALSE`
+| `verbose` | Should the function be verbose? | `TRUE` 
 
 ### 3.1.1 Creation of a control region for RAVEL
 
