@@ -1,5 +1,5 @@
 # Assuming images are registered and normalized beforehand
-normalizeRaw <- function(input.files, output.files=NULL, brain.mask=NULL,  verbose=TRUE, writeToDisk=FALSE, returnMatrix=TRUE){
+normalizeRaw <- function(input.files, output.files=NULL, brain.mask=NULL, writeToDisk=FALSE, returnMatrix=TRUE, verbose=TRUE){
 	
 	# RAVEL correction procedure:
 	if (!verbose) pboptions(type="none") 
@@ -15,9 +15,7 @@ normalizeRaw <- function(input.files, output.files=NULL, brain.mask=NULL,  verbo
 		output.files <- gsub(".nii.gz|.nii","_RAW.nii.gz", input.files)
 	}
 
-	
-
-	cat("[preprocessRAVEL] Creating the voxel intensities matrix V. \n")
+	cat("[normalizeRaw] Creating the voxel intensities matrix V. \n")
 
 
 	# Matrix of voxel intensities:
@@ -33,7 +31,7 @@ normalizeRaw <- function(input.files, output.files=NULL, brain.mask=NULL,  verbo
 
 
 	if (verbose & writeToDisk){
-		cat("[preprocessRAVEL] Writing out the corrected images \n")
+		cat("[normalizeRaw] Writing out the corrected images \n")
 		pblapply(1:ncol(V), function(i){
 			.write_brain(brain.norm = V[,i], output.file = output.files[i], brain.mask=brain.mask)
 		})
