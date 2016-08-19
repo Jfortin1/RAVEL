@@ -190,9 +190,9 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 | `normalizeWS`    | White Stripe |T1, T2, FLAIR |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
 | `normalizeHM` |Histogram Matching   |T1, T2 | [Link](http://www.ncbi.nlm.nih.gov/pubmed/10571928)| 
 
+#### RAVEL normalization
 
 
-The function `normalizeRAVEL` applies the RAVEL correction described in XX. The function `normalizeWS` applies the White Stripe intensity normalization described in XX. 
 
 ##### Creation of a control region for the RAVEL algorithm
 
