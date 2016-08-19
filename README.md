@@ -183,12 +183,12 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 
 ##### Available methods
 
-| Method      | Package function  | Modalities supported at the moment| Paper Link
+| Function     | Method  | Modalities supported at the moment| Paper Link
 | -------------  | -------------  | -------------  | ----------- |
-| No normalization    | `normalizeRaw` | T1, T2, FLAIR, PD | |
-| RAVEL    | `normalizeRAVEL` |T1, T2, FLAIR| [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
-| White Stripe    | `normalizeWS`|T1, T2, FLAIR |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
-| Histogram Matching    | `normalizeHM`|T1, T2 | | 
+| `normalizeRaw` | No normalization | T1, T2, FLAIR, PD | |
+| `normalizeRAVEL` | RAVEL   |T1, T2, FLAIR| [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
+| `normalizeWS`    | White Stripe |T1, T2, FLAIR |[Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X)| 
+| `normalizeHM` |Histogram Matching   |T1, T2 | | 
 
 
 
