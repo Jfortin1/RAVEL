@@ -10,7 +10,7 @@ RAVEL correction
 normalizeRAVEL(input.files, output.files=NULL, brain.mask=NULL, 
   control.mask=NULL, WhiteStripe=TRUE, 
   WhiteStripe_Type=c("T1","T2", "FLAIR"),  
-  k=1, verbose=TRUE, writeToDisk=FALSE, returnMatrix=FALSE)
+  k=1, verbose=TRUE, returnMatrix=TRUE, writeToDisk=FALSE)
 }
 \arguments{
   \item{input.files}{
@@ -40,11 +40,11 @@ normalizeRAVEL(input.files, output.files=NULL, brain.mask=NULL,
   \item{verbose}{
     Should messages be printed?
   }
-  \item{writeToDisk}{
-    Something
-  }
   \item{returnMatrix}{
     Should the matrix of normalized intensities be returned?
+  }
+  \item{writeToDisk}{
+    Something
   }
 }
 
