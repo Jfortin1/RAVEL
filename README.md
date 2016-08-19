@@ -26,6 +26,7 @@
 - [2. Image preprocessing](#id-section2)
 - [3. Intensity normalization and RAVEL correction](#id-section3)
 - [4. Statistical analysis](#id-section4)
+- [5. Volumetrics analysis (VBM) and RAVENS maps](#id-section4)
 
 
 
@@ -253,8 +254,8 @@ mask <- mask_intersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.n
 ### 4.1 Univariate voxel-wise regressions (T-maps)
 
 
-
-### 4. Analysis of RAVENS maps
+<div id='id-section5'/>
+## 5. Volumetrics analysis (VBM) and RAVENS maps
 
 
 
