@@ -121,19 +121,12 @@ scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further pr
 ```{r}
 template_brain_mask <- readNIfTI(template_brain_mask_path, reorient=FALSE)
 scan_reg_n4_brain <- niftiarr(scan_reg_n4, scan_reg_n4*template_brain_mask)
-```
-
-Visualization:
-
-```{}
 ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
  
 #### 2.6. Tissue Segmentation
 
-There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. 
-
-Let's produce the tissue segmentation for the `scan_reg_n4_brain` scan above:
+There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. Let's produce the tissue segmentation for the `scan_reg_n4_brain` scan above:
 
 ```{r}
 ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE, ylim=c(0,400))
