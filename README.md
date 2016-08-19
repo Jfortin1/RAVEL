@@ -250,7 +250,8 @@ mask <- mask_intersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.n
 <div id='id-section4'/>
 ## 4. Statistical analysis
 
-### Univariate voxel-wise regressions (T-maps)
+### 4.1 Univariate voxel-wise regressions (T-maps)
+
 
 
 ### 4. Analysis of RAVENS maps
