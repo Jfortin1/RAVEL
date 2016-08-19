@@ -206,7 +206,15 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 | `returnMatrix` | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`
 | `writeToDisk` | Should the normalized images be saved to the disk as NIfTI files? |`FALSE`
 
+### 3.1.1 Creation of a control region for RAVEL
 
+RAVEL uses a control region of the brain to infer unwanted variation across subjects. The control region is made of voxels that are known to be not associated with the phenotype of interest. For instance, it is known that the CSF intensities on T1-w images are not associated with the progression of AD. The control region must be specified in the argument `control.mask` of the function `normalizeRAVEL` as a path to a NIfTI file storing the binary mask. In the case of a CSF control region, one way to create such a binary mask is to create a CSF binary mask for each image, and then take the intersection of all binary masks to create a common CSF binary mask for all images. The helper function `mask_intersect` will take as input a list of binary masks (either `nifti` objects or a list of NIfTI file paths), and will output the intersection of all binary masks. By default, the function will save the intersection mask to the disk as a NIfTI file, as specified by `output.file` 
+
+Example:
+
+```{r}
+mask <- mask_intersect(list(csf_mask1, csf_mask2, csf_mask3), output.file="intersection_mask.nii")
+```
 
 
 
