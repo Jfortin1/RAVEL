@@ -193,19 +193,19 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 ### 3.1 RAVEL normalization
 
 
-| Argument     | Description  | Modalities supported at the moment| Paper Link
-| -------------  | -------------  | -------------  | ----------- |
+| Argument     | Description  | Default
+| -------------  | -------------  | -------------  | 
 | `input.files` | `vector` or `list` of the paths for the input NIfTI image files to be normalized 
 | `output.files` | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "_RAVEL" appended at the end.   
 | `brain.mask`  | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise 
 | `control.mask` | NIfTI image path for the binary control region mask. Must have value `1` for the control region and `0` otherwise. See the helper function `mask_intersect` for the creation of a `control.mask`.  
-| `WhiteStripe` | Should White Stripe normalization be performed before RAVEL? `TRUE` by default. 
-| `WhiteStripe_Type` | If `WhiteStripe` is `TRUE`, what is the type of images to be normalized? Must be one of "T1", "T2" and "FLAIR".
-| `k` | Integer specifying the number of principal components to be included in the RAVEL correction. 1 by default.
-| `verbose` | Should the function be verbose? `TRUE` by default. 
-| `writeToDisk` | Should the normalized images be saved to the disk as NIfTI files? `TRUE` by default. 
-| `writeToDisk` | Should the normalized images be saved to the disk as NIfTI files? `FALSE` by default. 
-| `returnMatrix` | Should the matrix of normalized images be returned?`TRUE` by default. Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. 
+| `WhiteStripe` | Should White Stripe normalization be performed before RAVEL? | `TRUE` 
+| `WhiteStripe_Type` | If `WhiteStripe` is `TRUE`, what is the type of images to be normalized? Must be one of "T1", "T2" and "FLAIR". | `T1`
+| `k` | Integer specifying the number of principal components to be included in the RAVEL correction. | `1`
+| `verbose` | Should the function be verbose? | `TRUE` 
+| `returnMatrix` | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`
+| `writeToDisk` | Should the normalized images be saved to the disk as NIfTI files? |`FALSE`
+
 
 
 
