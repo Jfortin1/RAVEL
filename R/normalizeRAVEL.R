@@ -26,7 +26,7 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, cont
 		res
 	}
 
-	cat("[preprocessRAVEL] Creating the voxel intensities matrix V. \n")
+	cat("[normalizeRAVEL] Creating the voxel intensities matrix V. \n")
 	if (WhiteStripe) cat("[preprocessRAVEL] WhiteStripe intensity normalization is applied to each scan. \n")
 	if (!WhiteStripe) cat("[preprocessRAVEL] WhiteStripe intensity normalization not applied.  \n")
 
@@ -47,7 +47,7 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, cont
 
 
   	# Submatrix of control voxels:
-	if (verbose) cat("[preprocessRAVEL] Creating the control voxel matrix Vc. \n")
+	if (verbose) cat("[normalizeRAVEL] Creating the control voxel matrix Vc. \n")
 	if (class(control.mask)=="nifti"){
 		control.indices <- control.mask==1
 	} else {
@@ -59,16 +59,16 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL, cont
 
 
 
-	if (verbose) cat("[preprocessRAVEL] Estimating the unwanted factors Z. \n")
+	if (verbose) cat("[normalizeRAVEL] Estimating the unwanted factors Z. \n")
 	Z  <- svd(Vc)$v[, 1:k, drop=FALSE] # Unwanted factors
 
 
-	if (verbose) cat("[preprocessRAVEL] Performing RAVEL correction \n")
+	if (verbose) cat("[normalizeRAVEL] Performing RAVEL correction \n")
 	V.norm <- .ravel_correction(V,Z)
 
 
 	if (verbose & writeToDisk){
-		cat("[preprocessRAVEL] Writing out the corrected images \n")
+		cat("[normalizeRAVEL] Writing out the corrected images \n")
 		pblapply(1:ncol(V.norm), function(i){
 			.write_brain(brain.norm = V.norm[,i], output.file = output.files[i], brain.mask=brain.mask)
 		})
