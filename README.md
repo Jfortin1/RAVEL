@@ -51,7 +51,7 @@ install_github("jfortin1/RAVEL")
 
 We present a pre-normalization preprocessing pipeline implemented in the R software, from raw images to images ready for intensity normalization and statistical analysis. Once the images are preprocessed, users can apply their favorite intensity normalization and the scan-effect correction tool RAVEL as presented in Section 1 above. We present a preprocessing pipeline that uses the R packages `ANTsR` and `fslr`. While we have chosen to use a specific template space (JHU-MNI-ss), a specific registration (non-linear diffeomorphic registration) and a specific tissue segmentation (FSL FAST), users can choose other algorithms prior to intensity normalization and in order for RAVEL to work. The only requirement is that the images are registered to the same template space. 
 
-#### 2.1. Prelude
+### 2.1. Prelude
 
 To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `fslr` is available on CRAN, and requires FSL to be installed on your machine; see the [FSL website](http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/) for installation. For `ANTsR`, we recommend to install the latest stable version available at the ANTsR [GitHub page](https://github.com/stnava/ANTsR/releases/). The version used for this vignette was `ANTsR_0.3.2.tgz`. For the template space, we use the JHU-MNI-ss atlas (see Section 1.2) included in the `EveTemplate` package, available on GitHub at [https://github.com/Jfortin1/EveTemplate](https://github.com/Jfortin1/EveTemplate). 
 For data examples, we use 4 T1-w scans from the package `RAVELData` available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). 
@@ -75,11 +75,11 @@ template_brain_mask_path <- getEveTemplatePath("Brain_Mask")
 scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 ```
 
-#### 2.2. JHU-MNI-ss template (_EVE_ atlas)
+### 2.2. JHU-MNI-ss template (_EVE_ atlas)
 
 
 
-#### 2.3. Registration to template
+### 2.3. Registration to template
 
 Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package.  Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
@@ -106,7 +106,7 @@ Since `scan_reg` is converted to a `nifti` object, we can use the function `orth
 ortho2(scan_reg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
-#### 2.4. Intensity inhomogeneity correction
+### 2.4. Intensity inhomogeneity correction
 
 We perform intensity inhomogeneity correction on the registered scan using the N4 Correction from the `ANTsR` package:
 
@@ -116,7 +116,7 @@ scan_reg_n4 <- n4BiasFieldCorrection(scan_reg)
 scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further processing
 ```
 
-#### 2.5. Skull stripping
+### 2.5. Skull stripping
 
 ```{r}
 template_brain_mask <- readNIfTI(template_brain_mask_path, reorient=FALSE)
@@ -124,7 +124,7 @@ scan_reg_n4_brain <- niftiarr(scan_reg_n4, scan_reg_n4*template_brain_mask)
 ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
  
-#### 2.6. Tissue Segmentation
+### 2.6. Tissue Segmentation
 
 There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. Let's produce the tissue segmentation for the `scan_reg_n4_brain` scan above:
 
@@ -152,7 +152,7 @@ ortho2(scan_reg_n4_brain_seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 The object `scan_reg_n4_brain_seg` is an image that contains the segmentation labels `0,1,2` and `3` referring to Background, CSF, GM and WM voxels respectively. 
 
   
-#### 2.7. Creation of a tissue mask
+### 2.7. Creation of a tissue mask
 
 Suppose we want to create a mask for CSF.
 
