@@ -217,12 +217,6 @@ mask <- mask_intersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.n
     output.file="intersection_mask.nii.gz")
 ```
 
-
-
-
-##### Creation of a control region for the RAVEL algorithm
-
-
 <div id='id-section4'/>
 ## 4. Statistical analysis
 
