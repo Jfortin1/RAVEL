@@ -1,22 +1,48 @@
 # Create intersection mask:
-mask_intersect <- function(list){
-	n <- length(list)
-	inter <- list[[1]]
-	for (i in 2:n){
-		inter[!(inter==1 & list[[i]]==1)] <- 0
-		inter
-	}
-	inter
+mask_intersect <- function(list, output.file = NULL, prob=1, 
+  reorient=FALSE, returnObject = TRUE, writeToDisk=TRUE, verbose=TRUE){
+
+  if (!verbose) pboptions(type="none") 
+
+  # Checks:
+  if (is.atomic(list)){
+      list <- as.list(list)
+  }
+  if (writeToDisk & is.null(output.file)){
+      stop("output.file must be specified if writeToDisk is true.")
+  }
+
+  n <- length(list)
+	inter  <- list[[1]]
+  if (class(inter, "nifti")){
+      inter <- Reduce("+", list)
+  } else if (class(inter, "character")){
+      inter <- readNIfTI(list[[1]], reorient=reorient)
+      pblapply(2:n, function(i){
+          inter <- inter + readNIfTI(list[[i]], reorient=reorient)
+      })
+  } else {
+      stop("list must be either a list of nifti objects or a list of NIfTI file paths.")
+  }
+
+  # Creating the intersection map:
+  cutoff <- floor(prob * n)
+  inter[inter < cutoff]  <- 0 
+  inter[inter >= cutoff] <- 1
+
+  # Writing to disk:
+  if (writeToDisk){
+      filename <- gsub(".nii.gz|.nii", "", output.file)
+      writeNIfTI(inter, filename)
+  }
+
+  # Returning object:
+  if (returnObject){
+      return(inter)
+  }
+
 }
 
-mask_intersect2 <- function(list, prob=1){
-  n <- length(list)
-  inter <- Reduce("+", list)
-  cutoff <- floor(prob * n)
-  inter[inter < cutoff] <- 0
-  inter[inter >= cutoff] <- 1
-  inter
-}
 
 .write_brain <- function(brain.norm, output.file, brain.mask){
 		brain.mask[brain.mask==1] <- brain.norm
