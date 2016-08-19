@@ -30,8 +30,8 @@ normalizeRaw <- function(input.files, output.files=NULL, brain.mask=NULL, writeT
 
 
 
-	if (verbose & writeToDisk){
-		cat("[normalizeRaw] Writing out the corrected images \n")
+	if (writeToDisk){
+		if (verbose) cat("[normalizeRaw] Writing out the corrected images \n")
 		pblapply(1:ncol(V), function(i){
 			.write_brain(brain.norm = V[,i], output.file = output.files[i], brain.mask=brain.mask)
 		})

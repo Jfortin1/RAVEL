@@ -29,8 +29,8 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL,
 	}
 
 	cat("[normalizeRAVEL] Creating the voxel intensities matrix V. \n")
-	if (WhiteStripe) cat("[preprocessRAVEL] WhiteStripe intensity normalization is applied to each scan. \n")
-	if (!WhiteStripe) cat("[preprocessRAVEL] WhiteStripe intensity normalization not applied.  \n")
+	if (WhiteStripe) cat("[normalizeRAVEL] WhiteStripe intensity normalization is applied to each scan. \n")
+	if (!WhiteStripe) cat("[normalizeRAVEL] WhiteStripe intensity normalization not applied.  \n")
 
 
 	# Matrix of voxel intensities:
@@ -69,8 +69,8 @@ normalizeRAVEL <- function(input.files, output.files=NULL, brain.mask=NULL,
 	V.norm <- .ravel_correction(V,Z)
 
 
-	if (verbose & writeToDisk){
-		cat("[normalizeRAVEL] Writing out the corrected images \n")
+	if (writeToDisk){
+		if (verbose) cat("[normalizeRAVEL] Writing out the corrected images \n")
 		pblapply(1:ncol(V.norm), function(i){
 			.write_brain(brain.norm = V.norm[,i], output.file = output.files[i], brain.mask=brain.mask)
 		})
