@@ -4,7 +4,7 @@ Version: 0.99.34
 Author: Jean-Philippe Fortin, Russell T. Shinohara
 Maintainer: Jean-Philippe Fortin <fortin946@gmail.com>
 Suggests: BiocStyle, knitr, RAVELData, EveTemplate
-Depends: methods, WhiteStripe, fslr, ANTsR, oro.nifti, pbapply
+Depends: methods, WhiteStripe, fslr, ANTsR, oro.nifti, pbapply, limma
 Description: Removal of artificial voxel effect by linear regression. 
 Url: https://github.com/Jfortin1/RAVEL
 License: GPL-2
