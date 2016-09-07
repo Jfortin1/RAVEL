@@ -14,13 +14,13 @@ mask_intersect <- function(list, output.file = NULL, prob=1,
 
   n <- length(list)
 	inter  <- list[[1]]
-  if (class(inter, "nifti")){
+  if (class(inter)=="nifti"){
       inter <- Reduce("+", list)
-  } else if (class(inter, "character")){
+  } else if (class(inter)=="character"){
       inter <- readNIfTI(list[[1]], reorient=reorient)
-      pblapply(2:n, function(i){
+      for (i in 2:n){
           inter <- inter + readNIfTI(list[[i]], reorient=reorient)
-      })
+      }
   } else {
       stop("list must be either a list of nifti objects or a list of NIfTI file paths.")
   }
@@ -40,7 +40,6 @@ mask_intersect <- function(list, output.file = NULL, prob=1,
   if (returnObject){
       return(inter)
   }
-
 }
 
 
