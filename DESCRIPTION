@@ -6,5 +6,6 @@ Maintainer: Jean-Philippe Fortin <fortin946@gmail.com>
 Suggests: BiocStyle, knitr, RAVELData, EveTemplate
 Depends: methods, WhiteStripe, fslr, ANTsR, oro.nifti, pbapply, limma
 Description: Removal of artificial voxel effect by linear regression. 
+Remotes: stnava/ANTsR
 Url: https://github.com/Jfortin1/RAVEL
 License: GPL-2
