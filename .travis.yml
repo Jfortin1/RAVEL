@@ -1,6 +1,7 @@
 sudo: required
 language: r
-bioc_required: false
+bioc_required: yes
+use_bioc: yes
 warnings_are_errors: false
 os: osx
 
