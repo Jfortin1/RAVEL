@@ -9,4 +9,5 @@ Description: Removal of artificial voxel effect by linear regression.
 Url: https://github.com/Jfortin1/RAVEL
 Remotes: jfortin1/RAVELData, jfortin1/EveTemplate, 
     stnava/ANTsR
+biocViews: 
 License: GPL-2
