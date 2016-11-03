@@ -1,5 +1,5 @@
 # Create intersection mask:
-mask_intersect <- function(list, output.file = NULL, prob=1, 
+maskIntersect <- function(list, output.file = NULL, prob=1, 
   reorient=FALSE, returnObject = TRUE, writeToDisk=TRUE, verbose=TRUE){
 
   if (!verbose) pboptions(type="none") 
