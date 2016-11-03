@@ -1,14 +1,9 @@
 sudo: required
 language: r
 bioc_required: yes
-use_bioc: yes
-warnings_are_errors: false
-os: osx
+warnings_are_errors: true
 
 r_github_packages:
   - Jfortin1/ANTsR
   - Jfortin1/RAVELData
   - Jfortin1/EveTemplate
-
-bioc_packages:
-  - BiocStyle
