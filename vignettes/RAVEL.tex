@@ -1,0 +1,149 @@
+% \VignetteIndexEntry{RAVEL: Removal of Artificial Voxel Effect by Linear Regression}
+% \VignettePackage{RAVEL}
+% \VignetteDepends{BiocStyle}
+% \VignetteEngine{knitr::knitr}
+
+\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[numbers]{natbib}
+\usepackage{amsthm}
+%\newcommand{\minfi}{\Biocpkg{minfi}}
+
+\RequirePackage{/Library/Frameworks/R.framework/Versions/3.2/Resources/library/BiocStyle/resources/tex/Bioconductor}
+
+\AtBeginDocument{\bibliographystyle{/Library/Frameworks/R.framework/Versions/3.2/Resources/library/BiocStyle/resources/tex/unsrturl}}
+
+
+\title{RAVEL: Removal of Artificial Voxel Effect by Linear Regression}
+\author{Jean-Philippe Fortin, Russell Taki Shinohara}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\maketitle{}
+\setcounter{secnumdepth}{1} 
+
+% Introduction
+\section{Introduction}
+
+We use the package \cite{whitestripe:package} for ... 
+Work from \cite{ravel}
+
+
+\section{Creation of a control region}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(RAVEL)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: WhiteStripe\\\#\# Loading required package: fslr\\\#\# Loading required package: stringr\\\#\# Loading required package: oro.nifti\\\#\# oro.nifti 0.5.2\\\#\# Loading required package: pbapply}}\begin{alltt}
+\hlkwd{library}\hlstd{(RAVELData)}
+\hlstd{datadir} \hlkwb{<-} \hlkwd{system.file}\hlstd{(}\hlstr{"data"}\hlstd{,}\hlkwc{package}\hlstd{=}\hlstr{"RAVELData"}\hlstd{)}
+\hlstd{files} \hlkwb{<-} \hlkwd{list.files}\hlstd{(datadir,} \hlkwc{pattern}\hlstd{=}\hlstr{"csf_mask.nii.gz"}\hlstd{,} \hlkwc{full.names}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlstd{masks} \hlkwb{<-} \hlkwd{pblapply}\hlstd{(files, readNIfTI)}
+\hlstd{control.mask}\hlkwb{<-} \hlkwd{mask_intersect}\hlstd{(masks)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+% Reading the data
+\section{Reading the data}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{files} \hlkwb{<-} \hlkwd{list.files}\hlstd{(datadir,} \hlkwc{pattern}\hlstd{=}\hlstr{"processed.nii.gz"}\hlstd{,} \hlkwc{full.names}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlstd{template}    \hlkwb{<-} \hlkwd{file.path}\hlstd{(datadir,} \hlstr{"JHU_MNI_SS_T1.nii.gz"}\hlstd{)}
+\hlstd{brain.mask} \hlkwb{<-} \hlkwd{file.path}\hlstd{(datadir,} \hlstr{"JHU_MNI_SS_T1_Brain_Mask.nii.gz"}\hlstd{)}
+\hlkwd{RAVEL}\hlstd{(}\hlkwc{input.files} \hlstd{= files,} \hlkwc{brain.mask} \hlstd{= brain.mask,} \hlkwc{control.mask} \hlstd{= control.mask,}\hlkwc{WhiteStripe}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [RAVEL] Creating the voxel intensities matrix V 
+## [RAVEL] Creating the control voxel matrix Vc 
+## [RAVEL] Estimating the unwanted factors Z 
+## [RAVEL] Performing RAVEL correction 
+## [RAVEL] Writing out the corrected images
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+\section*{Session info}
+
+Here is the output of \Rfunction{sessionInfo} on the system on which
+this document was compiled:
+\begin{itemize}\raggedright
+  \item R version 3.2.1 (2015-06-18), \verb|x86_64-apple-darwin10.8.0|
+  \item Locale: \verb|en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8|
+  \item Base packages: base, datasets, graphics, grDevices, methods, stats,
+    utils
+  \item Other packages: fslr~1.5.0, oro.nifti~0.5.2, pbapply~1.1-1,
+    RAVEL~0.99.0, RAVELData~0.99.0, stringr~1.0.0, WhiteStripe~1.1.1
+  \item Loaded via a namespace (and not attached): abind~1.4-3, BiocStyle~1.8.0,
+    bitops~1.0-6, colorspace~1.2-6, evaluate~0.8, formatR~1.2.1, grid~3.2.1,
+    highr~0.5.1, knitr~1.11, lattice~0.20-33, magrittr~1.5, Matrix~1.2-2,
+    matrixStats~0.14.2, mgcv~1.8-7, munsell~0.4.2, nlme~3.1-122, plyr~1.8.3,
+    R.methodsS3~1.7.0, R.oo~1.19.0, R.utils~2.1.0, Rcpp~0.12.1, scales~0.3.0,
+    splines~3.2.1, stringi~1.0-1, tools~3.2.1
+\end{itemize}
+
+
+
+
+\bibliography{RAVEL}
+
+
+
+\end{document}
+

@@ -4,7 +4,7 @@
 WhiteStripe intensity normalization. 
 }
 \description{
- WS stuff. 
+ WhiteStripe intensity normalization. 
 }
 \usage{
 normalizeWS(input.files, output.files=NULL, brain.mask=NULL, 

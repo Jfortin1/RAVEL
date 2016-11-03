@@ -1,17 +1,12 @@
 import(methods)
 import(oro.nifti)
 import(fslr)
-import(ANTsR)
 import(WhiteStripe)
 import(pbapply)
 import(limma)
-
 
 export(normalizeRaw)
 export(normalizeRAVEL)
 export(normalizeWS)
 export(mask_intersect)
 export(getTMap)
-export(oro2ants)
-export(ants2oro)
-export(tempants)

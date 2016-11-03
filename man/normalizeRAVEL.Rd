@@ -1,10 +1,10 @@
 \name{normalizeRAVEL}
 \alias{normalizeRAVEL}
 \title{
-RAVEL correction
+RAVEL intensity normalization
 }
 \description{
- RAVEl stuff is blablablablabla. 
+ RAVEl intensity normalization.  
 }
 \usage{
 normalizeRAVEL(input.files, output.files=NULL, brain.mask=NULL, 
