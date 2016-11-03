@@ -42,7 +42,6 @@ mask_intersect <- function(list, output.file = NULL, prob=1,
   }
 }
 
-
 .write_brain <- function(brain.norm, output.file, brain.mask){
     if (is.character(brain.mask)){
         brain.mask <- readNIfTI(brain.mask, reorient=FALSE)
@@ -52,67 +51,67 @@ mask_intersect <- function(list, output.file = NULL, prob=1,
 		writeNIfTI(brain.mask, output.file)
 }
 
-# Function from the extrantsr package (thx to John Muschelli): 
-tempants <- function(x, gzipped = TRUE){
-  if (inherits(x, "character")) {
-    return(x)
-  } else {
-    if (inherits(x, "antsImage")) {
-      ext = ".nii"
-      if (gzipped) ext = ".nii.gz"
-      tfile = paste0(tempfile(), ext)
-      antsImageWrite(x, tfile)
-      return(tfile)
-    }  else {
-      stop("x has unknown class - not char or nifti")
-    }
-  }
-  return(FALSE)
-}
+# # Function from the extrantsr package (thx to John Muschelli): 
+# tempants <- function(x, gzipped = TRUE){
+#   if (inherits(x, "character")) {
+#     return(x)
+#   } else {
+#     if (inherits(x, "antsImage")) {
+#       ext = ".nii"
+#       if (gzipped) ext = ".nii.gz"
+#       tfile = paste0(tempfile(), ext)
+#       antsImageWrite(x, tfile)
+#       return(tfile)
+#     }  else {
+#       stop("x has unknown class - not char or nifti")
+#     }
+#   }
+#   return(FALSE)
+# }
 
-ants2oro <- function(img, reorient = FALSE){
-  if ( is.antsImage(img) | is.character(img) ) {
-    fname = tempants(img)
-    img = readNIfTI(fname, reorient = reorient)
-    return(img)
-  }
-  if ( is.nifti(img) ) {
-    return(img)
-  }
-  stop("img not class nifti or antsImage")
-  return(NULL)
-}
+# ants2oro <- function(img, reorient = FALSE){
+#   if ( is.antsImage(img) | is.character(img) ) {
+#     fname = tempants(img)
+#     img = readNIfTI(fname, reorient = reorient)
+#     return(img)
+#   }
+#   if ( is.nifti(img) ) {
+#     return(img)
+#   }
+#   stop("img not class nifti or antsImage")
+#   return(NULL)
+# }
 
-oro2ants <- function(img, reference = NULL){
-  if (!is.null(reference)) {
-    if (is.antsImage(reference)) {
-      img = as(img, Class = "array")
-      aimg = as.antsImage(img)
-      aimg = antsCopyImageInfo(
-        target = aimg, 
-        reference = reference)
-      return(aimg)
-    }
-  }
-  if (  is.nifti(img) | is.character(img) ) {
-    fname = checkimg(img)
-    stopifnot(file.exists(fname))
-    img = antsImageRead(fname)
-    return(img)
-  }
-  if ( is.antsImage(img) ) {
-    return(img)    
-  }   
-  stop("img not class nifti or antsImage")
-  return(NULL)
-}
+# oro2ants <- function(img, reference = NULL){
+#   if (!is.null(reference)) {
+#     if (is.antsImage(reference)) {
+#       img = as(img, Class = "array")
+#       aimg = as.antsImage(img)
+#       aimg = antsCopyImageInfo(
+#         target = aimg, 
+#         reference = reference)
+#       return(aimg)
+#     }
+#   }
+#   if (  is.nifti(img) | is.character(img) ) {
+#     fname = checkimg(img)
+#     stopifnot(file.exists(fname))
+#     img = antsImageRead(fname)
+#     return(img)
+#   }
+#   if ( is.antsImage(img) ) {
+#     return(img)    
+#   }   
+#   stop("img not class nifti or antsImage")
+#   return(NULL)
+# }
 
 
-# To clean registration files:
-.clean_reg_files <- function(outprefix){
-    file.remove(paste0(outprefix, "1InverseWarp.nii.gz"))
-    file.remove(paste0(outprefix, "1Warp.nii.gz"))
-    file.remove(paste0(outprefix, "0GenericAffine.mat"))
-}
+# # To clean registration files:
+# .clean_reg_files <- function(outprefix){
+#     file.remove(paste0(outprefix, "1InverseWarp.nii.gz"))
+#     file.remove(paste0(outprefix, "1Warp.nii.gz"))
+#     file.remove(paste0(outprefix, "0GenericAffine.mat"))
+# }
 
 
