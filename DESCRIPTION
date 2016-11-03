@@ -1,6 +1,6 @@
 Package: RAVEL
 Title: Removal of Artificial Voxel Effect by Linear Regression
-Version: 0.99.38
+Version: 0.99.39
 Author: Jean-Philippe Fortin, Russell T. Shinohara
 Maintainer: Jean-Philippe Fortin <fortin946@gmail.com>
 Suggests: BiocStyle, knitr
