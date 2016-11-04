@@ -1,7 +1,7 @@
 .git
 README.md
 ./R/progress/
-^vignettes/.+$
+^vignettes/old/.+$
 .travis.yml
 todo.txt
 ^images/.+$
