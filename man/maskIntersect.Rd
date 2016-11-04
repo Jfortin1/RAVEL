@@ -41,7 +41,7 @@ Jean-Philippe Fortin
 }
 \examples{
 if (require(EveTemplate)){
-  path1 <- path2 <- getEveTemplatePath()
+  path1 <- path2 <- getEvePath()
   inter <- maskIntersect(list(path1,path2), writeToDisk=FALSE)
 }
 }
