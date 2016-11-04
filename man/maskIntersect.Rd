@@ -39,3 +39,9 @@ If \code{returnObject} is \code{TRUE}, a \code{nifti} object is returned, and if
 \author{
 Jean-Philippe Fortin
 }
+\examples{
+if (require(EveTemplate)){
+  path1 <- path2 <- getEveTemplatePath()
+  inter <- maskIntersect(list(path1,path2), writeToDisk=FALSE)
+}
+}
