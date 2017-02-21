@@ -1,0 +1,42 @@
+\name{normalizeHM}
+\alias{normalizeHM}
+\title{
+Histogram matching intensity normalization. 
+}
+\description{
+Histogram mathing intensity normalization. 
+}
+\usage{
+normalizeWM(input.files, output.files=NULL, brain.mask=NULL, 
+  type=c("T1","T2","FLAIR", "PD"), writeToDisk=FALSE, returnMatrix=FALSE, verbose=TRUE)
+}
+\arguments{
+  \item{input.files}{
+    Vector of filenames for the input images. Must be NIfTI files. 
+  }
+  \item{output.files}{
+    Optional vector of filenames for the output images. By default, will be the \code{input.files} with suffix "WS".
+  }
+  \item{brain.mask}{
+    Filename for the brain binary mask specifying the template space brain. Must be a NIfTI file. 
+  }
+  \item{type}{
+    What modality is used? Should be one of T1, T2, FLAIR or PD. 
+  }
+  \item{writeToDisk}{
+    Should the normalized scans be saved to the disk? 
+  }
+  \item{returnMatrix}{
+    Should the matrix of normalized intensities be returned?
+  }
+  \item{verbose}{
+    Should messages be printed?
+  }
+}
+
+\value{
+if \code{returnMatrix} is \code{FALSE}, no value returned, but Histogram-matching-normalized images are saved. If \code{returnMatrix} is \code{TRUE}, Histogram-matching-normalized images are saved and a matrix of normalized intensities is returned. 
+}
+\author{
+Jean-Philippe Fortin
+}
