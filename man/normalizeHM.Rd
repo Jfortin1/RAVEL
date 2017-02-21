@@ -8,7 +8,7 @@ Histogram mathing intensity normalization.
 }
 \usage{
 normalizeWM(input.files, output.files=NULL, brain.mask=NULL, 
-  type=c("T1","T2","FLAIR", "PD"), writeToDisk=FALSE, returnMatrix=FALSE, verbose=TRUE)
+  type=c("T1","T2","FLAIR", "PD"), writeToDisk=FALSE, returnMatrix=TRUE, verbose=TRUE)
 }
 \arguments{
   \item{input.files}{

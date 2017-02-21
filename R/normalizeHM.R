@@ -3,7 +3,7 @@
 
 # Assuming images are registered and normalized beforehand
 normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL, 
-	type=c("T1", "T2", "FLAIR", "PD"), writeToDisk=FALSE, returnMatrix=FALSE, verbose=TRUE){
+	type=c("T1", "T2", "FLAIR", "PD"), writeToDisk=FALSE, returnMatrix=TRUE, verbose=TRUE){
 	
 	type <- match.arg(type)
 	# RAVEL correction procedure:
@@ -19,7 +19,7 @@ normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL,
 	}
 
 	if (is.null(output.files)){
-		output.files <- gsub(".nii.gz|.nii","_WS.nii.gz", input.files)
+		output.files <- gsub(".nii.gz|.nii","_HM.nii.gz", input.files)
 	}
 	
     cat("[normalizeHM] Histogram matching is applied to each scan. \n")

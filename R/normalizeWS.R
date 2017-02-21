@@ -1,6 +1,6 @@
 # Assuming images are registered and normalized beforehand
 normalizeWS <- function(input.files, output.files=NULL, brain.mask=NULL, 
-	WhiteStripe_Type=c("T1", "T2", "FLAIR"), writeToDisk=FALSE, returnMatrix=FALSE, verbose=TRUE){
+	WhiteStripe_Type=c("T1", "T2", "FLAIR"), writeToDisk=FALSE, returnMatrix=TRUE, verbose=TRUE){
 	
 	WhiteStripe_Type <- match.arg(WhiteStripe_Type)
 	if (WhiteStripe_Type=="FLAIR") WhiteStripe_Type <- "T2"
