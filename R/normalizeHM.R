@@ -1,3 +1,6 @@
+# Original code version: Taki Shinohara - September 10, 2012
+# Current code version: Jean-Philippe Fortin - July 29 2015
+
 # Assuming images are registered and normalized beforehand
 normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL, 
 	type=c("T1", "T2", "FLAIR", "PD"), writeToDisk=FALSE, returnMatrix=FALSE, verbose=TRUE){
@@ -7,7 +10,9 @@ normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL,
 	if (!verbose) pboptions(type="none") 
 
 	if (!is.null(brain.mask)){
-		brain.mask <- readNIfTI(brain.mask, reorient=FALSE)
+		if (is(brain.mask, "character")){
+			brain.mask <- readNIfTI(brain.mask, reorient=FALSE)
+		}
 		brain.indices <- brain.mask==1
 	} else {
 		stop("brain.mask must be provided.")
@@ -17,7 +22,7 @@ normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL,
 		output.files <- gsub(".nii.gz|.nii","_WS.nii.gz", input.files)
 	}
 	
-    cat("[normalizeWS] WhiteStripe intensity normalization is applied to each scan. \n")
+    cat("[normalizeHM] Histogram matching is applied to each scan. \n")
 	# Matrix of voxel intensities:
 	V <- pblapply(input.files, function(x){
 		brain  <- readNIfTI(x, reorient=FALSE)
@@ -28,7 +33,7 @@ normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL,
 	V <- do.call(cbind, V)
 
 	if (writeToDisk){
-		if (verbose) cat("[normalizeWS] Writing out the corrected images \n")
+		if (verbose) cat("[normalizeHM] Writing out the corrected images \n")
 		pblapply(1:ncol(V), function(i){
 			.write_brain(brain.norm = V[,i], output.file = output.files[i], brain.mask=brain.mask)
 		})
@@ -37,13 +42,6 @@ normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL,
 		return(V)
 	}	
 }
-
-
-
-
-# This file does histogram adjustment normalization as described by Nyul.
-# Original code version: Taki Shinohara - September 10, 2012
-# Current code version: Jean-Philippe Fortin - July 29 2015
 
 
 
@@ -83,7 +81,8 @@ normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL,
 		return(transformed.data)
 	}
 
-	load("../objects/histogram_match_train_healthy.rda")
+
+	data(histogram_match_train_healthy)
 	if (type=="T1"){
 		land.m 	 <- apply(t1.landmarks, 2, mean)
 	} else if (type=="T2"){
@@ -97,41 +96,3 @@ normalizeHM <- function(input.files, output.files=NULL, brain.mask=NULL,
 	img <- do.hist.norm(img, i.min, i.max, i.s.min, i.s.max, h, land.m, img.fg)
 	return(img)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
