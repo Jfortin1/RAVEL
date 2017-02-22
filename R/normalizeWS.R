@@ -8,7 +8,9 @@ normalizeWS <- function(input.files, output.files=NULL, brain.mask=NULL,
 	if (!verbose) pboptions(type="none") 
 
 	if (!is.null(brain.mask)){
-		brain.mask <- readNIfTI(brain.mask, reorient=FALSE)
+		if (is(brain.mask, "character")){
+			brain.mask <- readNIfTI(brain.mask, reorient=FALSE)
+		}
 		brain.indices <- brain.mask==1
 	} else {
 		stop("brain.mask must be provided.")
