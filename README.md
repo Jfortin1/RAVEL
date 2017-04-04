@@ -25,8 +25,7 @@
 - [1. Introduction](#id-section1)
 - [2. Image preprocessing](#id-section2)
 - [3. Intensity normalization and RAVEL correction](#id-section3)
-- [4. Statistical analysis](#id-section4)
-- [5. Volumetrics analysis (VBM) and RAVENS maps](#id-section4)
+
 
 
 
@@ -249,21 +248,14 @@ mask <- maskIntersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.ni
     output.file="intersection_mask.nii.gz")
 ```
 
-The function `maskIntersect` also has the option to create an intersect mask that is less stringent by requiring the control region to be present in only a given percentage of the subjects, using the option `prob`. By default, `prob` is equal to 1, meaning 100% of the subjects has the final voxels labelled as CSF. For instance, to require that the final control region is shared for at least 90% of the subjects, one would type
+The function `maskIntersect` also has the option to create an intersection mask that is less stringent by requiring the control region to be present in only a given percentage of the subjects, using the option `prob`. By default, `prob` is equal to 1, meaning 100% of the subjects has the final voxels labelled as CSF. For instance, to require that the final control region is shared for at least 90% of the subjects, one would type
 
 ```{r}
 mask <- maskIntersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
     output.file="intersection_mask.nii.gz", prob=0.9)
 ```
 
-<div id='id-section4'/>
-## 4. Statistical analysis
 
-### 4.1 Univariate voxel-wise regressions (T-maps)
-
-
-<div id='id-section5'/>
-## 5. Volumetrics analysis (VBM) and RAVENS maps
 
 
 
