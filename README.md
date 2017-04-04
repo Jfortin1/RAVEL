@@ -240,13 +240,20 @@ The function `normalizeRAVEL` takes as input the preprocessed and registered ima
 
 ### Creation of a control region for RAVEL
 
-RAVEL uses a control region of the brain to infer unwanted variation across subjects. The control region is made of voxels that are known to be not associated with the phenotype of interest. For instance, it is known that the CSF intensities on T1-w images are not associated with the progression of AD. The control region must be specified in the argument `control.mask` of the function `normalizeRAVEL` as a path to a NIfTI file storing the binary mask. In the case of a CSF control region, one way to create such a binary mask is to create a CSF binary mask for each image, and then take the intersection of all binary masks to create a common CSF binary mask for all images. The helper function `mask_intersect` will take as input a list of binary masks (either `nifti` objects or a list of NIfTI file paths), and will output the intersection of all binary masks. By default, the function will save the intersection mask to the disk as a NIfTI file, as specified by `output.file` 
+RAVEL uses a control region of the brain to infer unwanted variation across subjects. The control region is made of voxels that are known to be not associated with the phenotype of interest. For instance, it is known that the CSF intensities on T1-w images are not associated with the progression of AD. The control region must be specified in the argument `control.mask` of the function `normalizeRAVEL` as a path to a NIfTI file storing the binary mask. In the case of a CSF control region, one way to create such a binary mask is to create a CSF binary mask for each image, and then take the intersection of all those binary masks. This can be done with the function `maskIntersect`. The function takes as input a list of binary masks (either `nifti` objects or a list of NIfTI file paths), and will output the intersection of all the binary masks. By default, the function will save the intersection mask to the disk as a NIfTI file, as specified by `output.file`:
 
 Example:
 
 ```{r}
-mask <- mask_intersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
+mask <- maskIntersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
     output.file="intersection_mask.nii.gz")
+```
+
+The function `maskIntersect` also has the option to create an intersect mask that is less stringent by requiring the control region to be present in only a given percentage of the subjects, using the option `prob`. By default, `prob` is equal to 1, meaning 100% of the subjects has the final voxels labelled as CSF. For instance, to require that the final control region is shared for at least 90% of the subjects, one would type
+
+```{r}
+mask <- maskIntersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
+    output.file="intersection_mask.nii.gz", prob=0.9)
 ```
 
 <div id='id-section4'/>
