@@ -25,6 +25,8 @@
 #' normalized intensities is returned.
 #' @author Jean-Philippe Fortin
 #' @importFrom stats quantile
+#' @importFrom pbapply pblapply
+#' @export
 normalizeHM <-
   function(input.files,
            output.files = NULL,
@@ -40,7 +42,7 @@ normalizeHM <-
     }
     
     if (!is.null(brain.mask)) {
-      if (is(brain.mask, "character")) {
+      if (is.character(brain.mask)) {
         brain.mask <- readNIfTI(brain.mask, reorient = FALSE)
       }
       brain.indices <- brain.mask == 1
@@ -137,15 +139,14 @@ normalizeHM <-
     }
   
   
-  data(histogram_match_train_healthy)
   if (type == "T1") {
-    land.m 	 <- apply(t1.landmarks, 2, mean)
+    land.m 	 <- apply(RAVEL::landmarks$t1, 2, mean)
   } else if (type == "T2") {
-    land.m 	 <- apply(t2.landmarks, 2, mean)
+    land.m 	 <- apply(RAVEL::landmarks$t2, 2, mean)
   } else if (type == "FLAIR") {
-    land.m 	 <- apply(flair.landmarks, 2, mean)
+    land.m 	 <- apply(RAVEL::landmarks$flair, 2, mean)
   } else if (type == "PD") {
-    land.m 	 <- apply(pd.landmarks, 2, mean)
+    land.m 	 <- apply(RAVEL::landmarks$pd, 2, mean)
   }
   img.fg  <- 1 * (img > mean(img))
   img <- do.hist.norm(img, i.min, i.max, i.s.min, 

@@ -21,10 +21,12 @@
 #' WhiteStripe-normalized images are saved. If \code{returnMatrix} is
 #' \code{TRUE}, WhiteStripe-normalized images are saved and a matrix of
 #' normalized intensities is returned.
+#' @param ... additional arguments to pass to \code{\link{whitestripe}}
 #' @author Jean-Philippe Fortin
-#' @importFrom pbapply pboptions
+#' @importFrom pbapply pboptions pblapply
 #' @importFrom oro.nifti readNIfTI
 #' @importFrom WhiteStripe whitestripe whitestripe_norm 
+#' @export
 normalizeWS <-
   function(input.files,
            output.files = NULL,
@@ -44,7 +46,7 @@ normalizeWS <-
     }
     
     if (!is.null(brain.mask)) {
-      if (is(brain.mask, "character")) {
+      if (is.character(brain.mask)) {
         brain.mask <- readNIfTI(brain.mask, reorient = FALSE)
       }
       brain.indices <- brain.mask == 1

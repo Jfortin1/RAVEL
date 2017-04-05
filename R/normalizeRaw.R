@@ -19,6 +19,8 @@
 #' images are saved. If \code{returnMatrix} is \code{TRUE}, images are saved
 #' and a matrix of intensities is returned.
 #' @author Jean-Philippe Fortin
+#' @importFrom pbapply pblapply
+#' @export
 normalizeRaw <-
   function(input.files,
            output.files = NULL,
@@ -32,7 +34,7 @@ normalizeRaw <-
     }
     
     if (!is.null(brain.mask)) {
-      if (is(brain.mask, "character")) {
+      if (is.character(brain.mask)) {
         brain.mask <- readNIfTI(brain.mask, reorient = FALSE)
       }
       brain.indices <- brain.mask == 1

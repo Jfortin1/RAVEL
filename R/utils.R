@@ -26,6 +26,7 @@
 #'   inter <- maskIntersect(list(path1,path2), writeToDisk=FALSE)
 #' }
 #' @importFrom oro.nifti writeNIfTI
+#' @export
 maskIntersect <- function(list,
                           output.file = NULL,
                           prob = 1,

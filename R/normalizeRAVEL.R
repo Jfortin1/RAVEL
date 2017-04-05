@@ -30,6 +30,7 @@
 #' @importFrom pbapply pboptions
 #' @importFrom oro.nifti readNIfTI
 #' @importFrom WhiteStripe whitestripe whitestripe_norm
+#' @export
 normalizeRAVEL <- function(input.files,
                            output.files = NULL,
                            brain.mask = NULL,
@@ -49,7 +50,7 @@ normalizeRAVEL <- function(input.files,
   }
   
   if (!is.null(brain.mask)) {
-    if (is(brain.mask, "character")) {
+    if (is.character(brain.mask)) {
       brain.mask <- readNIfTI(brain.mask, reorient = FALSE)
     }
     brain.indices <- brain.mask == 1
