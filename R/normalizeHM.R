@@ -26,6 +26,7 @@
 #' @author Jean-Philippe Fortin
 #' @importFrom stats quantile
 #' @importFrom pbapply pblapply
+#' @importFrom neurobase check_nifti checkimg
 #' @export
 normalizeHM <-
   function(input.files,
@@ -42,16 +43,12 @@ normalizeHM <-
     }
     
     if (!is.null(brain.mask)) {
-      if (is.character(brain.mask)) {
-        brain.mask <- readNIfTI(brain.mask, reorient = FALSE)
-      }
+      brain.mask = neurobase::check_nifti(brain.mask, 
+                                          reorient = FALSE, 
+                                          allow.array = FALSE)
       brain.indices <- brain.mask == 1
     } else {
       stop("brain.mask must be provided.")
-    }
-    
-    if (is.null(output.files)) {
-      output.files <- gsub(".nii.gz|.nii", "_HM.nii.gz", input.files)
     }
     
     if (verbose) {
@@ -59,11 +56,19 @@ normalizeHM <-
     }
     # Matrix of voxel intensities:
     V <- pblapply(input.files, function(x) {
-      brain  <- readNIfTI(x, reorient = FALSE)
+      brain = check_nifti(x, reorient = FALSE, 
+                                     allow.array = FALSE)      
       brain  <- .hm(brain, type = type)
       brain  <- as.vector(brain[brain.indices])
       brain
     })
+    
+    input.files = checkimg(input.files)
+    if (is.null(output.files)) {
+      output.files <- gsub(".nii.gz|.nii", "_HM.nii.gz", input.files)
+    }
+    
+
     V <- do.call(cbind, V)
     
     if (writeToDisk) {

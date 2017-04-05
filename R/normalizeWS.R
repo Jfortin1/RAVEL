@@ -46,17 +46,14 @@ normalizeWS <-
     }
     
     if (!is.null(brain.mask)) {
-      if (is.character(brain.mask)) {
-        brain.mask <- readNIfTI(brain.mask, reorient = FALSE)
-      }
+      brain.mask = neurobase::check_nifti(brain.mask, 
+                                          reorient = FALSE, 
+                                          allow.array = FALSE)
       brain.indices <- brain.mask == 1
     } else {
       stop("brain.mask must be provided.")
     }
     
-    if (is.null(output.files)) {
-      output.files <- gsub(".nii.gz|.nii", "_WS.nii.gz", input.files)
-    }
     
     if (verbose) {
       message("[normalizeWS] WhiteStripe intensity normalization is applied to each scan. \n")
@@ -64,7 +61,7 @@ normalizeWS <-
     
     # Matrix of voxel intensities:
     V <- pblapply(input.files, function(x) {
-      brain <- readNIfTI(x, reorient = FALSE)
+      brain <- check_nifti(x, reorient = FALSE, allow.array = FALSE)
       indices <- whitestripe(brain, type = WhiteStripe_Type, 
                              verbose = FALSE, ...)
       brain   <- whitestripe_norm(brain, indices$whitestripe.ind)
@@ -73,9 +70,16 @@ normalizeWS <-
     })
     V <- do.call(cbind, V)
     
+    
+    input.files = checkimg(input.files)
+    if (is.null(output.files)) {
+      output.files <- gsub(".nii.gz|.nii", "_WS.nii.gz", input.files)
+    }
+    
     if (writeToDisk) {
-      if (verbose)
-        cat("[normalizeWS] Writing out the corrected images \n")
+      if (verbose) {
+        message("[normalizeWS] Writing out the corrected images \n")
+      }
       pblapply(1:ncol(V), function(i) {
         .write_brain(
           brain.norm = V[, i],

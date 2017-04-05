@@ -6,7 +6,7 @@
 \usage{
 getTMap(V, design, columnIndex = NULL, weights = NULL, brain.mask,
   eBayes = TRUE, output.file = "Tmap.nii.gz", returnObject = TRUE,
-  writeToDisk = FALSE, verbose = TRUE)
+  writeToDisk = FALSE, verbose = TRUE, ...)
 }
 \arguments{
 \item{V}{Matrix of voxels intensities (rows are voxels, columns are
@@ -37,6 +37,8 @@ containing the computed t-statistics.}
 \item{writeToDisk}{Should the t-statistics image be saved to the disk?}
 
 \item{verbose}{Should messages be printed?}
+
+\item{...}{additional arguments to pass to \code{\link{lmFit}}}
 }
 \value{
 If \code{returnObject} is \code{TRUE}, a matrix of the t-statitics
