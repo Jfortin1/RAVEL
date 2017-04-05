@@ -32,7 +32,7 @@ of T1, T2 or FLAIR.}
 
 \item{returnMatrix}{Should the matrix of normalized intensities be returned?}
 
-\item{writeToDisk}{Something}
+\item{writeToDisk}{Should the normalized images be saved to disk?}
 
 \item{verbose}{Should messages be printed?}
                         
