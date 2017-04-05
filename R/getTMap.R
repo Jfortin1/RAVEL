@@ -28,13 +28,16 @@
 #' @param returnObject Should the t-statistics be returned as a matrix?
 #' @param writeToDisk Should the t-statistics image be saved to the disk?
 #' @param verbose Should messages be printed?
+#' @param ... additional arguments to pass to \code{\link{lmFit}}
 #' @return If \code{returnObject} is \code{TRUE}, a matrix of the t-statitics
 #' is returned, and if \code{writeToDisk} is \code{TRUE}, the t-statistics
 #' image is saved to disk as a NIfTI file.
 #' @author Jean-Philippe Fortin
 #' @importFrom limma lmFit eBayes
-getTMap <- function(V, design, columnIndex = NULL, weights=NULL, brain.mask, eBayes = TRUE, output.file="Tmap.nii.gz",  
-	returnObject = TRUE, writeToDisk = FALSE, verbose = TRUE){
+getTMap <- function(V, design, columnIndex = NULL, 
+                    weights=NULL, brain.mask, eBayes = TRUE, 
+                    output.file="Tmap.nii.gz",  
+	returnObject = TRUE, writeToDisk = FALSE, verbose = TRUE, ...){
 	if (is.null(columnIndex)){
 		stop("columnIndex must be provided.")
 	} else {
@@ -42,17 +45,20 @@ getTMap <- function(V, design, columnIndex = NULL, weights=NULL, brain.mask, eBa
 			stop("columnIndex must be smaller than the number of columns of the design matrix.")
 		}
 	}
-	if (!is.null(brain.mask)){
-		brain.mask <- readNIfTI(brain.mask, reorient=FALSE)
-		brain.indices <- brain.mask==1
-	} else {
-		stop("brain.mask must be provided.")
-	}
+  if (!is.null(brain.mask)) {
+    brain.mask = neurobase::check_nifti(brain.mask, 
+                                        reorient = FALSE, 
+                                        allow.array = FALSE)
+    brain.indices <- brain.mask == 1
+  } else {
+    stop("brain.mask must be provided.")
+  }  
+  
 	if (nrow(V) != sum(brain.indices)){
 		stop("Number of rows of V does not agree with the brain mask.")
 	}
 
-	fit <- lmFit(V, design = design, weights = weights)
+	fit <- lmFit(V, design = design, weights = weights, ...)
 	Tmat <- .getOrdinaryT(fit)
 	# Need to add some p-values maybe ?
 	if (eBayes){
@@ -61,7 +67,9 @@ getTMap <- function(V, design, columnIndex = NULL, weights=NULL, brain.mask, eBa
 
 	if (writeToDisk){
 		if (verbose) cat("[getTMap] Writing out the T map \n")
-		.write_brain(brain.norm = Tmat[, columnIndex], output.file = output.file, brain.mask=brain.mask)
+		.write_brain(brain.norm = Tmat[, columnIndex], 
+		             output.file = output.file, 
+		             brain.mask=brain.mask)
 	} 
 
 	if (returnObject & !eBayes ){

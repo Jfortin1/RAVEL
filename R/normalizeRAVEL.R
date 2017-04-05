@@ -43,23 +43,21 @@ normalizeRAVEL <- function(input.files,
                            verbose = TRUE) {
   # RAVEL correction procedure:
   WhiteStripe_Type <- match.arg(WhiteStripe_Type)
-  if (WhiteStripe_Type == "FLAIR")
+  if (WhiteStripe_Type == "FLAIR") {
     WhiteStripe_Type <- "T2"
+  }
+  
   if (!verbose) {
     pboptions(type = "none")
   }
   
   if (!is.null(brain.mask)) {
-    if (is.character(brain.mask)) {
-      brain.mask <- readNIfTI(brain.mask, reorient = FALSE)
-    }
+    brain.mask = neurobase::check_nifti(brain.mask, 
+                                        reorient = FALSE, 
+                                        allow.array = FALSE)
     brain.indices <- brain.mask == 1
   } else {
     stop("brain.mask must be provided.")
-  }
-  
-  if (is.null(output.files)) {
-    output.files <- gsub(".nii.gz|.nii", "_RAVEL.nii.gz", input.files)
   }
   
   .ravel_correction <- function(V, Z) {
@@ -89,10 +87,12 @@ normalizeRAVEL <- function(input.files,
   }
   # Matrix of voxel intensities:
   V <- pblapply(input.files, function(x) {
-    brain <- readNIfTI(x, reorient = FALSE)
+    brain = neurobase::check_nifti(x, reorient = FALSE, 
+                                   allow.array = FALSE)    
     if (WhiteStripe) {
-      indices <-
-        whitestripe(brain, type = WhiteStripe_Type, verbose = FALSE)
+      indices <- whitestripe(brain,
+                    type = WhiteStripe_Type, 
+                    verbose = FALSE)
       brain   <- whitestripe_norm(brain, indices$whitestripe.ind)
     }
     if (!is.null(brain.mask)) {
@@ -102,19 +102,21 @@ normalizeRAVEL <- function(input.files,
   })
   V <- do.call(cbind, V)
   
+  input.files = checkimg(input.files)
+  if (is.null(output.files)) {
+    output.files <- gsub(".nii.gz|.nii", "_RAVEL.nii.gz", input.files)
+  }
   
   # Submatrix of control voxels:
   if (verbose)
     message("[normalizeRAVEL] Creating the control voxel matrix Vc. \n")
-  if (class(control.mask) == "nifti") {
-    control.indices <- control.mask == 1
-  } else {
-    control.indices <- readNIfTI(control.mask, reorient = FALSE) == 1
-  }
+  
+  control.mask = check_nifti(control.mask, 
+                             reorient = FALSE, 
+                             allow.array = FALSE)
+  control.indices <- control.mask == 1  
   control.indices <- control.indices[brain.mask == 1]
   Vc <- V[control.indices, , drop = FALSE]
-  
-  
   
   
   if (verbose) {

@@ -2,10 +2,10 @@
 
 
 #' Create matrix of voxel intensities without normalization.
-#' 
+#'
 #' Create matrix of voxel intensities without normalization.
-#' 
-#' 
+#'
+#'
 #' @param input.files Vector of filenames for the input images. Must be NIfTI
 #' files.
 #' @param output.files Optional vector of filenames for the output images. By
@@ -32,40 +32,40 @@ normalizeRaw <-
     if (!verbose) {
       pboptions(type = "none")
     }
-    
+
     if (!is.null(brain.mask)) {
-      if (is.character(brain.mask)) {
-        brain.mask <- readNIfTI(brain.mask, reorient = FALSE)
-      }
+      brain.mask = neurobase::check_nifti(brain.mask,
+                                          reorient = FALSE,
+                                          allow.array = FALSE)
       brain.indices <- brain.mask == 1
     } else {
       stop("brain.mask must be provided.")
     }
-    
-    if (is.null(output.files)) {
-      output.files <- gsub(".nii.gz|.nii", "_RAW.nii.gz", input.files)
-    }
-    
+
     if (verbose) {
       message("[normalizeRaw] Creating the voxel intensities matrix V. \n")
     }
-    
-    
+
+
     # Matrix of voxel intensities:
     V <- pblapply(input.files, function(x) {
-      brain <- readNIfTI(x, reorient = FALSE)
+      brain <- check_nifti(x, reorient = FALSE, allow.array = FALSE)
       if (!is.null(brain.mask)) {
         brain <- as.vector(brain[brain.indices])
       }
       brain
     })
     V <- do.call(cbind, V)
-    
-    
-    
+
+    input.files = checkimg(input.files)
+    if (is.null(output.files)) {
+      output.files <- gsub(".nii.gz|.nii", "_RAW.nii.gz", input.files)
+    }
+
     if (writeToDisk) {
-      if (verbose)
-        cat("[normalizeRaw] Writing out the corrected images \n")
+      if (verbose) {
+        message("[normalizeRaw] Writing out the corrected images \n")
+      }
       pblapply(1:ncol(V), function(i) {
         .write_brain(
           brain.norm = V[, i],

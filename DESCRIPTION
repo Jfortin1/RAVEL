@@ -1,6 +1,6 @@
 Package: RAVEL
 Title: Removal of Artificial Voxel Effect by Linear Regression
-Version: 1.0
+Version: 1.1
 Author: Jean-Philippe Fortin, R Taki Shinohara
 Maintainer: Jean-Philippe Fortin <fortin946@gmail.com>
 Suggests:
@@ -12,6 +12,7 @@ Imports:
     methods,
     WhiteStripe,
     oro.nifti,
+    neurobase,
     pbapply,
     limma
 BugReports: https://github.com/Jfortin1/RAVEL/issues
