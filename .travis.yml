@@ -5,4 +5,3 @@ bioc_required: yes
 warnings_are_errors: true
 
 r_check_args: --as-cran
->>>>>>> upstream/master
