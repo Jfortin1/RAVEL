@@ -20,8 +20,9 @@
 #' of T1, T2 or FLAIR.
 #' @param k Number of unwanted factors to be included in the RAVEL model.
 #' @param returnMatrix Should the matrix of normalized intensities be returned?
-#' @param writeToDisk Something
+#' @param writeToDisk Should the normalized images be saved to disk?
 #' @param verbose Should messages be printed?
+#' @param ... additional arguments to pass to \code{\link{whitestripe}}
 #' @return if \code{returnMatrix} is \code{FALSE}, no value returned, but
 #' RAVEL-corrected images are saved. If \code{returnMatrix} is \code{TRUE},
 #' RAVEL-corrected images are saved and a matrix of normalized intensities is
@@ -40,7 +41,7 @@ normalizeRAVEL <- function(input.files,
                            k = 1,
                            returnMatrix = TRUE,
                            writeToDisk = FALSE,
-                           verbose = TRUE) {
+                           verbose = TRUE, ...) {
   # RAVEL correction procedure:
   WhiteStripe_Type <- match.arg(WhiteStripe_Type)
   if (WhiteStripe_Type == "FLAIR") {
@@ -92,7 +93,7 @@ normalizeRAVEL <- function(input.files,
     if (WhiteStripe) {
       indices <- whitestripe(brain,
                     type = WhiteStripe_Type, 
-                    verbose = FALSE)
+                    verbose = FALSE, ...)
       brain  <- whitestripe_norm(brain, indices$whitestripe.ind)
     }
     if (!is.null(brain.mask)) {

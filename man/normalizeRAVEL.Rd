@@ -7,7 +7,7 @@
 normalizeRAVEL(input.files, output.files = NULL, brain.mask = NULL,
   control.mask = NULL, WhiteStripe = TRUE, WhiteStripe_Type = c("T1",
   "T2", "FLAIR"), k = 1, returnMatrix = TRUE, writeToDisk = FALSE,
-  verbose = TRUE)
+  verbose = TRUE, ...)
 }
 \arguments{
 \item{input.files}{Vector of filenames for the input images. Must be NIfTI
@@ -32,9 +32,11 @@ of T1, T2 or FLAIR.}
 
 \item{returnMatrix}{Should the matrix of normalized intensities be returned?}
 
-\item{writeToDisk}{Something}
+\item{writeToDisk}{Should the normalized images be saved to disk?}
 
 \item{verbose}{Should messages be printed?}
+
+\item{...}{additional arguments to pass to \code{\link{whitestripe}}}
 }
 \value{
 if \code{returnMatrix} is \code{FALSE}, no value returned, but
