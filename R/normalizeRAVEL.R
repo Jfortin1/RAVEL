@@ -20,7 +20,7 @@
 #' of T1, T2 or FLAIR.
 #' @param k Number of unwanted factors to be included in the RAVEL model.
 #' @param returnMatrix Should the matrix of normalized intensities be returned?
-#' @param writeToDisk Something
+#' @param writeToDisk Should the normalized images be saved to disk?
 #' @param verbose Should messages be printed?
 #' @param ... Arguments to be passed to whitestripe
 #' @return if \code{returnMatrix} is \code{FALSE}, no value returned, but
