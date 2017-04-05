@@ -2,6 +2,29 @@
 # Current code version: Jean-Philippe Fortin - July 29 2015
 
 # Assuming images are registered and normalized beforehand
+
+
+#' Histogram matching intensity normalization.
+#' 
+#' Histogram mathing intensity normalization.
+#' 
+#' 
+#' @param input.files Vector of filenames for the input images. Must be NIfTI
+#' files.
+#' @param output.files Optional vector of filenames for the output images. By
+#' default, will be the \code{input.files} with suffix "WS".
+#' @param brain.mask Filename for the brain binary mask specifying the template
+#' space brain. Must be a NIfTI file.
+#' @param type What modality is used? Should be one of T1, T2, FLAIR or PD.
+#' @param writeToDisk Should the normalized scans be saved to the disk?
+#' @param returnMatrix Should the matrix of normalized intensities be returned?
+#' @param verbose Should messages be printed?
+#' @return if \code{returnMatrix} is \code{FALSE}, no value returned, but
+#' Histogram-matching-normalized images are saved. If \code{returnMatrix} is
+#' \code{TRUE}, Histogram-matching-normalized images are saved and a matrix of
+#' normalized intensities is returned.
+#' @author Jean-Philippe Fortin
+#' @importFrom stats quantile
 normalizeHM <-
   function(input.files,
            output.files = NULL,

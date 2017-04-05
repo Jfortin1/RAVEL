@@ -1,4 +1,31 @@
 # Create intersection mask:
+
+
+#' Intersection of a list of brain masks
+#' 
+#' Intersection of a list of brain masks.
+#' 
+#' 
+#' @param list List of the mask input files (nifti files) or mask nifti
+#' objects.
+#' @param output.file Optional filename for the output image.
+#' @param prob Probability of intersection. Ex: 0.9 will return a mask for
+#' voxels that intersect 90\% of the time.
+#' @param reorient Should the input images be reoriented? FALSE by default.
+#' @param returnObject Should a nifti object be returned?
+#' @param writeToDisk Should the intersection mask be saved to the disk?
+#' @param verbose Should messages be printed?
+#' @return If \code{returnObject} is \code{TRUE}, a \code{nifti} object is
+#' returned, and if \code{writeToDisk} is \code{TRUE}, the intersection mask is
+#' saved to disk as a NIfTI file.
+#' @author Jean-Philippe Fortin
+#' @examples
+#' 
+#' if (require(EveTemplate)){
+#'   path1 <- path2 <- getEvePath()
+#'   inter <- maskIntersect(list(path1,path2), writeToDisk=FALSE)
+#' }
+#' @importFrom oro.nifti writeNIfTI
 maskIntersect <- function(list,
                           output.file = NULL,
                           prob = 1,

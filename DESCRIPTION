@@ -8,11 +8,10 @@ Suggests:
     knitr,
     RAVELData,
     EveTemplate
-Depends:
+Imports:
     methods,
     WhiteStripe,
     fslr,
-    ANTsR,
     oro.nifti,
     pbapply,
     limma
@@ -22,5 +21,4 @@ Remotes: jfortin1/RAVELData, jfortin1/EveTemplate,
     Jfortin1/ANTsR
 biocViews: 
 License: GPL-2
-RoxygenNote: 5.0.1.9000
-
+RoxygenNote: 6.0.1

@@ -1,4 +1,30 @@
 # Assuming images are registered and normalized beforehand
+
+
+#' WhiteStripe intensity normalization.
+#' 
+#' WhiteStripe intensity normalization.
+#' 
+#' 
+#' @param input.files Vector of filenames for the input images. Must be NIfTI
+#' files.
+#' @param output.files Optional vector of filenames for the output images. By
+#' default, will be the \code{input.files} with suffix "WS".
+#' @param brain.mask Filename for the brain binary mask specifying the template
+#' space brain. Must be a NIfTI file.
+#' @param WhiteStripe_Type What modality is used for WhiteStripe? Should be one
+#' of T1, T2 or FLAIR.
+#' @param writeToDisk Should the normalized scans be saved to the disk?
+#' @param returnMatrix Should the matrix of normalized intensities be returned?
+#' @param verbose Should messages be printed?
+#' @return if \code{returnMatrix} is \code{FALSE}, no value returned, but
+#' WhiteStripe-normalized images are saved. If \code{returnMatrix} is
+#' \code{TRUE}, WhiteStripe-normalized images are saved and a matrix of
+#' normalized intensities is returned.
+#' @author Jean-Philippe Fortin
+#' @importFrom pbapply pboptions
+#' @importFrom oro.nifti readNIfTI
+#' @importFrom WhiteStripe whitestripe whitestripe_norm 
 normalizeWS <-
   function(input.files,
            output.files = NULL,
@@ -30,7 +56,10 @@ normalizeWS <-
       output.files <- gsub(".nii.gz|.nii", "_WS.nii.gz", input.files)
     }
     
-    cat("[normalizeWS] WhiteStripe intensity normalization is applied to each scan. \n")
+    if (verbose) {
+      message("[normalizeWS] WhiteStripe intensity normalization is applied to each scan. \n")
+    }
+    
     # Matrix of voxel intensities:
     V <- pblapply(input.files, function(x) {
       brain <- readNIfTI(x, reorient = FALSE)
