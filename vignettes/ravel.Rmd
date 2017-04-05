@@ -1,0 +1,21 @@
+---
+title: "Working with RAVEL"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r setup, include=FALSE}
+library(knitr)
+```
+
+
+
+## Main functions
+The main functions implemented are `normalizeRaw` and `normalizeRAVEL`. 
+
+[This GitHub repository](https://github.com/jfortin1/RAVEL) will be used for development and issues. 

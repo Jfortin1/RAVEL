@@ -1,14 +1,14 @@
-\name{normalizeWS}
-\alias{normalizeWS}
+\name{normalizeHM}
+\alias{normalizeHM}
 \title{
-WhiteStripe intensity normalization. 
+Histogram matching intensity normalization. 
 }
 \description{
- WhiteStripe intensity normalization. 
+Histogram mathing intensity normalization. 
 }
 \usage{
-normalizeWS(input.files, output.files=NULL, brain.mask=NULL, 
-  WhiteStripe_Type=c("T1","T2","FLAIR"), writeToDisk=FALSE, returnMatrix=TRUE, verbose=TRUE)
+normalizeWM(input.files, output.files=NULL, brain.mask=NULL, 
+  type=c("T1","T2","FLAIR", "PD"), writeToDisk=FALSE, returnMatrix=TRUE, verbose=TRUE)
 }
 \arguments{
   \item{input.files}{
@@ -20,8 +20,8 @@ normalizeWS(input.files, output.files=NULL, brain.mask=NULL,
   \item{brain.mask}{
     Filename for the brain binary mask specifying the template space brain. Must be a NIfTI file. 
   }
-  \item{WhiteStripe_Type}{
-    What modality is used for WhiteStripe? Should be one of T1, T2 or FLAIR.
+  \item{type}{
+    What modality is used? Should be one of T1, T2, FLAIR or PD. 
   }
   \item{writeToDisk}{
     Should the normalized scans be saved to the disk? 
@@ -35,7 +35,7 @@ normalizeWS(input.files, output.files=NULL, brain.mask=NULL,
 }
 
 \value{
-if \code{returnMatrix} is \code{FALSE}, no value returned, but WhiteStripe-normalized images are saved. If \code{returnMatrix} is \code{TRUE}, WhiteStripe-normalized images are saved and a matrix of normalized intensities is returned. 
+if \code{returnMatrix} is \code{FALSE}, no value returned, but Histogram-matching-normalized images are saved. If \code{returnMatrix} is \code{TRUE}, Histogram-matching-normalized images are saved and a matrix of normalized intensities is returned. 
 }
 \author{
 Jean-Philippe Fortin

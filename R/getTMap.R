@@ -38,6 +38,4 @@ getTMap <- function(V, design, columnIndex = NULL, weights=NULL, brain.mask, eBa
 	} else {
 		return(list(fit=fit))
 	}
-
-
 }

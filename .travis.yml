@@ -1,46 +1,8 @@
 # Sample .travis.yml for R projects
 
 language: r
-warnings_are_errors: true
-sudo: false
-cache: packages
-use_bioc: yes
 bioc_required: yes
-upgrade_deps: false
+warnings_are_errors: true
 
-  
-# apt_packages:
-#   - pandoc
-#   - tcl8.5-dev
-#   - tk8.5-dev
-#   - libhdf5-7
-#   - libhdf5-dev
-
-# brew_packages:
-#   - pandoc
-#   - homebrew/science/hdf5  --enable-cxx
-
-before_install:
-  # for RGL
-  - export RGL_USE_NULL=TRUE;
-  - cwd=`pwd`
-  - cd ~/
-  - itkrrel=0.0.1
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then wget https://github.com/stnava/ITKR/releases/download/latest/ITKR_${itkrrel}_R_x86_64-pc-linux-gnu.tar.gz; R CMD INSTALL ITKR_${itkrrel}_R_x86_64-pc-linux-gnu.tar.gz; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget http://github.com/stnava/ITKR/releases/download/latest/ITKR_${itkrrel}.tgz; R CMD INSTALL ITKR_${itkrrel}.tgz; fi
-  # cmake shit
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then wget --no-check-certificate https://cmake.org/files/v3.4/cmake-3.4.0-rc1-Linux-x86_64.sh; sh cmake-3.4.0-rc1-Linux-x86_64.sh --skip-license --prefix=${HOME}; export PATH=${HOME}/bin/:$PATH; fi
-  - export PATH=${HOME}/bin/:$PATH    
-  - cd $cwd
-  - Rscript -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")'
-  # this removes remotes - which is a problem
-  - Rscript -e 'devtools::source_url("https://gist.githubusercontent.com/muschellij2/69c48f469ab34cc05752361645ffa8e0/raw/57e7d3b22907699d260f863a0d337a12567ffc30/rewrite_dcf.R"); repo = get_remote_info(package = "ANTsR"); devtools::install_github(repo, upgrade_dependencies = FALSE);'
-  - Rscript -e 'devtools::source_url("https://gist.githubusercontent.com/muschellij2/69c48f469ab34cc05752361645ffa8e0/raw/57e7d3b22907699d260f863a0d337a12567ffc30/rewrite_dcf.R"); rewrite_dcf(drop_remotes = c("ITKR"));'
-  - Rscript -e 'devtools::source_url("https://gist.githubusercontent.com/muschellij2/69c48f469ab34cc05752361645ffa8e0/raw/57e7d3b22907699d260f863a0d337a12567ffc30/rewrite_dcf.R"); rewrite_dcf(drop_remotes = c("ANTsR", "ITKR"));'
-
-env:
-  global:
-    RGL_USE_NULL=TRUE
-
-bioc_packages:
-  - BiocStyle
+r_check_args: --as-cran
+>>>>>>> upstream/master
