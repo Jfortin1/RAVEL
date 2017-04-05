@@ -36,7 +36,7 @@ RAVEL is an R package that combines the preprocessing and statistical analysis o
 
 ##### Installation
 
-```{r}
+```r
 library(devtools)
 install_github("jfortin1/RAVEL")
 ```
@@ -57,7 +57,7 @@ To preprocess the images, we use the packages `fslr` and `ANTsR`. The package `f
 For data examples, we use 4 T1-w scans from the package `RAVELData` available on GitHub at [https://github.com/Jfortin1/RAVELData](https://github.com/Jfortin1/RAVELData). 
 Once the packages are properly installed, we are ready to start our preprocessing of T1-w images. We first load the packages into R:
 
-```{r}
+```r
 library(fslr)
 library(ANTsR)
 library(RAVELData)
@@ -66,7 +66,7 @@ have.fsl() # Should be TRUE if fsl is correctly installed
 ```
 
 and let's specify the path for the different files that we will need:
-```{r}
+```r
 # JHU-MNI-ss template:
 library(EveTemplate)
 template_path <- getEvePath("T1")
@@ -84,7 +84,7 @@ scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 
 Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package.  Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
-```{r}
+```r
 template    <- antsImageRead(template_path, 3)
 scan <- antsImageRead(scan_path,3)
 outprefix <- gsub(".nii.gz","",scan_path) # Prefix for the output files
@@ -93,17 +93,17 @@ scan_reg   <- antsImageClone(output$warpedmovout) # Registered brain
 ```
 The object `scan_reg` contains the scan registed to the template. Note that the object is in the `ANTsR` format. Since I prefer to work with the `oro.nifti` package, which is compatible with `flsr`, I convert the object to a `nifti` object using the function `ants2oro` as follows:
 
-```{r}
+```r
 scan_reg <- ants2oro(scan_reg)
 ```
 I can save the registered brain in the NIfTi format using the `writeNIfTI` command:
 
-```{r}
+```r
 writeNIfTI(scan_reg, "scan_reg")
 ```
 Since `scan_reg` is converted to a `nifti` object, we can use the function `ortho2` from the `fslr` package to visualize the scan: 
 
-```{r}
+```r
 ortho2(scan_reg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
@@ -111,7 +111,7 @@ ortho2(scan_reg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 
 We perform intensity inhomogeneity correction on the registered scan using the N4 Correction from the `ANTsR` package:
 
-```{r}
+```r
 scan_reg <- oro2ants(scan_reg) # Convert to ANTsR object
 scan_reg_n4 <- n4BiasFieldCorrection(scan_reg)
 scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further processing
@@ -119,7 +119,7 @@ scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further pr
 
 ### 2.5. Skull stripping
 
-```{r}
+```r
 template_brain_mask <- readNIfTI(template_brain_mask_path, reorient=FALSE)
 scan_reg_n4_brain <- niftiarr(scan_reg_n4, scan_reg_n4*template_brain_mask)
 ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
@@ -129,7 +129,7 @@ ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 
 There are different tissue segmentation algorithms available in R. My favorite is the FSL FAST segmentation via the [`fslr`](https://cran.r-project.org/web/packages/fslr/index.html) package. Let's produce the tissue segmentation for the `scan_reg_n4_brain` scan above:
 
-```{r}
+```r
 ortho2(scan_reg_n4_brain, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE, ylim=c(0,400))
 ```
 The last line of code produces via the `ortho2` function from the `fslr` package the following visualization of the template:
@@ -141,7 +141,7 @@ The last line of code produces via the `ortho2` function from the `fslr` package
 
 We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
 
-```{r}
+```r
 scan_reg_n4_brain_seg <- fast(scan_reg_n4_brain, verbose=FALSE, opts="-t 1 -n 3") 
 ortho2(scan_reg_n4_brain_seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
@@ -157,14 +157,14 @@ The object `scan_reg_n4_brain_seg` is an image that contains the segmentation la
 
 Suppose we want to create a mask for CSF.
 
-```{r}
+```r
 scan_reg_n4_brain_csf_mask <- scan_reg_n4_brain_seg
 scan_reg_n4_brain_csf_mask[scan_reg_n4_brain_csf_mask!=1] <- 0
 ortho2(scan_reg_n4_brain_csf_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 We use the fact that the file `scan_reg_n4_brain_seg` is equal to 1 for CSF, 2 for GM and 3 for WM. FOr instance, a WM mask could be created as follows:
 
-```{r}
+```r
 scan_reg_n4_brain_wm_mask <- scan_reg_n4_brain_seg
 scan_reg_n4_brain_wm_mask[scan_reg_n4_brain_wm_mask!=3] <- 0
 ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
@@ -243,14 +243,14 @@ RAVEL uses a control region of the brain to infer unwanted variation across subj
 
 Example:
 
-```{r}
+```r
 mask <- maskIntersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
     output.file="intersection_mask.nii.gz")
 ```
 
 The function `maskIntersect` also has the option to create an intersection mask that is less stringent by requiring the control region to be present in only a given percentage of the subjects, using the option `prob`. By default, `prob` is equal to 1, meaning 100% of the subjects has the final voxels labelled as CSF. For instance, to require that the final control region is shared for at least 90% of the subjects, one would type
 
-```{r}
+```r
 mask <- maskIntersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
     output.file="intersection_mask.nii.gz", prob=0.9)
 ```
