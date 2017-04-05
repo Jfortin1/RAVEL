@@ -21,6 +21,6 @@ Url: https://github.com/Jfortin1/RAVEL
 Remotes: jfortin1/RAVELData, jfortin1/EveTemplate,
     Jfortin1/ANTsR
 LazyData: TRUE
-biocViews: 
 License: GPL-2
 RoxygenNote: 6.0.1
+biocViews: 
