@@ -93,7 +93,7 @@ normalizeRAVEL <- function(input.files,
       indices <- whitestripe(brain,
                     type = WhiteStripe_Type, 
                     verbose = FALSE)
-      brain   <- whitestripe_norm(brain, indices$whitestripe.ind)
+      brain  <- whitestripe_norm(brain, indices$whitestripe.ind)
     }
     if (!is.null(brain.mask)) {
       brain <- as.vector(brain[brain.indices])
