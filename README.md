@@ -32,6 +32,7 @@
 
 
 <div id='id-section1'/>
+
 ## 1. Introduction
 
 RAVEL is an R package that combines the preprocessing and statistical analysis of magnetic resonance imaging (MRI) datasets within one framework. Users can start with raw images in the NIfTI format, and end up with a variety of statistical results associated with voxels and regions of interest (ROI) in the brain. RAVEL stands for _Removal of Artificial Voxel Effect by Linear regression_, the main preprocessing function of the package that allows an effective removal of between-scan unwanted variation. We have shown in [a recent paper](http://www.sciencedirect.com/science/article/pii/S1053811916001452) that RAVEL improves significantly population-wide statistical inference. The vignette is divided into several sections. In Section 1, we present a pre-normalization preprocessing pipeline from raw images to processed images ready for intensity normalization. In Section 2, we explain how to use the RAVEL algorithm as well as other intensity normalization techniques. In Section 3, we present different tools for post-normalization statistical analysis. In Section 4, we present additional functions that help the visualization of images and statistical results. 
@@ -47,6 +48,7 @@ install_github("jfortin1/RAVEL")
 
 
 <div id='id-section2'/>
+
 ## 2. Image preprocessing 
 
 
@@ -173,6 +175,7 @@ ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FAL
 ```
 
 <div id='id-section3'/>
+
 ## 3. Intensity normalization and RAVEL correction
 
 Since MRI intensities are acquired in arbitrary units, image intensities are not comparable across scans, between subjects and across sites. Intensity normalization (or intensity standardization) is paramount before performing between-subject intensity comparisons. The `RAVEL` package includes the popular histogram matching normalization (`normalizeHM`) as well as the White Stripe normalization (`normalizeWS`); see the table below for the reference papers. Once the images intensities are normalized, the RAVEL correction tool can be applied using the function `normalizeRAVEL` to remove additional unwanted variation using a control region. Because we have found that the combination White Stripe + RAVEL was best at removing unwanted variation, the function `normalizeRAVEL` performs White Stripe normalization by default prior to the RAVEL correction. 
