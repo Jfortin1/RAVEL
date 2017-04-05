@@ -5,6 +5,8 @@
 
 **Authors**: Jean-Philippe Fortin, John Muschelli, Russell T. Shinohara
 
+**License**: GPL-2
+
 ##### Software status
 
 | Resource:      | Travis CI     |
