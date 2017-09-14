@@ -7,3 +7,9 @@ todo.txt
 ^images/.+$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+icon\.png
+icon\.psd
+icon\.svg
+icon_black\.png
+sticker\.R
+sticker\.png
