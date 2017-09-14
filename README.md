@@ -268,3 +268,4 @@ For studies with a small number of subjects, the opposite problem may arise: too
 
 
 
+Logo from: https://openclipart.org/detail/14743/violin-bow
