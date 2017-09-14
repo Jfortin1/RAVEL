@@ -22,6 +22,7 @@ Url: https://github.com/Jfortin1/RAVEL
 Remotes: jfortin1/RAVELData, jfortin1/EveTemplate
 LazyData: TRUE
 License: GPL-2
+Encoding: UTF-8
 RoxygenNote: 6.0.1.9000
 biocViews: 
 VignetteBuilder: knitr
