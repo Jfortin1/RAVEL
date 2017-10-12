@@ -13,3 +13,6 @@ icon\.svg
 icon_black\.png
 sticker\.R
 sticker\.png
+^icon\.png$
+^sticker\.R$
+^sticker\.png$
