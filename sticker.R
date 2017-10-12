@@ -15,3 +15,7 @@ sticker("icon.png",
         s_height = 0.6,
         s_x = 1,
         filename = "sticker.png")
+
+
+usethis::use_build_ignore(
+  c("icon.png", "sticker.R", "sticker.png"))
