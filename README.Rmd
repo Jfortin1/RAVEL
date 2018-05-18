@@ -109,6 +109,8 @@ scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 Tp perform a non-linear registration to the JHU-MNI-ss template, one can use the diffeomorphism algorithm via the `ANTsR` package.  Note that we perform the registration with the skulls on. Here is an example where we register the scan1 from the `RAVELData` package to the JHU-MNI-ss template:
 
 ```{r, eval = FALSE}
+library(ANTsRCore)
+library(ANTsR)
 template    <- antsImageRead(template_path, 3)
 scan <- antsImageRead(scan_path,3)
 outprefix <- gsub(".nii.gz","",scan_path) # Prefix for the output files
@@ -118,7 +120,12 @@ scan_reg   <- antsImageClone(output$warpedmovout) # Registered brain
 The object `scan_reg` contains the scan registed to the template. Note that the object is in the `ANTsR` format. Since I prefer to work with the `oro.nifti` package, which is compatible with `flsr`, I convert the object to a `nifti` object using the function `ants2oro` as follows:
 
 ```{r, eval = FALSE}
-scan_reg <- ants2oro(scan_reg)
+# devtools::install_github("muschellij2/extrantsr")
+# or
+# source("https://neuroconductor.org/sites/default/files/neurocLite.R")
+# neuro_install("extrantsr")
+library(extrantsr)
+scan_reg <- extrantsr::ants2oro(scan_reg)
 ```
 I can save the registered brain in the NIfTi format using the `writeNIfTI` command:
 
@@ -136,9 +143,9 @@ ortho2(scan_reg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 We perform intensity inhomogeneity correction on the registered scan using the N4 Correction from the `ANTsR` package:
 
 ```{r, eval = FALSE}
-scan_reg <- oro2ants(scan_reg) # Convert to ANTsR object
+scan_reg <- extrantsr::oro2ants(scan_reg) # Convert to ANTsR object
 scan_reg_n4 <- n4BiasFieldCorrection(scan_reg)
-scan_reg_n4 <- ants2oro(scan_reg_n4) # Conversion to nifti object for further processing
+scan_reg_n4 <- extrantsr::ants2oro(scan_reg_n4) # Conversion to nifti object for further processing
 ```
 
 ### 2.5. Skull stripping
@@ -160,7 +167,7 @@ The last line of code produces via the `ortho2` function from the `fslr` package
 
 
 <p align="center">
-<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/template.png" width="600"/>
+<img src="images/template.png" width="600"/>
 </p>
 
 We perform a 3-class tissue segmentation on the T1-w image with the FAST segmentation algorithm:
@@ -170,7 +177,7 @@ scan_reg_n4_brain_seg <- fast(scan_reg_n4_brain, verbose=FALSE, opts="-t 1 -n 3"
 ortho2(scan_reg_n4_brain_seg, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 <p align="center">
-<img src="https://github.com/Jfortin1/RAVEL/blob/master/images/seg.png" width="600"/>
+<img src="images/seg.png" width="600"/>
 </p>
 
 
