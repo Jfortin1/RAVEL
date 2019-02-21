@@ -82,7 +82,7 @@ maskIntersect <- function(list,
   }
   brain.mask[brain.mask == 1] <- brain.norm
   output.file <- gsub(".nii.gz|.nii", "", output.file)
-  writeNIfTI(brain.mask, output.file)
+  writenii(nim=brain.mask, filename=output.file)
 }
 
 # # Function from the extrantsr package (thx to John Muschelli):
