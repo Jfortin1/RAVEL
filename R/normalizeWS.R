@@ -63,6 +63,7 @@ normalizeWS <-
     V <- pblapply(input.files, function(x) {
       brain <- check_nifti(x, reorient = FALSE, allow.array = FALSE)
       indices <- whitestripe(brain, type = WhiteStripe_Type, 
+                             stripped=TRUE,
                              verbose = FALSE, ...)
       brain   <- whitestripe_norm(brain, indices$whitestripe.ind)
       brain <- as.vector(brain[brain.indices])

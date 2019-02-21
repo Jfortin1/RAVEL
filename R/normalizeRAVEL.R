@@ -93,6 +93,7 @@ normalizeRAVEL <- function(input.files,
     if (WhiteStripe) {
       indices <- whitestripe(brain,
                     type = WhiteStripe_Type, 
+                    stripped=TRUE,
                     verbose = FALSE, ...)
       brain  <- whitestripe_norm(brain, indices$whitestripe.ind)
     }
