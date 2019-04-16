@@ -9,7 +9,7 @@
 
 ### Intensity normalizations for structural MRIs
 
-**Creator**: Jean-Philippe Fortin, <jeanphi@mail.med.upenn.edu>
+**Creator**: Jean-Philippe Fortin, <fortin946@gmail.com>
 
 **Authors**: Jean-Philippe Fortin, John Muschelli, Russell T. Shinohara
 
