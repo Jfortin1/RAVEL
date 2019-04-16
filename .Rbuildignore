@@ -17,3 +17,6 @@ sticker\.png
 ^sticker\.R$
 ^sticker\.png$
 ^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
