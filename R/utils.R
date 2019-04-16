@@ -19,6 +19,7 @@
 #' returned, and if \code{writeToDisk} is \code{TRUE}, the intersection mask is
 #' saved to disk as a NIfTI file.
 #' @author Jean-Philippe Fortin
+#' @importFrom neurobase writenii
 #' @examples
 #' 
 #' if (require(EveTemplate)){
@@ -46,6 +47,7 @@ maskIntersect <- function(list,
     stop("output.file must be specified if writeToDisk is true.")
   }
   
+  list = check_nifti(list, reorient = reorient)
   n <- length(list)
   inter  <- list[[1]]
   if (class(inter) == "nifti") {
@@ -67,7 +69,7 @@ maskIntersect <- function(list,
   # Writing to disk:
   if (writeToDisk) {
     filename <- gsub(".nii.gz|.nii", "", output.file)
-    writeNIfTI(inter, filename)
+    writenii(nim = inter, filename = filename)
   }
   
   # Returning object:

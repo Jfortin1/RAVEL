@@ -108,6 +108,11 @@ normalizeRAVEL <- function(input.files,
   if (is.null(output.files)) {
     output.files <- gsub(".nii.gz|.nii", "_RAVEL.nii.gz", input.files)
   }
+  lout = length(output.files)
+  lin = length(input.files)
+  if (lout != lin) {
+    warning("Length output files not the same as input files!")
+  }
   
   # Submatrix of control voxels:
   if (verbose)

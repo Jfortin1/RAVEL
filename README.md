@@ -27,7 +27,7 @@ GPL-2
 
 | Method      | Citation                                                                                                                                                                                                                                                                                                                                                                                                 | Paper Link                                                                 |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| RAVEL       | Jean-Philippe Fortin, Elizabeth M Sweeney, John Muschelli, Ciprian M Crainiceanu, Russell T Shinohara, Alzheimer’s Disease Neuroimaging Initiative, et al. **Removing inter-subject technical variability in magnetic resonance imaging studies**. NeuroImage, 132:198–212, 2016.                                                                                                                        | [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
+| RAVEL       | Jean-Philippe Fortin, Elizabeth M Sweeney, John Muschelli, Ciprian M Crainiceanu, Russell T Shinohara, Alzheimer’s Disease Neuroimaging Initiative, et al. **Removing inter-subject technical variability in magnetic resonance imaging studies**. NeuroImage, 132:198–212, 2016.                                                                                                                        | [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
 | WhiteStripe | Russell T Shinohara, Elizabeth M Sweeney, Jeff Goldsmith, Navid Shiee, Farrah J Mateen, Peter A Calabresi, Samson Jarso, Dzung L Pham, Daniel S Reich, Ciprian M Crainiceanu, Australian Imaging Biomarkers Lifestyle Flagship Study of Ageing, and Alzheimer’s Disease Neuroimaging Initiative. **Statistical normalization techniques for magnetic resonance imaging**. Neuroimage Clin, 6:9–19, 2014. | [Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X) |
 
 ## Table of content
@@ -35,8 +35,6 @@ GPL-2
   - [1. Introduction](#id-section1)
   - [2. Image preprocessing](#id-section2)
   - [3. Intensity normalization and RAVEL correction](#id-section3)
-
-<div id='id-section1'/>
 
 ## 1\. Introduction
 
@@ -61,8 +59,6 @@ You can install RAVEL from github with:
 # install.packages("devtools")
 devtools::install_github("jfortin1/RAVEL")
 ```
-
-<div id='id-section2'/>
 
 ## 2\. Image preprocessing
 
@@ -116,7 +112,7 @@ template_brain_mask_path <- getEvePath("Brain_Mask")
 scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
 ```
 
-### 2.2. JHU-MNI-ss template (*EVE* atlas)
+### 2.2. JHU-MNI-ss template (\_EVE\_ atlas)
 
 ### 2.3. Registration to template
 
@@ -244,8 +240,6 @@ scan_reg_n4_brain_wm_mask[scan_reg_n4_brain_wm_mask!=3] <- 0
 ortho2(scan_reg_n4_brain_wm_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FALSE)
 ```
 
-<div id='id-section3'/>
-
 ## 3\. Intensity normalization and RAVEL correction
 
 Since MRI intensities are acquired in arbitrary units, image intensities
@@ -294,9 +288,9 @@ comparison.
 
 | Argument       | Description                                                                                                                               | Default |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `input.files`  | `vector` or `list` of the paths for the input NIfTI image files to be normalized                                                          |
-| `output.files` | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with “\_RAW" appended at the end.  | `NULL`  |
-| `brain.mask`   | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                           |
+| `input.files`  | `vector` or `list` of the paths for the input NIfTI image files to be normalized                                                          |         |
+| `output.files` | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "\_RAW" appended at the end.  | `NULL`  |
+| `brain.mask`   | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                           |         |
 | `returnMatrix` | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`  |
 | `writeToDisk`  | Should the normalized images be saved to the disk as NIfTI files?                                                                         | `FALSE` |
 | `verbose`      | Should the function be verbose?                                                                                                           | `TRUE`  |
@@ -313,9 +307,9 @@ function.
 
 | Argument           | Description                                                                                                                               | Default |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `input.files`      | `vector` or `list` of the paths for the input NIfTI image files to be normalized                                                          |
-| `output.files`     | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with “\_WS" appended at the end.   | `NULL`  |
-| `brain.mask`       | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                           |
+| `input.files`      | `vector` or `list` of the paths for the input NIfTI image files to be normalized                                                          |         |
+| `output.files`     | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "\_WS" appended at the end.   | `NULL`  |
+| `brain.mask`       | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                           |         |
 | `WhiteStripe_Type` | What is the type of images to be normalized? Must be one of “T1”, “T2” and “FLAIR”.                                                       | `T1`    |
 | `returnMatrix`     | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`  |
 | `writeToDisk`      | Should the normalized images be saved to the disk as NIfTI files?                                                                         | `FALSE` |
@@ -337,10 +331,10 @@ mask.
 
 | Argument           | Description                                                                                                                                                                                       | Default |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `input.files`      | `vector` or `list` of the paths for the input NIfTI image files to be normalized                                                                                                                  |
-| `output.files`     | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with “\_RAVEL" appended at the end.                                                        | `NULL`  |
-| `brain.mask`       | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                                                                                   |
-| `control.mask`     | NIfTI image path for the binary control region mask. Must have value `1` for the control region and `0` otherwise. See the helper function `mask_intersect` for the creation of a `control.mask`. |
+| `input.files`      | `vector` or `list` of the paths for the input NIfTI image files to be normalized                                                                                                                  |         |
+| `output.files`     | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "\_RAVEL" appended at the end.                                                        | `NULL`  |
+| `brain.mask`       | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                                                                                   |         |
+| `control.mask`     | NIfTI image path for the binary control region mask. Must have value `1` for the control region and `0` otherwise. See the helper function `mask_intersect` for the creation of a `control.mask`. |         |
 | `WhiteStripe`      | Should White Stripe normalization be performed before RAVEL?                                                                                                                                      | `TRUE`  |
 | `WhiteStripe_Type` | If `WhiteStripe` is `TRUE`, what is the type of images to be normalized? Must be one of “T1”, “T2” and “FLAIR”.                                                                                   | `T1`    |
 | `k`                | Integer specifying the number of principal components to be included in the RAVEL correction.                                                                                                     | `1`     |
