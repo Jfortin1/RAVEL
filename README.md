@@ -11,7 +11,7 @@
 
 **Creator**: Jean-Philippe Fortin, <fortin946@gmail.com>
 
-**Authors**: Jean-Philippe Fortin, John Muschelli, Russell T. Shinohara
+**Authors**: Jean-Philippe Fortin, John Muschelli
 
 **License**:
 GPL-2
