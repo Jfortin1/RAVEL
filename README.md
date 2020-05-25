@@ -1,11 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# RAVEL
+# RAVEL <img src="sticker.png" width = "150" align="right" />
 
-<!-- ![Sticker](sticker.png) -->
 
-<img src="sticker.png" width="100">
 
 ### Intensity normalizations for structural MRIs
 
