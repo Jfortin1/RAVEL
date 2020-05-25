@@ -6,13 +6,15 @@ package = desc$get("Package")
 outline = "black"
 # background = "#0caa41"
 background = "dodgerblue2"
-p_color = "black"
+background = "gold"
+p_color = "grey25"
 sticker("icon.png",	
         package = package,
         h_fill = background,
         h_color = outline, 
+        p_color = p_color,
         s_width = 0.30, 
-        s_height = 0.6,
+        s_height = 0.45,
         s_x = 1,
         filename = "sticker.png")
 
