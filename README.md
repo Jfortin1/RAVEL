@@ -265,7 +265,7 @@ normalization*.
 | `normalizeRaw`   | No normalization   | T1, T2, FLAIR, PD                  |                                                                            |
 | `normalizeRAVEL` | RAVEL              | T1, T2, FLAIR                      | [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
 | `normalizeWS`    | White Stripe       | T1, T2, FLAIR                      | [Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X) |
-| `normalizeHM`    | Histogram Matching | T1, T2                             | [Link](http://www.ncbi.nlm.nih.gov/pubmed/10571928)                        |
+| `normalizeHM`    | Histogram Matching | T1, T2, FLAIR, PD                            | [Link](http://www.ncbi.nlm.nih.gov/pubmed/10571928)                        |
 
 Briefly, each function takes as input a list of NIfTI file paths
 specifying the images to be normalized, and return a matrix of
