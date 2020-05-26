@@ -12,17 +12,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-# RAVEL
-
-<!-- ![Sticker](sticker.png) -->
-<img src="sticker.png" width="100">
+# RAVEL <img src="sticker.png" width = "150" align="right" />
 
 
 ### Intensity normalizations for structural MRIs
 
-**Creator**: Jean-Philippe Fortin, jeanphi@mail.med.upenn.edu
+**Creator**: Jean-Philippe Fortin, fortin946@gmail.com
 
-**Authors**: Jean-Philippe Fortin, John Muschelli, Russell T. Shinohara
+**Authors**: Jean-Philippe Fortin, John Muschelli
 
 **License**: GPL-2
 
