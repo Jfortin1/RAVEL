@@ -4,9 +4,19 @@
 \alias{getTMap}
 \title{Compute t-statistic map with or without Empirical Bayes.}
 \usage{
-getTMap(V, design, columnIndex = NULL, weights = NULL, brain.mask,
-  eBayes = TRUE, output.file = "Tmap.nii.gz", returnObject = TRUE,
-  writeToDisk = FALSE, verbose = TRUE, ...)
+getTMap(
+  V,
+  design,
+  columnIndex = NULL,
+  weights = NULL,
+  brain.mask,
+  eBayes = TRUE,
+  output.file = "Tmap.nii.gz",
+  returnObject = TRUE,
+  writeToDisk = FALSE,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{V}{Matrix of voxels intensities (rows are voxels, columns are

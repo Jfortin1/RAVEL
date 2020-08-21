@@ -4,8 +4,14 @@
 \alias{normalizeRaw}
 \title{Create matrix of voxel intensities without normalization.}
 \usage{
-normalizeRaw(input.files, output.files = NULL, brain.mask = NULL,
-  writeToDisk = FALSE, returnMatrix = TRUE, verbose = TRUE)
+normalizeRaw(
+  input.files,
+  output.files = NULL,
+  brain.mask = NULL,
+  writeToDisk = FALSE,
+  returnMatrix = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{input.files}{Vector of filenames for the input images. Must be NIfTI

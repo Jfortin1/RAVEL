@@ -4,9 +4,16 @@
 \alias{normalizeWS}
 \title{WhiteStripe intensity normalization.}
 \usage{
-normalizeWS(input.files, output.files = NULL, brain.mask = NULL,
-  WhiteStripe_Type = c("T1", "T2", "FLAIR"), writeToDisk = FALSE,
-  returnMatrix = TRUE, verbose = TRUE, ...)
+normalizeWS(
+  input.files,
+  output.files = NULL,
+  brain.mask = NULL,
+  WhiteStripe_Type = c("T1", "T2", "FLAIR"),
+  writeToDisk = FALSE,
+  returnMatrix = TRUE,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{input.files}{Vector of filenames for the input images. Must be NIfTI

@@ -4,8 +4,15 @@
 \alias{maskIntersect}
 \title{Intersection of a list of brain masks}
 \usage{
-maskIntersect(list, output.file = NULL, prob = 1, reorient = FALSE,
-  returnObject = TRUE, writeToDisk = TRUE, verbose = TRUE)
+maskIntersect(
+  list,
+  output.file = NULL,
+  prob = 1,
+  reorient = FALSE,
+  returnObject = TRUE,
+  writeToDisk = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{list}{List of the mask input files (nifti files) or mask nifti

@@ -4,9 +4,15 @@
 \alias{normalizeHM}
 \title{Histogram matching intensity normalization.}
 \usage{
-normalizeHM(input.files, output.files = NULL, brain.mask = NULL,
-  type = c("T1", "T2", "FLAIR", "PD"), writeToDisk = FALSE,
-  returnMatrix = TRUE, verbose = TRUE)
+normalizeHM(
+  input.files,
+  output.files = NULL,
+  brain.mask = NULL,
+  type = c("T1", "T2", "FLAIR", "PD"),
+  writeToDisk = FALSE,
+  returnMatrix = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{input.files}{Vector of filenames for the input images. Must be NIfTI

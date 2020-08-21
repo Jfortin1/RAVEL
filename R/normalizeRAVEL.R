@@ -14,6 +14,7 @@
 #' space brain.  Must be a NIfTI file.
 #' @param control.mask Filename for the control region binary mask to be used
 #' in RAVEL.  Must be a NIfTI file.
+#' @param mod Model matrix for outcome of interest and other covariates 
 #' @param WhiteStripe Should White Stripe intensity normalization be performed
 #' prior to RAVEL?.
 #' @param WhiteStripe_Type What modality is used for WhiteStripe? Should be one
@@ -36,6 +37,7 @@ normalizeRAVEL <- function(input.files,
                            output.files = NULL,
                            brain.mask = NULL,
                            control.mask = NULL,
+                           mod=NULL,
                            WhiteStripe = TRUE,
                            WhiteStripe_Type = c("T1", "T2", "FLAIR"),
                            k = 1,
@@ -43,6 +45,9 @@ normalizeRAVEL <- function(input.files,
                            writeToDisk = FALSE,
                            verbose = TRUE, ...) {
   # RAVEL correction procedure:
+  if (!is.null(mod)){
+    message("[normalizeRAVEL] Performing RAVEL with covariates adjustment \n")
+  }
   WhiteStripe_Type <- match.arg(WhiteStripe_Type)
   if (WhiteStripe_Type == "FLAIR") {
     WhiteStripe_Type <- "T2"
@@ -61,14 +66,6 @@ normalizeRAVEL <- function(input.files,
     stop("brain.mask must be provided.")
   }
   
-  .ravel_correction <- function(V, Z) {
-    means <- rowMeans(V)
-    beta   <- solve(t(Z) %*% Z) %*% t(Z) %*% t(V)
-    fitted <- t(Z %*% beta)
-    res   <- V - fitted
-    res   <- res + means
-    res
-  }
   
   if (verbose) {
     message("[normalizeRAVEL] Creating the voxel intensities matrix V. \n")
@@ -132,11 +129,46 @@ normalizeRAVEL <- function(input.files,
   Z  <- svd(Vc)$v[, 1:k, drop = FALSE] # Unwanted factors
   
   
+  .checkDesign <- function(design, n.z){
+    # Check if the design is confounded
+    if(qr(design)$rank<ncol(design)){
+        if(ncol(design)>(n.z+1)){
+          if((qr(design[,-c(1:n.z),drop=FALSE])$rank<ncol(design[,-c(1:n.z),drop=FALSE]))){
+            stop('The covariates in mod are confounded. Please remove one or more of the covariates so the design is not confounded.')
+          } else {
+            stop("At least one covariate is confounded with the estimated Z components. Please remove confounded covariates and rerun RAVEL.")
+          }
+        }
+    }
+    design
+  }
+
+  .ravel_correction <- function(V, Z, mod=NULL) {
+    A <- rowMeans(V)
+    if (is.null(mod)){
+      gamma  <- solve(t(Z) %*% Z) %*% t(Z) %*% t(V)
+    } else {
+      # Creating design matrix:
+      design <- cbind(Z,mod)
+      check  <- apply(design, 2, function(x) all(x == 1))
+      design <- as.matrix(design[,!check,drop=FALSE]) #Removing intercept
+      n.z <- ncol(Z)
+      design <- .checkDesign(design, n.z)
+      n.covariates <- ncol(design)-n.z
+      # Jointly fitting gamma and beta:
+      gamma_beta <- solve(t(design) %*% design) %*% t(design) %*% t(V)
+      gamma <- gamma_beta[1:n.z,,drop=FALSE]
+    }
+    fitted <- t(Z %*% gamma)
+    res    <- V - fitted
+    res    <- res + A
+    return(res)
+  }
+
   if (verbose) {
     message("[normalizeRAVEL] Performing RAVEL correction \n")
   }
-  V.norm <- .ravel_correction(V, Z)
-  
+  V.norm <- .ravel_correction(V, Z, mod=mod)
   
   if (writeToDisk) {
     if (verbose) {
