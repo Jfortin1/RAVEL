@@ -29,21 +29,24 @@
 #' RAVEL-corrected images are saved and a matrix of normalized intensities is
 #' returned.
 #' @author Jean-Philippe Fortin
-#' @importFrom pbapply pboptions
+#' @importFrom pbapply pboptions pblapply
 #' @importFrom oro.nifti readNIfTI
 #' @importFrom WhiteStripe whitestripe whitestripe_norm
+#' @importFrom neurobase check_nifti
 #' @export
 normalizeRAVEL <- function(input.files,
-                           output.files = NULL,
-                           brain.mask = NULL,
-                           control.mask = NULL,
-                           mod=NULL,
-                           WhiteStripe = TRUE,
-                           WhiteStripe_Type = c("T1", "T2", "FLAIR"),
-                           k = 1,
-                           returnMatrix = TRUE,
-                           writeToDisk = FALSE,
-                           verbose = TRUE, ...) {
+                          output.files = NULL,
+                          brain.mask = NULL,
+                          control.mask = NULL,
+                          mod=NULL,
+                          WhiteStripe = TRUE,
+                          WhiteStripe_Type = c("T1", "T2", "FLAIR"),
+                          k = 1,
+                          returnMatrix = TRUE,
+                          writeToDisk = FALSE,
+                          verbose = TRUE,
+                          ...
+){
   # RAVEL correction procedure:
   if (!is.null(mod)){
     message("[normalizeRAVEL] Performing RAVEL with covariates adjustment \n")
