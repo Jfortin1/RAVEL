@@ -333,6 +333,7 @@ mask.
 | `output.files`     | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "\_RAVEL" appended at the end.                                                        | `NULL`  |
 | `brain.mask`       | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                                                                                   |         |
 | `control.mask`     | NIfTI image path for the binary control region mask. Must have value `1` for the control region and `0` otherwise. See the helper function `mask_intersect` for the creation of a `control.mask`. |         |
+| `mod`     | Model matrix for outcome of interest and other covariates  |    `NULL`     |
 | `WhiteStripe`      | Should White Stripe normalization be performed before RAVEL?                                                                                                                                      | `TRUE`  |
 | `WhiteStripe_Type` | If `WhiteStripe` is `TRUE`, what is the type of images to be normalized? Must be one of “T1”, “T2” and “FLAIR”.                                                                                   | `T1`    |
 | `k`                | Integer specifying the number of principal components to be included in the RAVEL correction.                                                                                                     | `1`     |
