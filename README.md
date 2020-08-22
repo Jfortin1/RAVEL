@@ -107,7 +107,7 @@ template_path <- getEvePath("T1")
 # JHU-MNI-ss template brain mask:
 template_brain_mask_path <- getEvePath("Brain_Mask")
 # Example of T1-w MPRAGE image
-scan_path <- system.file(package="RAVELData", "data/scan1.nii.gz")
+scan_path <- system.file(package="RAVELData", "extdata/scan1.nii.gz")
 ```
 
 ### 2.2. JHU-MNI-ss template (\_EVE\_ atlas)
@@ -144,7 +144,7 @@ library(extrantsr)
 scan_reg <- extrantsr::ants2oro(scan_reg)
 ```
 
-I can save the registered brain in the NIfTi format using the
+We can save the registered brain in the NIfTi format using the
 `writeNIfTI` command:
 
 ``` r
@@ -229,7 +229,7 @@ ortho2(scan_reg_n4_brain_csf_mask, crosshairs=FALSE, mfrow=c(1,3), add.orient=FA
 ```
 
 We use the fact that the file `scan_reg_n4_brain_seg` is equal to 1 for
-CSF, 2 for GM and 3 for WM. FOr instance, a WM mask could be created as
+CSF, 2 for GM and 3 for WM. For instance, a WM mask could be created as
 follows:
 
 ``` r
@@ -351,8 +351,8 @@ progression of AD. The control region must be specified in the argument
 `control.mask` of the function `normalizeRAVEL` as a path to a NIfTI
 file storing a binary mask. In the case of a CSF control region, one way
 to create such a binary mask is to create a CSF binary mask for each
-image, and then to take the intersection of all those binary masks. This
-can be done with the function `maskIntersect`. The function takes as
+scan first, and then to take the intersection of all those binary masks. This
+can be done with the function `maskIntersect` in `RAVEL`. The function takes as
 input a list of binary masks (either `nifti` objects or a list of NIfTI
 file paths), and will output the intersection of all the binary masks.
 By default, the function will save the intersection mask to the disk as
@@ -362,8 +362,9 @@ a NIfTI file, as specified by
 Example:
 
 ``` r
-mask <- maskIntersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
-    output.file="intersection_mask.nii.gz")
+dir   <- file.path(find.package("RAVELData"), "extdata")
+masks <- list.files(dir, full.names=TRUE, pattern="*mask*.nii*")
+intersect_mask  <- maskIntersect(masks, output.file=tempfile())
 ```
 
 When the number of subjects is large, the intersection mask may be
@@ -378,8 +379,7 @@ subjects, one would
 type
 
 ``` r
-mask <- maskIntersect(list("csf_mask1.nii.gz", "csf_mask2.nii.gz", "csf_mask3.nii.gz"),
-    output.file="intersection_mask.nii.gz", prob=0.9)
+intersect_mask  <- maskIntersect(masks, output.file=tempfile(), prob=0.9)
 ```
 
 For studies with a small number of subjects, the opposite problem may
