@@ -401,4 +401,29 @@ retained in the final intersection mask. Mask erosion, for instance
 using [fslr](https://github.com/muschellij2/fslr), may be performed to
 remove such voxels and refine the control mask.
 
+### 3.6 Controlling for biological covariates in RAVEL
+
+In removing the unwanted variation estimated using control voxels, it is possible to preserve biological variation by specifying biological covariates in the `normalizeRAVEL` function, similar to ComBat harmonization. 
+
+For instance, suppose we want to normalize intensities across participants using CSF, and also want to make sure that we don't remove variation in intensities associated with age. We first need to build a model matrix for the biological covariates (here age):
+
+```
+age <- c(70,62,43,76) #Simulated age
+gender <- c("M", "M", "F", "F")
+mod <- model.matrix(~age+gender)
+```
+
+Note that while the model matrix has an intercept column, this will be automatically handled internally by the ```normalizeRAVEL``` function. To run RAVEL while adjusting for age and gender, we include ```mod``` as an argument as follows:
+
+```
+Y.ravel.mod <- normalizeRAVEL(input.files=input.files,
+	control.mask=control.mask,
+	brain.mask=brain.mask,
+	k=1, 
+	mod=mod,
+	returnMatrix=TRUE,
+	WhiteStripe=FALSE
+)
+```
+
 Logo from: <https://openclipart.org/detail/14743/violin-bow>
