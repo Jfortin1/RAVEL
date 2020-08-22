@@ -296,7 +296,7 @@ comparison.
 ### 3.2 White Stripe normalization
 
 The function `normalizeWS` takes as input the preprocessed and
-registered images, applies the White Stripe normalization algorith to
+registered images, applies the White Stripe normalization algorithm to
 each image separately via the `WhiteStripe` R package, and creates a
 matrix of normalized voxel intensities. Note that the White Stripe
 normalization is also included as a first step in the RAVEL algorithm
@@ -315,7 +315,20 @@ function.
 
 ### 3.3 Histogram matching normalization
 
-Not ready yet.
+The function `normalizeHM` takes as input the preprocessed and
+registered images, applies the Histogram matching normalization algorithm to
+each image separately, and creates a
+matrix of normalized voxel intensities.
+
+| Argument           | Description                                                                                                                               | Default |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `input.files`      | `vector` or `list` of the paths for the input NIfTI image files to be normalized                                                          |         |
+| `output.files`     | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "\_WS" appended at the end.   | `NULL`  |
+| `brain.mask`       | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                           |         |
+| `type` | What is the type of images to be normalized? Must be one of “T1”, “T2”, "PD", and “FLAIR”.                                                       | `T1`    |
+| `returnMatrix`     | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`  |
+| `writeToDisk`      | Should the normalized images be saved to the disk as NIfTI files?                                                                         | `FALSE` |
+| `verbose`          | Should the function be verbose?                                                                                                           | `TRUE`  |
 
 ### 3.4 RAVEL normalization
 
