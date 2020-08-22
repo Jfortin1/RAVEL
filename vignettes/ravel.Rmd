@@ -1,21 +1,141 @@
 ---
-title: "Working with RAVEL"
-output: rmarkdown::html_vignette
+title: "RAVEL: R package for intensity normalization of structural MRIs"
+author: 
+- name: Jean-Philippe Fortin
+  email: fortin946@gmail.com
+date: "`r Sys.Date()`"
+output: 
+  BiocStyle::html_document:
+    toc_float: true
+#    theme: paper
+    number_sections: true
 vignette: >
+  %\VignetteIndexEntry{RAVEL}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
 
 
 
-```{r setup, include=FALSE}
-library(knitr)
+# Main functions
+
+- `normalizeRaw`: no normalization
+- `normalizeWS`: WhiteStripe normalization
+- `normalizeHM`: Histogram Matching normalization
+- `normalizeRAVEL`: RAVEL normalization
+
+
+## Example dataset from ```RAVELData```
+
+```{r, warning=FALSE, message=FALSE}
+library(EveTemplate)
+library(RAVEL)
+library(RAVELData)
+```
+
+We first get the path of the NIfTI files for the 4 scans stored in the R package `RAVELData`. The scans were corrected for inhomogeneity and non-linearly registered to the Eve Template after skull stripping.
+```{r}
+dir <- file.path(find.package("RAVELData"), "extdata")
+input.files  <- list.files(dir, full.names=TRUE, pattern="processed.nii.gz")
+```
+
+RAVEL requires a set of control voxels to infer the unwanted variation. We use a CSF mask that was created using the intersection of all 4 subject-specific CSF masks, also stored in `RAVELData`:
+```{r}
+control.mask <- list.files(dir, full.names=TRUE, pattern="mask_intersection.nii.gz")
+```
+
+Finally, we also need to provide a brain mask. Since the 4 scans were registered to the Eve Template, we use the Eve Template brain mask accessible through the R package `EveTemplate`:
+
+```{r}
+brain.mask   <- EveTemplate::getEvePath("Brain_Mask")
 ```
 
 
 
-## Main functions
-The main functions implemented are `normalizeRaw` and `normalizeRAVEL`. 
+# No normalization
 
-[This GitHub repository](https://github.com/jfortin1/RAVEL) will be used for development and issues. 
+```{r, eval=FALSE}
+Y.raw <- normalizeRaw(input.files=input.files,
+	brain.mask=brain.mask,
+	returnMatrix=TRUE
+)
+```
+
+# Histogram matching normalization
+
+```{r, eval=FALSE}
+Y.hm <- normalizeHM(input.files=input.files,
+	brain.mask=brain.mask,
+	returnMatrix=TRUE,
+	type="T1"
+)
+```
+
+
+# WhiteStripe normalization
+
+```{r, eval=FALSE}
+Y.ws <- normalizeWS(input.files=input.files,
+	brain.mask=brain.mask,
+	returnMatrix=TRUE,
+	WhiteStripe_Type="T1"
+)
+```
+
+
+# RAVEL normalization
+
+We perform RAVEL intensity normalization using $k=1$ component to tesimate the unwanted variation. For the sake of time, we specify `WhiteStripe=FALSE`, but we recommend to **always** use the default `WhiteStripe=TRUE` as we have shown that the combination WhiteStripe + RAVEL is best at normalizing data. 
+
+```{r, eval=FALSE}
+Y.ravel <- normalizeRAVEL(input.files=input.files,
+	control.mask=control.mask,
+	brain.mask=brain.mask,
+	k=1, 
+	returnMatrix=TRUE,
+	WhiteStripe=FALSE
+)
+```
+
+If `returnMatrix=FALSE`, NIfTI objects containing the RAVEL-normalized values will be saved to disk instead. 
+
+## Creation of a control voxels mask
+
+The function ```maskIntersect``` will produce the intersection of a list of binary masks. For instance, to produce an intersection mask of all 4 CSF masks stored in ```RAVELData```, we would do the following: 
+
+```{r, eval=FALSE}
+dir <- file.path(find.package("RAVELData"), "extdata")
+masks <- list.files(dir, full.names=TRUE, pattern="*mask*.nii*")
+mask  <- maskIntersect(masks, output.file="csf_mask_intersection.nii.gz")
+```
+
+An additional argument, ```prob```, can control the percentage of participants in which the control voxel appears.
+
+## Controling for biological covariates in RAVEL
+
+In removing the unwanted variation estimated using control voxels, it is possible to preserve biological variation by specifying biological covariates in the `normalizeRAVEL` function, similar to ComBat harmonization. 
+
+For instance, suppose we want to normalize intensities across participants using CSF, and also want to make sure that we don't remove variation in intensities associated with age. We first need to build a model matrix for the biological covariates (here age):
+
+```{r, eval=TRUE}
+age <- c(70,62,43,76) #Simulated age
+gender <- c("M", "M", "F", "F")
+mod <- model.matrix(~age+gender)
+mod
+```
+
+Note that while the model matrix has an intercept column, this will be automatically handled internally by the ```normalizeRAVEL``` function. To run RAVEL while adjusting for age and gender, we include ```mod``` as an argument as follows:
+
+```{r, eval=FALSE}
+Y.ravel.mod <- normalizeRAVEL(input.files=input.files,
+	control.mask=control.mask,
+	brain.mask=brain.mask,
+	k=1, 
+	mod=mod,
+	returnMatrix=TRUE,
+	WhiteStripe=FALSE
+)
+```
+
+
+

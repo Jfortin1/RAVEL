@@ -83,7 +83,7 @@ normalizeRAVEL <- function(input.files,
       message(
         paste0(
           "[normalizeRAVEL] WhiteStripe intensity normalization",
-          " not applied.  \n"))
+          " not applied (not recommended).  \n"))
     }
   }
   # Matrix of voxel intensities:
