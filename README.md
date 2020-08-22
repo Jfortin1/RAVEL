@@ -5,7 +5,7 @@
 
 
 
-### Intensity normalizations for structural MRIs
+### Intensity normalization methods for structural MRIs
 
 **Creator**: Jean-Philippe Fortin, <fortin946@gmail.com>
 
