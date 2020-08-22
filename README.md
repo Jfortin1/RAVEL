@@ -407,7 +407,7 @@ In removing the unwanted variation estimated using control voxels, it is possibl
 
 For instance, suppose we want to normalize intensities across participants using CSF, and also want to make sure that we don't remove variation in intensities associated with age. We first need to build a model matrix for the biological covariates (here age):
 
-```
+``` r
 age <- c(70,62,43,76) #Simulated age
 gender <- c("M", "M", "F", "F")
 mod <- model.matrix(~age+gender)
@@ -415,7 +415,7 @@ mod <- model.matrix(~age+gender)
 
 Note that while the model matrix has an intercept column, this will be automatically handled internally by the ```normalizeRAVEL``` function. To run RAVEL while adjusting for age and gender, we include ```mod``` as an argument as follows:
 
-```
+``` r
 Y.ravel.mod <- normalizeRAVEL(input.files=input.files,
 	control.mask=control.mask,
 	brain.mask=brain.mask,
