@@ -57,8 +57,8 @@ normalizeZScore <- function(input.files,
     })
     V <- do.call(cbind, V)
     # Whole brain z-score normalization:
-    means <- apply(V,1,mean,na.rm=TRUE)
-    sds <- apply(V,1,sd, na.rm=TRUE)
+    means <- apply(V,2,mean,na.rm=TRUE)
+    sds <- apply(V,2,sd, na.rm=TRUE)
     V <- sweep(V,2,means, "-")
     V <- sweep(V,2,sds, "/")
 
