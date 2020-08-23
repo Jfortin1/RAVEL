@@ -45,9 +45,9 @@ of T1, T2 or FLAIR.}
 
 \item{k}{Number of unwanted factors to be included in the RAVEL model.}
 
-\item{returnMatrix}{Should the matrix of normalized intensities be returned?}
+\item{returnMatrix}{Should the matrix of intensities be returned? FALSE by default.}
 
-\item{writeToDisk}{Should the normalized images be saved to disk?}
+\item{writeToDisk}{Should the scans be saved to the disk? FALSE by default.}
 
 \item{verbose}{Should messages be printed?}
 

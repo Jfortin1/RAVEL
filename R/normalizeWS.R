@@ -15,8 +15,8 @@
 #' @param stripped Is the image skull stripped? TRUE by default. 
 #' @param WhiteStripe_Type What modality is used for WhiteStripe? Should be one
 #' of T1, T2 or FLAIR.
-#' @param writeToDisk Should the normalized scans be saved to the disk?
-#' @param returnMatrix Should the matrix of normalized intensities be returned?
+#' @param writeToDisk Should the scans be saved to the disk? FALSE by default. 
+#' @param returnMatrix Should the matrix of intensities be returned? FALSE by default.
 #' @param verbose Should messages be printed?
 #' @return if \code{returnMatrix} is \code{FALSE}, no value returned, but
 #' WhiteStripe-normalized images are saved. If \code{returnMatrix} is
@@ -41,7 +41,7 @@ normalizeWS <- function(input.files,
     if (WhiteStripe_Type == "FLAIR") {
       WhiteStripe_Type <- "T2"
     }
-    # RAVEL correction procedure:
+    
     if (!verbose) {
       pboptions(type = "none")
     }

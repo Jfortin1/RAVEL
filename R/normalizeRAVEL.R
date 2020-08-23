@@ -21,8 +21,8 @@
 #' of T1, T2 or FLAIR.
 #' @param stripped Is the image skull stripped? TRUE by default. 
 #' @param k Number of unwanted factors to be included in the RAVEL model.
-#' @param returnMatrix Should the matrix of normalized intensities be returned?
-#' @param writeToDisk Should the normalized images be saved to disk?
+#' @param writeToDisk Should the scans be saved to the disk? FALSE by default. 
+#' @param returnMatrix Should the matrix of intensities be returned? FALSE by default.
 #' @param verbose Should messages be printed?
 #' @param ... additional arguments to pass to \code{\link{whitestripe}}
 #' @return if \code{returnMatrix} is \code{FALSE}, no value returned, but

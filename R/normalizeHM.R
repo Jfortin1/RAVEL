@@ -10,12 +10,12 @@
 #' @param input.files Vector of filenames for the input images. Must be NIfTI
 #' files.
 #' @param output.files Optional vector of filenames for the output images. By
-#' default, will be the \code{input.files} with suffix "WS".
+#' default, will be the \code{input.files} with suffix "HM".
 #' @param brain.mask Filename for the brain binary mask specifying the template
 #' space brain. Must be a NIfTI file.
 #' @param type What modality is used? Should be one of T1, T2, FLAIR or PD.
-#' @param writeToDisk Should the normalized scans be saved to the disk?
-#' @param returnMatrix Should the matrix of normalized intensities be returned?
+#' @param writeToDisk Should the scans be saved to the disk? FALSE by default. 
+#' @param returnMatrix Should the matrix of intensities be returned? FALSE by default.
 #' @param verbose Should messages be printed?
 #' @return if \code{returnMatrix} is \code{FALSE}, no value returned, but
 #' Histogram-matching-normalized images are saved. If \code{returnMatrix} is
@@ -35,7 +35,7 @@ normalizeHM <- function(input.files,
            verbose = TRUE
 ){
     type <- match.arg(type)
-    # RAVEL correction procedure:
+    
     if (!verbose) {
       pboptions(type = "none")
     }

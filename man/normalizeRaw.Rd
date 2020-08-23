@@ -23,9 +23,9 @@ default, will be the \code{input.files} with suffix "WS".}
 \item{brain.mask}{Filename for the brain binary mask specifying the template
 space brain. Must be a NIfTI file.}
 
-\item{writeToDisk}{Should the scans be saved to the disk?}
+\item{writeToDisk}{Should the scans be saved to the disk? FALSE by default.}
 
-\item{returnMatrix}{Should the matrix of intensities be returned?}
+\item{returnMatrix}{Should the matrix of intensities be returned? FALSE by default.}
 
 \item{verbose}{Should messages be printed?}
 }
