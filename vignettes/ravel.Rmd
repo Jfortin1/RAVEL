@@ -22,6 +22,7 @@ vignette: >
 - `normalizeRaw`: no normalization
 - `normalizeWS`: WhiteStripe normalization
 - `normalizeHM`: Histogram Matching normalization
+- `normalizeZScore`: Whole-brain z-score normalization
 - `normalizeRAVEL`: RAVEL normalization
 
 
@@ -79,6 +80,15 @@ Y.ws <- normalizeWS(input.files=input.files,
 	brain.mask=brain.mask,
 	returnMatrix=TRUE,
 	WhiteStripe_Type="T1"
+)
+```
+
+# Whole-brain z-score normalization
+
+```{r, eval=FALSE}
+Y.zscore <- normalizeZScore(input.files=input.files,
+	brain.mask=brain.mask,
+	returnMatrix=TRUE
 )
 ```
 
