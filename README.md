@@ -265,7 +265,8 @@ normalization*.
 | `normalizeRaw`   | No normalization   | T1, T2, FLAIR, PD                  |                                                                            |
 | `normalizeRAVEL` | RAVEL              | T1, T2, FLAIR                      | [Link](http://www.sciencedirect.com/science/article/pii/S1053811916001452) |
 | `normalizeWS`    | White Stripe       | T1, T2, FLAIR                      | [Link](http://www.sciencedirect.com/science/article/pii/S221315821400117X) |
-| `normalizeHM`    | Histogram Matching | T1, T2, FLAIR, PD                            | [Link](http://www.ncbi.nlm.nih.gov/pubmed/10571928)                        |
+| `normalizeHM`    | Histogram Matching | T1, T2, FLAIR, PD                  | [Link](http://www.ncbi.nlm.nih.gov/pubmed/10571928)                        |
+| `normalizeZScore`| Z-score transformation  | T1, T2, FLAIR, PD                  |                                                                            |
 
 Briefly, each function takes as input a list of NIfTI file paths
 specifying the images to be normalized, and return a matrix of
@@ -330,7 +331,27 @@ matrix of normalized voxel intensities.
 | `writeToDisk`      | Should the normalized images be saved to the disk as NIfTI files?                                                                         | `FALSE` |
 | `verbose`          | Should the function be verbose?                                                                                                           | `TRUE`  |
 
-### 3.4 RAVEL normalization
+
+### 3.4 Z-score transformation (whole-brain)
+
+The function `normalizeZScore` takes as input the preprocessed and
+registered images, applies a whole-brain z-score transformation to
+each image separately, and creates a
+matrix of normalized voxel intensities.
+
+| Argument           | Description                                                                                                                               | Default |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `input.files`      | `vector` or `list` of the paths for the input NIfTI image files to be normalized                                                          |         |
+| `output.files`     | Optionnal `vector` or `list` of the paths for the output images. By default, will be the `input.files` with "\_WS" appended at the end.   | `NULL`  |
+| `brain.mask`       | NIfTI image path for the binary brain mask. Must have value `1` for the brain and `0` otherwise                                           |         |
+| `type` | What is the type of images to be normalized? Must be one of “T1”, “T2”, "PD", and “FLAIR”.                                                       | `T1`    |
+| `returnMatrix`     | Should the matrix of normalized images be returned? Rows correspond to voxels specified by `brain.mask`, and columns correspond to scans. | `TRUE`  |
+| `writeToDisk`      | Should the normalized images be saved to the disk as NIfTI files?                                                                         | `FALSE` |
+| `verbose`          | Should the function be verbose?                                                                                                           | `TRUE`  |
+
+
+
+### 3.5 RAVEL normalization
 
 The function `normalizeRAVEL` takes as input the preprocessed and
 registered images, and a control region mask, and applies the RAVEL
@@ -354,7 +375,7 @@ mask.
 | `writeToDisk`      | Should the normalized images be saved to the disk as NIfTI files?                                                                                                                                 | `FALSE` |
 | `verbose`          | Should the function be verbose?                                                                                                                                                                   | `TRUE`  |
 
-### 3.5 Creation of a control region for RAVEL
+### 3.6 Creation of a control region for RAVEL
 
 RAVEL uses a control region of the brain to infer unwanted variation
 across subjects. The control region is made of voxels known to be
@@ -401,7 +422,7 @@ retained in the final intersection mask. Mask erosion, for instance
 using [fslr](https://github.com/muschellij2/fslr), may be performed to
 remove such voxels and refine the control mask.
 
-### 3.6 Controlling for biological covariates in RAVEL
+### 3.7 Controlling for biological covariates in RAVEL
 
 In removing the unwanted variation estimated using control voxels, it is possible to preserve biological variation by specifying biological covariates in the `normalizeRAVEL` function, similar to ComBat harmonization. 
 
