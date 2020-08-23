@@ -12,6 +12,7 @@ normalizeRAVEL(
   mod = NULL,
   WhiteStripe = TRUE,
   WhiteStripe_Type = c("T1", "T2", "FLAIR"),
+  stripped = TRUE,
   k = 1,
   returnMatrix = TRUE,
   writeToDisk = FALSE,
@@ -39,6 +40,8 @@ prior to RAVEL?.}
 
 \item{WhiteStripe_Type}{What modality is used for WhiteStripe? Should be one
 of T1, T2 or FLAIR.}
+
+\item{stripped}{Is the image skull stripped? TRUE by default.}
 
 \item{k}{Number of unwanted factors to be included in the RAVEL model.}
 

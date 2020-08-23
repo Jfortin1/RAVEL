@@ -19,6 +19,7 @@
 #' prior to RAVEL?.
 #' @param WhiteStripe_Type What modality is used for WhiteStripe? Should be one
 #' of T1, T2 or FLAIR.
+#' @param stripped Is the image skull stripped? TRUE by default. 
 #' @param k Number of unwanted factors to be included in the RAVEL model.
 #' @param returnMatrix Should the matrix of normalized intensities be returned?
 #' @param writeToDisk Should the normalized images be saved to disk?
@@ -41,6 +42,7 @@ normalizeRAVEL <- function(input.files,
                           mod=NULL,
                           WhiteStripe = TRUE,
                           WhiteStripe_Type = c("T1", "T2", "FLAIR"),
+                          stripped=TRUE,
                           k = 1,
                           returnMatrix = TRUE,
                           writeToDisk = FALSE,
@@ -93,7 +95,7 @@ normalizeRAVEL <- function(input.files,
     if (WhiteStripe) {
       indices <- whitestripe(brain,
                     type = WhiteStripe_Type, 
-                    stripped=TRUE,
+                    stripped=stripped,
                     verbose = FALSE, ...)
       brain  <- whitestripe_norm(brain, indices$whitestripe.ind)
     }

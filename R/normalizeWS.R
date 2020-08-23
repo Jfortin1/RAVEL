@@ -12,6 +12,7 @@
 #' default, will be the \code{input.files} with suffix "WS".
 #' @param brain.mask Filename for the brain binary mask specifying the template
 #' space brain. Must be a NIfTI file.
+#' @param stripped Is the image skull stripped? TRUE by default. 
 #' @param WhiteStripe_Type What modality is used for WhiteStripe? Should be one
 #' of T1, T2 or FLAIR.
 #' @param writeToDisk Should the normalized scans be saved to the disk?
@@ -27,10 +28,10 @@
 #' @importFrom oro.nifti readNIfTI
 #' @importFrom WhiteStripe whitestripe whitestripe_norm 
 #' @export
-normalizeWS <-
-  function(input.files,
+normalizeWS <- function(input.files,
            output.files = NULL,
            brain.mask = NULL,
+           stripped=TRUE,
            WhiteStripe_Type = c("T1", "T2", "FLAIR"),
            writeToDisk = FALSE,
            returnMatrix = TRUE,
@@ -63,7 +64,7 @@ normalizeWS <-
     V <- pblapply(input.files, function(x) {
       brain <- check_nifti(x, reorient = FALSE, allow.array = FALSE)
       indices <- whitestripe(brain, type = WhiteStripe_Type, 
-                             stripped=TRUE,
+                             stripped=stripped,
                              verbose = FALSE, ...)
       brain   <- whitestripe_norm(brain, indices$whitestripe.ind)
       brain <- as.vector(brain[brain.indices])

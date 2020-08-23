@@ -8,6 +8,7 @@ normalizeWS(
   input.files,
   output.files = NULL,
   brain.mask = NULL,
+  stripped = TRUE,
   WhiteStripe_Type = c("T1", "T2", "FLAIR"),
   writeToDisk = FALSE,
   returnMatrix = TRUE,
@@ -24,6 +25,8 @@ default, will be the \code{input.files} with suffix "WS".}
 
 \item{brain.mask}{Filename for the brain binary mask specifying the template
 space brain. Must be a NIfTI file.}
+
+\item{stripped}{Is the image skull stripped? TRUE by default.}
 
 \item{WhiteStripe_Type}{What modality is used for WhiteStripe? Should be one
 of T1, T2 or FLAIR.}
