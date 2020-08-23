@@ -70,6 +70,15 @@ normalizeRAVEL <- function(input.files,
   } else {
     stop("brain.mask must be provided.")
   }
+
+  if (!is.null(control.mask)) {
+    control.mask = check_nifti(control.mask, 
+                             reorient = FALSE, 
+                             allow.array = FALSE)
+  } else {
+    stop("control.mask must be provided.")
+  }
+
   
   
   if (verbose) {
@@ -119,10 +128,6 @@ normalizeRAVEL <- function(input.files,
   # Submatrix of control voxels:
   if (verbose)
     message("[normalizeRAVEL] Creating the control voxel matrix Vc. \n")
-  
-  control.mask = check_nifti(control.mask, 
-                             reorient = FALSE, 
-                             allow.array = FALSE)
   control.indices <- control.mask == 1  
   control.indices <- control.indices[brain.mask == 1]
   Vc <- V[control.indices, , drop = FALSE]
