@@ -51,10 +51,17 @@ project](https://neuroconductor.org/).
 
 ##### Installation
 
-You can install RAVEL from github with:
+The following dependencies need to be installed first:
+
+```r
+install.packages("devtools")
+devtools::install_github("muschellij2/neurobase")
+devtools::install_github("muschellij2/WhiteStripe")
+```
+
+RAVEL can be installed using the following command:
 
 ``` r
-# install.packages("devtools")
 devtools::install_github("jfortin1/RAVEL")
 ```
 
