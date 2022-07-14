@@ -49,7 +49,7 @@ that RAVEL improves significantly population-wide statistical inference.
 RAVEL is now part of the [Neuroconductor
 project](https://neuroconductor.org/).
 
-##### Installation
+### Installation
 
 The following dependencies need to be installed first:
 
